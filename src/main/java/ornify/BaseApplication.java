@@ -191,6 +191,31 @@ public class BaseApplication extends JApplication implements ActionListener
     colorPanel.setVisible(true);
     
     panels.add(colorPanel);
+    
+    // Create question panel
+    JPanel yearPanel = new JPanel();
+    yearPanel.setLayout(null);
+    yearPanel.setBounds(0, 0, WIDTH, HEIGHT);
+    
+    // Add to the title panel
+    JLabel year = new JLabel("When is the bird found?");
+    year.setFont(new Font("Verdana", Font.BOLD, 30));
+
+    year.setBounds((WIDTH / 2) - 200, 50, 500, 100);
+    
+    JButton nextButton2 = new JButton(NEXT);
+    nextButton2.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
+    nextButton2.addActionListener(this);
+    JButton returnButton2 = new JButton(RETURN);
+    returnButton2.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 100, 100, 50);
+    returnButton2.addActionListener(this);
+    
+    yearPanel.add(year);
+    yearPanel.add(nextButton2);
+    yearPanel.add(returnButton2);
+    yearPanel.setVisible(true);
+    
+    panels.add(yearPanel);
 
     // Add everything to the main panel
     this.curPanel = titlePanel;
