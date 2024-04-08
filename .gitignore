@@ -1,13 +1,11 @@
-/.project
-/.classpath
 /target/
 target/classes/ornify/SQLDatabase.class
 target/classes/ornify
 
 # Compiled class file
 *.class
-/.classpath
-/.project
+*.classpath
+*.project
 
 
 # Log file
