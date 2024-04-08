@@ -30,3 +30,4 @@ target/classes/ornify
 hs_err_pid*
 replay_pid*
 /bin/
+*.class
