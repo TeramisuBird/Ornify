@@ -142,82 +142,19 @@ public class BaseApplication extends JApplication implements ActionListener
     
     panels.add(titlePanel);
     
-//    // Create question panel
-//    JPanel sizePanel = new JPanel();
-//    sizePanel.setLayout(null);
-//    sizePanel.setBounds(0, 0, WIDTH, HEIGHT);
-//    
-//    // Add to the title panel
-//    JLabel size = new JLabel("Choose size of bird");
-//    size.setFont(new Font("Verdana", Font.BOLD, 30));
-//
-//    size.setBounds((WIDTH / 2) - 200, 50, 500, 100);
-//    
-//    JButton nextButton = new JButton(NEXT);
-//    nextButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
-//    nextButton.addActionListener(this);
-//    JButton returnButton = new JButton(RETURN);
-//    returnButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 100, 100, 50);
-//    returnButton.addActionListener(this);
-//    
-//    sizePanel.add(size);
-//    sizePanel.add(nextButton);
-//    sizePanel.add(returnButton);
-//    sizePanel.setVisible(true);
-//    
-    CustomPanel sizePanel = new CustomPanel("Choose size of bird", this);
+//  make panels via custom panel subclasses
+    CustomPanel sizePanel = new SizePanel("What is the size of this bird?", this);
+    CustomPanel yearPanel = new YearPanel("During what time of the year did you see it?", this);
+    CustomPanel footPanel = new FootPanel("What is the foot shape?", this);   
+    CustomPanel beakPanel = new BeakPanel("What is the beak shape?", this);  
+    CustomPanel colorPanel = new ColorPanel("What color was this bird?", this);
     
+//    add to panel list
     panels.add(sizePanel.getPanel());
-    
-    // Create question panel
-    JPanel colorPanel = new JPanel();
-    colorPanel.setLayout(null);
-    colorPanel.setBounds(0, 0, WIDTH, HEIGHT);
-    
-    // Add to the title panel
-    JLabel color = new JLabel("Choose color of bird");
-    color.setFont(new Font("Verdana", Font.BOLD, 30));
-
-    color.setBounds((WIDTH / 2) - 200, 50, 500, 100);
-    
-    JButton nextButton1 = new JButton(NEXT);
-    nextButton1.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
-    nextButton1.addActionListener(this);
-    JButton returnButton1 = new JButton(RETURN);
-    returnButton1.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 100, 100, 50);
-    returnButton1.addActionListener(this);
-    
-    colorPanel.add(color);
-    colorPanel.add(nextButton1);
-    colorPanel.add(returnButton1);
-    colorPanel.setVisible(true);
-    
-    panels.add(colorPanel);
-    
-    // Create question panel
-    JPanel yearPanel = new JPanel();
-    yearPanel.setLayout(null);
-    yearPanel.setBounds(0, 0, WIDTH, HEIGHT);
-    
-    // Add to the title panel
-    JLabel year = new JLabel("When is the bird found?");
-    year.setFont(new Font("Verdana", Font.BOLD, 30));
-
-    year.setBounds((WIDTH / 2) - 200, 50, 500, 100);
-    
-    JButton nextButton2 = new JButton(NEXT);
-    nextButton2.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
-    nextButton2.addActionListener(this);
-    JButton returnButton2 = new JButton(RETURN);
-    returnButton2.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 100, 100, 50);
-    returnButton2.addActionListener(this);
-    
-    yearPanel.add(year);
-    yearPanel.add(nextButton2);
-    yearPanel.add(returnButton2);
-    yearPanel.setVisible(true);
-    
-    panels.add(yearPanel);
+    panels.add(yearPanel.getPanel());
+    panels.add(footPanel.getPanel());
+    panels.add(beakPanel.getPanel());
+    panels.add(colorPanel.getPanel());
 
     // Add everything to the main panel
     this.curPanel = titlePanel;
