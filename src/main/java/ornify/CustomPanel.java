@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class CustomPanel implements ActionListener
 {
@@ -25,7 +26,9 @@ public class CustomPanel implements ActionListener
     this.panel.setLayout(null);
     this.panel.setBounds(0, 0, WIDTH, HEIGHT);
     
-    JLabel label = new JLabel(question);
+    String html = "<html><body style='width: %1spx'>%1s";
+    JLabel label = new JLabel(String.format(html, 300, question));
+    label.setHorizontalAlignment(SwingConstants.CENTER);
     label.setFont(new Font("Verdana", Font.BOLD, 30));
 
     label.setBounds((WIDTH / 2) - 200, 50, 500, 100);
