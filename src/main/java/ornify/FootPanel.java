@@ -2,7 +2,7 @@ package ornify;
 
 public class FootPanel extends CustomPanel
 {
-  private static final String[] OPTIONS = {"Webbed", "Zygodactyl/Normal", "Clawed"};
+  private static final String[] OPTIONS = {"Clawed", "Climbing", "Perching", "Wading", "Webbed"};
 
   public FootPanel(String question, BaseApplication ba)
   {
