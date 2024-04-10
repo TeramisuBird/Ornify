@@ -102,7 +102,7 @@ public class BaseApplication extends JApplication implements ActionListener
    * 
    * @throws IOException
    */
-  protected void handleReturn()
+  public void handleReturn()
   {
     JPanel panel = (JPanel) this.getContentPane();
     panel.remove(curPanel);
@@ -142,30 +142,32 @@ public class BaseApplication extends JApplication implements ActionListener
     
     panels.add(titlePanel);
     
-    // Create question panel
-    JPanel sizePanel = new JPanel();
-    sizePanel.setLayout(null);
-    sizePanel.setBounds(0, 0, WIDTH, HEIGHT);
+//    // Create question panel
+//    JPanel sizePanel = new JPanel();
+//    sizePanel.setLayout(null);
+//    sizePanel.setBounds(0, 0, WIDTH, HEIGHT);
+//    
+//    // Add to the title panel
+//    JLabel size = new JLabel("Choose size of bird");
+//    size.setFont(new Font("Verdana", Font.BOLD, 30));
+//
+//    size.setBounds((WIDTH / 2) - 200, 50, 500, 100);
+//    
+//    JButton nextButton = new JButton(NEXT);
+//    nextButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
+//    nextButton.addActionListener(this);
+//    JButton returnButton = new JButton(RETURN);
+//    returnButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 100, 100, 50);
+//    returnButton.addActionListener(this);
+//    
+//    sizePanel.add(size);
+//    sizePanel.add(nextButton);
+//    sizePanel.add(returnButton);
+//    sizePanel.setVisible(true);
+//    
+    CustomPanel sizePanel = new CustomPanel("Choose size of bird", this);
     
-    // Add to the title panel
-    JLabel size = new JLabel("Choose size of bird");
-    size.setFont(new Font("Verdana", Font.BOLD, 30));
-
-    size.setBounds((WIDTH / 2) - 200, 50, 500, 100);
-    
-    JButton nextButton = new JButton(NEXT);
-    nextButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
-    nextButton.addActionListener(this);
-    JButton returnButton = new JButton(RETURN);
-    returnButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 100, 100, 50);
-    returnButton.addActionListener(this);
-    
-    sizePanel.add(size);
-    sizePanel.add(nextButton);
-    sizePanel.add(returnButton);
-    sizePanel.setVisible(true);
-    
-    panels.add(sizePanel);
+    panels.add(sizePanel.getPanel());
     
     // Create question panel
     JPanel colorPanel = new JPanel();

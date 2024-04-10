@@ -16,10 +16,11 @@ public class CustomPanel implements ActionListener
   public JButton nextButton;
   public JButton returnButton;
   public JPanel panel;
-//  public ??? choices; (filler attribute until we decide what the type is)
+  public BaseApplication baseApp;
   
-  public CustomPanel(String question)
+  public CustomPanel(String question, BaseApplication ba)
   {
+    this.baseApp = ba;
     this.panel = new JPanel();
     this.panel.setLayout(null);
     this.panel.setBounds(0, 0, WIDTH, HEIGHT);
@@ -52,7 +53,16 @@ public class CustomPanel implements ActionListener
   @Override
   public void actionPerformed(ActionEvent e)
   {
-    BaseApplication baseApplication = new BaseApplication(null);
-    baseApplication.actionPerformed(e);
+    switch (e.getActionCommand())
+    {
+      case "Return":
+        this.baseApp.handleReturn();
+        break;
+      case "Next":
+        this.baseApp.handleNext();
+        break;
+      default:
+        break;
+    }
   }
 }
