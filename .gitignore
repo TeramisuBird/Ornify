@@ -3,6 +3,7 @@ target/classes/ornify/SQLDatabase.class
 target/classes/ornify
 target/
 *.target
+*.settings
 
 # Compiled class file
 *.class
