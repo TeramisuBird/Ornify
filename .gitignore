@@ -1,6 +1,8 @@
 /target/
 target/classes/ornify/SQLDatabase.class
 target/classes/ornify
+target/
+*.target
 
 # Compiled class file
 *.class
