@@ -61,10 +61,8 @@ public class BaseApplication extends JApplication implements ActionListener
   
   public void addChoice(final String question, final String choice)
   {
-    userChoices.put(question, choice);
-    for(String key : userChoices.keySet())
-    {
-      System.out.println(key + " " + userChoices.get(key));
+    if (!userChoices.containsKey(question) || choice != userChoices.get(question)) {
+      userChoices.put(question, choice);
     }
   }
 

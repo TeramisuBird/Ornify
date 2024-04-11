@@ -18,6 +18,7 @@ public class SizePanel extends CustomPanel implements ItemListener
     super(question, ba);
     this.combo = new JComboBox<String>(OPTIONS);
     combo.setBounds((WIDTH / 2) - 50, (HEIGHT / 2), 100, 50);
+    combo.addItemListener(this);
     JPanel panel = this.getPanel();
     panel.add(combo);
     
@@ -30,9 +31,8 @@ public class SizePanel extends CustomPanel implements ItemListener
     // if the state combobox is changed
     if (e.getSource() == combo) {
       currentOption = (String) combo.getSelectedItem();
+      this.baseApp.addChoice("Size", currentOption);
     }
-//    this.baseApp.addChoice("Size", currentOption);
-    System.out.println(this.currentOption);
   }
   
   public String getOption()
