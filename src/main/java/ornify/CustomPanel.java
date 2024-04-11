@@ -50,8 +50,6 @@ public class CustomPanel implements ActionListener
   {
     return this.panel;
   }
-  
-  
 
   @Override
   public void actionPerformed(ActionEvent e)

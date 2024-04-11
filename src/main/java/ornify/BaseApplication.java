@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ public class BaseApplication extends JApplication implements ActionListener
   protected static final String RETURN = "Return";
   protected static final String NEXT = "Next";
 
+  public HashMap<String, String> userChoices;
   private JPanel curPanel;
   private int index;
   private ArrayList<JPanel> panels;
@@ -32,6 +34,7 @@ public class BaseApplication extends JApplication implements ActionListener
     super(args, WIDTH, HEIGHT);
     panels = new ArrayList<JPanel>();
     index = 0;
+    userChoices = new HashMap<String, String>();
   }
 
   public void actionPerformed(ActionEvent evt)
@@ -53,6 +56,15 @@ public class BaseApplication extends JApplication implements ActionListener
         break;
       default:
         break;
+    }
+  }
+  
+  public void addChoice(final String question, final String choice)
+  {
+    userChoices.put(question, choice);
+    for(String key : userChoices.keySet())
+    {
+      System.out.println(key + " " + userChoices.get(key));
     }
   }
 

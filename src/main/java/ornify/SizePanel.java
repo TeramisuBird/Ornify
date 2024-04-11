@@ -31,6 +31,8 @@ public class SizePanel extends CustomPanel implements ItemListener
     if (e.getSource() == combo) {
       currentOption = (String) combo.getSelectedItem();
     }
+//    this.baseApp.addChoice("Size", currentOption);
+    System.out.println(this.currentOption);
   }
   
   public String getOption()
