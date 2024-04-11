@@ -52,6 +52,7 @@ public class ResultsPanel implements ActionListener
     switch (e.getActionCommand())
     {
       case "Return":
+        this.baseApp.dumpResults();
         this.baseApp.handleReturn();
         break;
       default:

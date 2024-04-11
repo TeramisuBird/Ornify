@@ -65,6 +65,14 @@ public class BaseApplication extends JApplication implements ActionListener
       userChoices.put(question, choice);
     }
   }
+  
+  public void dumpResults()
+  {
+   for (String key : userChoices.keySet())
+   {
+     System.out.println(key + ": " + userChoices.get(key));
+   }
+  }
 
   /**
    * Method that controls the start button action.
@@ -82,6 +90,7 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.add(curPanel);
     panel.revalidate();
     panel.repaint();
+    userChoices = new HashMap<String,String>();
   }
   
   /**
@@ -178,4 +187,5 @@ public class BaseApplication extends JApplication implements ActionListener
     JApplication app = new BaseApplication(args);
     invokeInEventDispatchThread(app);
   }
+
 }
