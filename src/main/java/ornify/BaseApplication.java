@@ -148,6 +148,7 @@ public class BaseApplication extends JApplication implements ActionListener
     CustomPanel footPanel = new FootPanel("What is the foot shape?", this);   
     CustomPanel beakPanel = new BeakPanel("What is the beak shape?", this);  
     CustomPanel colorPanel = new ColorPanel("What color was this bird?", this);
+    ResultsPanel resultPanel = new ResultsPanel("Is this your bird?", this);
     
 //    add to panel list
     panels.add(sizePanel.getPanel());
@@ -155,6 +156,7 @@ public class BaseApplication extends JApplication implements ActionListener
     panels.add(footPanel.getPanel());
     panels.add(beakPanel.getPanel());
     panels.add(colorPanel.getPanel());
+    panels.add(resultPanel.getPanel());
 
     // Add everything to the main panel
     this.curPanel = titlePanel;
