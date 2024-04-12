@@ -66,6 +66,7 @@ public class ResultsPanel implements ActionListener
         {
           case(0):
             conditions = conditions + "season='" + text + "'";
+            fieldsEntered++;
             break;
           case(1):
             if (fieldsEntered == 0)
