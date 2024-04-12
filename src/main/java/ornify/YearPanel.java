@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 public class YearPanel extends CustomPanel implements ItemListener
 {
-  private static final String[] OPTIONS = {"Spring/Fall", "Summer", "Fall", "All-Year"};
+  private static final String[] OPTIONS = {"Spring/Fall", "Summer", "Winter", "All-Year"};
   private JComboBox<String> combo;
   private String currentOption;
 
