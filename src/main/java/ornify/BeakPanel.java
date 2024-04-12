@@ -31,7 +31,7 @@ public class BeakPanel extends CustomPanel implements ItemListener
     // if the state combobox is changed
     if (e.getSource() == combo) {
       currentOption = (String) combo.getSelectedItem();
-      this.baseApp.addChoice("Beak", currentOption);
+      this.baseApp.addChoice(currentOption, 6);
     }
   }
   

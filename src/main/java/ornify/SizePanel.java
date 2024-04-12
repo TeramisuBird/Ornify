@@ -32,7 +32,7 @@ public class SizePanel extends CustomPanel implements ItemListener
     // if the state combobox is changed
     if (e.getSource() == combo) {
       currentOption = (String) combo.getSelectedItem();
-      this.baseApp.addChoice("Size", currentOption);
+      this.baseApp.addChoice(currentOption, 1);
     }
   }
   

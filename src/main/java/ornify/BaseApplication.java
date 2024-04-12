@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,17 +23,35 @@ public class BaseApplication extends JApplication implements ActionListener
   protected static final String RETURN = "Return";
   protected static final String NEXT = "Next";
 
-  public HashMap<String, String> userChoices;
+  public String[] userChoices;
   private JPanel curPanel;
   private int index;
   private ArrayList<JPanel> panels;
+  
+//  public String[] selections = {
+//    "YEAR",
+//    "SIZE",
+//    "CROWN",
+//    "SUPERCILIUM",
+//    "EYESTRIPE",
+//    "AURICULARS",
+//    "BEAK_SHAPE",
+//    "BEAK_LENGTH",
+//    "BEAK_COLOR",
+//    "THROAT",
+//    "BREAST",
+//    "COVERTS",
+//    "WING",
+//    "FOOT_SHAPE",
+//    "FOOT_COLOR"
+//  };
 
   public BaseApplication(String[] args)
   {
     super(args, WIDTH, HEIGHT);
     panels = new ArrayList<JPanel>();
     index = 0;
-    userChoices = new HashMap<String, String>();
+    userChoices = new String[15];
   }
 
   public void actionPerformed(ActionEvent evt)
@@ -59,18 +76,16 @@ public class BaseApplication extends JApplication implements ActionListener
     }
   }
   
-  public void addChoice(final String question, final String choice)
+  public void addChoice(final String choice, final int index)
   {
-    if (!userChoices.containsKey(question) || choice != userChoices.get(question)) {
-      userChoices.put(question, choice);
-    }
+    userChoices[index] = choice;
   }
   
   public void dumpResults()
   {
-   for (String key : userChoices.keySet())
+   for (String choice : userChoices)
    {
-     System.out.println(key + ": " + userChoices.get(key));
+     System.out.println(choice);
    }
   }
 
@@ -90,7 +105,7 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.add(curPanel);
     panel.revalidate();
     panel.repaint();
-    userChoices = new HashMap<String,String>();
+    userChoices = new String[15];
   }
   
   /**
@@ -113,7 +128,7 @@ public class BaseApplication extends JApplication implements ActionListener
       panel.repaint();
     }
     
-    System.out.println("Next");
+//    System.out.println("Next");
   }
   
   /**
@@ -165,7 +180,8 @@ public class BaseApplication extends JApplication implements ActionListener
     CustomPanel sizePanel = new SizePanel("What is the size of this bird?", this);
     CustomPanel yearPanel = new YearPanel("During what time of the year did you see it?", this);
     CustomPanel footPanel = new FootPanel("What is the foot shape?", this);   
-    CustomPanel beakPanel = new BeakPanel("What is the beak shape?", this);  
+    CustomPanel beakPanel = new BeakPanel("What is the beak shape?", this);
+    CustomPanel beakLenPanel = new BeakLenPanel("What is the beak length?", this);  
     CustomPanel colorPanel = new ColorPanel("What color was this bird?", this);
     ResultsPanel resultPanel = new ResultsPanel("Is this your bird?", this);
     
@@ -174,6 +190,7 @@ public class BaseApplication extends JApplication implements ActionListener
     panels.add(yearPanel.getPanel());
     panels.add(footPanel.getPanel());
     panels.add(beakPanel.getPanel());
+    panels.add(beakLenPanel.getPanel());
     panels.add(colorPanel.getPanel());
     panels.add(resultPanel.getPanel());
 

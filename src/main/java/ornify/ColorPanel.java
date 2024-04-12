@@ -126,52 +126,52 @@ public class ColorPanel extends CustomPanel implements ItemListener
     // if the state combobox is changed
     if (e.getSource() == beakCombo) {
       currentBeak = (String) beakCombo.getSelectedItem();
-      this.baseApp.addChoice("Beak Color", currentBeak);
+      this.baseApp.addChoice(currentBeak, 8);
     }
     
     if (e.getSource() == crownCombo) {
       currentCrown = (String) crownCombo.getSelectedItem();
-      this.baseApp.addChoice("Crown Color", currentCrown);
+      this.baseApp.addChoice(currentCrown, 2);
     }
     
     if (e.getSource() == superciliumCombo) {
       currentSupercilium = (String) superciliumCombo.getSelectedItem();
-      this.baseApp.addChoice("Supercilium Color", currentSupercilium);
+      this.baseApp.addChoice(currentSupercilium, 3);
     }
     
     if (e.getSource() == eyestripeCombo) {
       currentEyestripe = (String) eyestripeCombo.getSelectedItem();
-      this.baseApp.addChoice("Eyestripe Color", currentEyestripe);
+      this.baseApp.addChoice(currentEyestripe, 4);
     }
     
     if (e.getSource() == auricularCombo) {
       currentAuricular = (String) auricularCombo.getSelectedItem();
-      this.baseApp.addChoice("Auriculars Color", currentAuricular);
+      this.baseApp.addChoice(currentAuricular, 5);
     }
     
     if (e.getSource() == throatCombo) {
       currentThroat = (String) throatCombo.getSelectedItem();
-      this.baseApp.addChoice("Throat Color", currentThroat);
+      this.baseApp.addChoice(currentThroat, 9);
     }
     
     if (e.getSource() == breastCombo) {
       currentBreast = (String) breastCombo.getSelectedItem();
-      this.baseApp.addChoice("Breast Color", currentBreast);
+      this.baseApp.addChoice(currentBreast, 10);
     }
     
     if (e.getSource() == wingCombo) {
       currentWing = (String) wingCombo.getSelectedItem();
-      this.baseApp.addChoice("Wing Color", currentWing);
+      this.baseApp.addChoice(currentWing, 12);
     }
     
     if (e.getSource() == covertCombo) {
       currentCovert = (String) covertCombo.getSelectedItem();
-      this.baseApp.addChoice("Coverts Color", currentCovert);
+      this.baseApp.addChoice(currentCovert, 11);
     }
     
     if (e.getSource() == feetCombo) {
       currentFeet = (String) feetCombo.getSelectedItem();
-      this.baseApp.addChoice("Feet Color", currentFeet);
+      this.baseApp.addChoice(currentFeet, 14);
     }
   }
   
@@ -189,10 +189,7 @@ public class ColorPanel extends CustomPanel implements ItemListener
         this.baseApp.handleReturn();
         break;
       case "Next":
-//        if (!currentOption.equals(OPTIONS[0]))
-//        {
-          this.baseApp.handleNext();
-//        }
+        this.baseApp.handleNext();
         break;
       default:
         break;

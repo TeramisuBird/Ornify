@@ -7,13 +7,13 @@ import java.awt.event.ItemListener;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-public class YearPanel extends CustomPanel implements ItemListener
+public class BeakLenPanel extends CustomPanel implements ItemListener
 {
-  private static final String[] OPTIONS = {"----", "Spring/Fall", "Summer", "Winter"};
+  private static final String[] OPTIONS = {"----", "Short", "Average", "Long"};
   private JComboBox<String> combo;
   private String currentOption;
-
-  public YearPanel(String question, BaseApplication ba)
+  
+  public BeakLenPanel(String question, BaseApplication ba)
   {
     super(question, ba);
     this.combo = new JComboBox<String>(OPTIONS);
@@ -31,7 +31,7 @@ public class YearPanel extends CustomPanel implements ItemListener
     // if the state combobox is changed
     if (e.getSource() == combo) {
       currentOption = (String) combo.getSelectedItem();
-      this.baseApp.addChoice(currentOption, 0);
+      this.baseApp.addChoice(currentOption, 7);
     }
   }
   

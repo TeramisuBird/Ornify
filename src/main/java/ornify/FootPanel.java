@@ -31,7 +31,7 @@ public class FootPanel extends CustomPanel implements ItemListener
     // if the state combobox is changed
     if (e.getSource() == combo) {
       currentOption = (String) combo.getSelectedItem();
-      this.baseApp.addChoice("Foot", currentOption);
+      this.baseApp.addChoice(currentOption, 13);
     }
   }
   
@@ -49,10 +49,7 @@ public class FootPanel extends CustomPanel implements ItemListener
         this.baseApp.handleReturn();
         break;
       case "Next":
-        if (!currentOption.equals(OPTIONS[0]))
-        {
-          this.baseApp.handleNext();
-        }
+        this.baseApp.handleNext();
         break;
       default:
         break;
