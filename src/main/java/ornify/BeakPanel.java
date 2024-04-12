@@ -1,5 +1,6 @@
 package ornify;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -8,7 +9,7 @@ import javax.swing.JPanel;
 
 public class BeakPanel extends CustomPanel implements ItemListener
 {
-  private static final String[] OPTIONS = {"Cone", "Chisel", "Pointy", "Hooked", "Straining", "Probing"};
+  private static final String[] OPTIONS = {"----", "Cone", "Chisel", "Pointy", "Hooked", "Flat", "Probing"};
   private JComboBox<String> combo;
   private String currentOption;
   
@@ -37,5 +38,24 @@ public class BeakPanel extends CustomPanel implements ItemListener
   public String getOption()
   {
     return currentOption;
+  }
+  
+  @Override
+  public void actionPerformed(ActionEvent e)
+  {
+    switch (e.getActionCommand())
+    {
+      case "Return":
+        this.baseApp.handleReturn();
+        break;
+      case "Next":
+        if (!currentOption.equals(OPTIONS[0]))
+        {
+          this.baseApp.handleNext();
+        }
+        break;
+      default:
+        break;
+    }
   }
 }
