@@ -40,6 +40,8 @@ public class CustomPanel implements ActionListener
     this.returnButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 100, 100, 50);
     this.returnButton.addActionListener(this);
     
+    this.panel.setBackground(BaseApplication.background_color);
+    
     this.panel.add(label);
     this.panel.add(this.nextButton);
     this.panel.add(this.returnButton);

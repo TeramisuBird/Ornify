@@ -1,5 +1,6 @@
 package ornify;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,8 @@ public class BaseApplication extends JApplication implements ActionListener
 {
   public static final int WIDTH = 600;
   public static final int HEIGHT = 600;
+  
+  public static final Color background_color = new Color(180, 250, 250);
 
   protected static final String ABOUT = "About";
   protected static final String LOAD = "Load";
@@ -127,8 +130,6 @@ public class BaseApplication extends JApplication implements ActionListener
       panel.revalidate();
       panel.repaint();
     }
-    
-//    System.out.println("Next");
   }
   
   /**
@@ -155,28 +156,9 @@ public class BaseApplication extends JApplication implements ActionListener
     // Add the panel to the main window
     JPanel panel = (JPanel) this.getContentPane();
     panel.setLayout(null);
-
-    JLabel title = new JLabel("Ornify");
-    title.setFont(new Font("Verdana", Font.BOLD, 30));
-
-    title.setBounds((WIDTH / 2) - 50, 50, 200, 100);
-
-    JPanel titlePanel = new JPanel();
-    titlePanel.setLayout(null);
-    titlePanel.setBounds(0, 0, WIDTH, HEIGHT);
-
-    JButton startButton = new JButton(START);
-    startButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
-    startButton.addActionListener(this);
-
-    // Add to the title panel
-    titlePanel.add(title);
-    titlePanel.add(startButton);
-    titlePanel.setVisible(true);
     
-    panels.add(titlePanel);
-    
-//  make panels via custom panel subclasses
+    //  make panels via custom panel subclasses
+    TitlePanel titlePanel = new TitlePanel("Ornify", this);
     CustomPanel sizePanel = new SizePanel("What is the size of this bird?", this);
     CustomPanel yearPanel = new YearPanel("During what time of the year did you see it?", this);
     CustomPanel footPanel = new FootPanel("What is the foot shape?", this);   
@@ -185,7 +167,8 @@ public class BaseApplication extends JApplication implements ActionListener
     CustomPanel colorPanel = new ColorPanel("What color was this bird?", this);
     ResultsPanel resultPanel = new ResultsPanel("Is this your bird?", this);
     
-//    add to panel list
+    //    add to panel list
+    panels.add(titlePanel.getPanel());
     panels.add(sizePanel.getPanel());
     panels.add(yearPanel.getPanel());
     panels.add(footPanel.getPanel());
@@ -195,7 +178,7 @@ public class BaseApplication extends JApplication implements ActionListener
     panels.add(resultPanel.getPanel());
 
     // Add everything to the main panel
-    this.curPanel = titlePanel;
+    this.curPanel = titlePanel.getPanel();
     panel.add(curPanel);
   }
 
