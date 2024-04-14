@@ -51,7 +51,7 @@ public class BaseApplication extends JApplication implements ActionListener
     super(args, WIDTH, HEIGHT);
     panels = new ArrayList<JPanel>();
     index = 0;
-//    userChoices = new String[15];
+    userChoices = new String[15];
   }
 
   public void actionPerformed(ActionEvent evt)
@@ -106,7 +106,7 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.add(curPanel);
     panel.revalidate();
     panel.repaint();
-    userChoices = new String[15];
+//    userChoices = new String[15];
   }
   
   /**

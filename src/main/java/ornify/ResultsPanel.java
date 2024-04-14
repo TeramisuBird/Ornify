@@ -90,7 +90,7 @@ public class ResultsPanel implements ActionListener
     switch (e.getActionCommand())
     {
       case "Return":
-        this.panel.remove(textPane);
+        this.panel.remove(resultDisplay);
         this.panel.repaint();
         this.matchesText = STARTING_TEXT;
         this.baseApp.handleReturn();
@@ -113,7 +113,6 @@ public class ResultsPanel implements ActionListener
     String conditions = "";
     
     int fieldsEntered = 0;
-    
     for (int i = 0; i < 15; i++)
     {
       if (this.baseApp.userChoices[i] != null)
@@ -182,6 +181,7 @@ public class ResultsPanel implements ActionListener
     }
     
     String query = select + from + where + conditions;
+//    System.out.println(query);
 
     ResultSet matches = this.db.getResultsFromQuery(query);
     this.set = matches;
