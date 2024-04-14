@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 public class ResultsPanel implements ActionListener
 {
+  private static final String STARTING_TEXT = "Possible matches are:\n";
   public static final int WIDTH = 600;
   public static final int HEIGHT = 600;
   
@@ -28,7 +29,7 @@ public class ResultsPanel implements ActionListener
   public ResultsPanel(String question, BaseApplication ba)
   {
     this.db = new SQLDatabase("jdbc:mysql://new", "root", "root");
-    this.matchesText = "Possible matches are:\n";
+    this.matchesText = STARTING_TEXT;
     this.baseApp = ba;
     this.panel = new JPanel();
     this.panel.setLayout(null);
@@ -66,6 +67,7 @@ public class ResultsPanel implements ActionListener
       case "Return":
         this.panel.remove(textPane);
         this.panel.repaint();
+        this.matchesText = STARTING_TEXT;
         this.baseApp.handleReturn();
         break;
       case "Find Matches":
