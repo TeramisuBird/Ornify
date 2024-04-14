@@ -46,13 +46,8 @@ public class SQLDatabase
     try
     {
       reader = new BufferedReader(new FileReader(SECRET_FILEPATH));
-      if (!isOnline) {
-        serverName = reader.readLine();
-        databaseName = reader.readLine();
-        databaseURL = reader.readLine();
-        username = reader.readLine();
+      if (isOnline) {
         password = reader.readLine();
-      } else {
         username = "teramisubird";
         serverName = "db4free.net:3306";
         databaseName = "ornify"
@@ -61,9 +56,12 @@ public class SQLDatabase
             + "&useLegacyDatetimeCode=false"
             + "&serverTimezone=UTC"
             + "&useSSL=false";
-        for(int i=0; i<5; i++) {
-          reader.readLine();
-        }
+      } else {
+        reader.readLine();
+        serverName = reader.readLine();
+        databaseName = reader.readLine();
+        databaseURL = reader.readLine();
+        username = reader.readLine();
         password = reader.readLine();
       }
       String url = databaseURL + serverName + "/" + databaseName;
