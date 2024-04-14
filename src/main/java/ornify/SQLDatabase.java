@@ -193,7 +193,8 @@ public class SQLDatabase
   {
     try
     {
-      Statement statement = getConnection().createStatement();
+      Statement statement = getConnection().createStatement(
+          ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       return statement.executeQuery(query);
     }
     catch (SQLException e)
