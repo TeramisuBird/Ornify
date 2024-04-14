@@ -3,10 +3,13 @@ package ornify;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 public class ResultsPanel implements ActionListener
@@ -14,14 +17,18 @@ public class ResultsPanel implements ActionListener
   public static final int WIDTH = 600;
   public static final int HEIGHT = 600;
   
-//  private SQLDatabase db;
+  private SQLDatabase db;
+  public JTextPane textPane;
   public JButton returnButton;
+  public JButton getResultsButton;
   public JPanel panel;
   public BaseApplication baseApp;
+  public String matchesText;
   
   public ResultsPanel(String question, BaseApplication ba)
   {
-//    this.db = new SQLDatabase();
+    this.db = new SQLDatabase("jdbc:mysql://new", "root", "root");
+    this.matchesText = "Possible matches are:\n";
     this.baseApp = ba;
     this.panel = new JPanel();
     this.panel.setLayout(null);
@@ -38,18 +45,39 @@ public class ResultsPanel implements ActionListener
     this.returnButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 100, 100, 50);
     this.returnButton.addActionListener(this);
     
+    this.getResultsButton = new JButton("Find Matches");
+    this.getResultsButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
+    this.getResultsButton.addActionListener(this);
+    
+    this.textPane = new JTextPane();
+    
     this.panel.setBackground(BaseApplication.background_color);
     this.panel.add(label);
     this.panel.add(this.returnButton);
+    this.panel.add(this.getResultsButton);
     this.panel.setVisible(true);
   }
   
-  public JPanel getPanel()
+  @Override
+  public void actionPerformed(ActionEvent e)
   {
-    return this.panel;
+    switch (e.getActionCommand())
+    {
+      case "Return":
+        this.panel.remove(textPane);
+        this.panel.repaint();
+        this.baseApp.handleReturn();
+        break;
+      case "Find Matches":
+        buildResults();
+//      this.baseApp.dumpResults();
+        break;
+      default:
+        break;
+    }
   }
   
-  private void temp() {
+  private void buildResults() {
     String select = "select name, image_url, sound_url ";
     String from = "from REPLACE_DB_NAME_HERE";
     String where = " where ";
@@ -126,21 +154,30 @@ public class ResultsPanel implements ActionListener
     
     String query = select + from + where + conditions;
     System.out.println(query);
+//    this.db.printColumnFromQuery(0, query);
+//    ResultSet matches = this.db.getResultsFromQuery(query);
+//    
+//    try
+//    {
+//      while (matches.next())
+//      {
+//        matchesText = matchesText + matches.getString(1) + "\n";
+//      }
+//    }
+//    catch (SQLException e)
+//    {
+//      e.printStackTrace();
+//    }
+    
+    this.textPane.setText(matchesText);
+    this.textPane.setBounds((WIDTH / 2) - 260, (HEIGHT / 2) - 55, WIDTH - 80, 100);
+    this.textPane.setVisible(true);
+    this.panel.add(textPane);
+    this.panel.repaint();
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e)
+  public JPanel getPanel()
   {
-    switch (e.getActionCommand())
-    {
-      case "Return":
-        temp();
-//        this.baseApp.dumpResults();
-        this.baseApp.handleReturn();
-        break;
-      default:
-        break;
-    }
-    
+    return this.panel;
   }
 }
