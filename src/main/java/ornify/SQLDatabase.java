@@ -1,10 +1,14 @@
 package ornify;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * A class which manages a single instance of an SQL database.
@@ -15,10 +19,51 @@ import java.sql.Statement;
  */
 public class SQLDatabase
 {
-  public String url = "jdbc:mysql://new";
-  public String username = "root";
-  public String password = "root";
+  private final String SECRET_FILEPATH = "sql_secret.txt";
   private Connection connection;
+
+  /**
+   * You must have a sql_secret.txt in the local path for this to work! The line-by-line order of
+   * the file goes:
+   * <li>server name
+   * <li>database name
+   * <li>database url
+   * <li>database username
+   * <li>database password
+   */
+  public SQLDatabase()
+  {
+    String serverName = "localhost";
+    String databaseName = "birds";
+    String databaseURL = "jdbc:mysql://";
+    String username = "root";
+    String password = "root";
+    BufferedReader reader;
+    try
+    {
+      reader = new BufferedReader(new FileReader(SECRET_FILEPATH));
+      serverName = reader.readLine();
+      databaseName = reader.readLine();
+      databaseURL = reader.readLine();
+      username = reader.readLine();
+      password = reader.readLine();
+      String url = databaseURL + serverName + "/" + databaseName;
+      this.connection = DriverManager.getConnection(url, username, password);
+    }
+    catch (IOException e)
+    {
+      System.out.println("** sql_secret.txt Format Error"
+          + "\nEnsure your database info or file location of sql_secret.txt is correct.");
+    }
+    catch (SQLException e)
+    {
+      System.out.println("** SQL Error" + "\nThis database does not exist.");
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
 
   public SQLDatabase(String url, String username, String password)
   {
@@ -34,6 +79,34 @@ public class SQLDatabase
     {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * Gets an ArrayList of result strings from the given SQL query.
+   * 
+   * @param column
+   *          - The column to make a list of.
+   * @param query
+   *          - The SQL query itself.
+   * @return An ArrayList of type String
+   */
+  public ArrayList<String> getListFromQuery(int column, String query)
+  {
+    ResultSet results = getResultsFromQuery(query);
+    ArrayList<String> list = new ArrayList<String>();
+    try
+    {
+      while (results.next())
+      {
+        list.add(results.getString(column));
+      }
+    }
+    catch (SQLException e)
+    {
+      System.out.println("SQL Error: " + e.getErrorCode());
+      e.printStackTrace();
+    }
+    return list;
   }
 
   /**
