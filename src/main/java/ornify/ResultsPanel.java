@@ -28,7 +28,7 @@ public class ResultsPanel implements ActionListener
   
   public ResultsPanel(String question, BaseApplication ba)
   {
-    this.db = new SQLDatabase("jdbc:mysql://new", "root", "root");
+    this.db = new SQLDatabase();
     this.matchesText = STARTING_TEXT;
     this.baseApp = ba;
     this.panel = new JPanel();
@@ -72,7 +72,6 @@ public class ResultsPanel implements ActionListener
         break;
       case "Find Matches":
         buildResults();
-//      this.baseApp.dumpResults();
         break;
       default:
         break;
@@ -81,7 +80,7 @@ public class ResultsPanel implements ActionListener
   
   private void buildResults() {
     String select = "select name, image_url, sound_url ";
-    String from = "from REPLACE_DB_NAME_HERE";
+    String from = "from bird";
     String where = " where ";
     String conditions = "";
     
@@ -155,21 +154,29 @@ public class ResultsPanel implements ActionListener
     }
     
     String query = select + from + where + conditions;
-    System.out.println(query);
+//    System.out.println(query);
 //    this.db.printColumnFromQuery(0, query);
-//    ResultSet matches = this.db.getResultsFromQuery(query);
-//    
-//    try
-//    {
-//      while (matches.next())
-//      {
-//        matchesText = matchesText + matches.getString(1) + "\n";
-//      }
-//    }
-//    catch (SQLException e)
-//    {
-//      e.printStackTrace();
-//    }
+//    this.baseApp.dumpResults();
+    ResultSet matches = this.db.getResultsFromQuery(query);
+    
+    try
+    {
+      if (matches != null)
+      {
+        while (matches.next())
+        {
+          matchesText = matchesText + matches.getString(1) + "\n";
+        }
+      }
+      else
+      {
+        matchesText = matchesText + "No results - query error\n";
+      }
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
     
     this.textPane.setText(matchesText);
     this.textPane.setBounds((WIDTH / 2) - 260, (HEIGHT / 2) - 55, WIDTH - 80, 100);

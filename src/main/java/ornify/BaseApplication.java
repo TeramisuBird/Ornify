@@ -51,7 +51,7 @@ public class BaseApplication extends JApplication implements ActionListener
     super(args, WIDTH, HEIGHT);
     panels = new ArrayList<JPanel>();
     index = 0;
-    userChoices = new String[15];
+//    userChoices = new String[15];
   }
 
   public void actionPerformed(ActionEvent evt)
@@ -83,10 +83,11 @@ public class BaseApplication extends JApplication implements ActionListener
   
   public void dumpResults()
   {
-   for (String choice : userChoices)
+   for (int i = 0; i < userChoices.length; i++)
    {
-     System.out.println(choice);
+     System.out.printf("%d: %s", i, userChoices[i]);
    }
+   System.out.println();
   }
 
   /**
