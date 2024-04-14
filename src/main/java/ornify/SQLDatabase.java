@@ -29,11 +29,12 @@ public class SQLDatabase
   /**
    * You must have a sql_secret.txt in the local path for this to work! The line-by-line order of
    * the file goes:
-   * <li>server name
-   * <li>database name
-   * <li>database url
-   * <li>database username
-   * <li>database password
+   * <li>online database password
+   * <li>local server name
+   * <li>local database name
+   * <li>local database url
+   * <li>local database username
+   * <li>local database password
    */
   public SQLDatabase(boolean isOnline)
   {
