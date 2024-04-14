@@ -21,6 +21,10 @@ public class SQLDatabase
 {
   private final String SECRET_FILEPATH = "sql_secret.txt";
   private Connection connection;
+  
+  public SQLDatabase() {
+    this(false);
+  }
 
   /**
    * You must have a sql_secret.txt in the local path for this to work! The line-by-line order of
@@ -31,7 +35,7 @@ public class SQLDatabase
    * <li>database username
    * <li>database password
    */
-  public SQLDatabase()
+  public SQLDatabase(boolean isOnline)
   {
     String serverName = "localhost";
     String databaseName = "birds";
@@ -42,12 +46,28 @@ public class SQLDatabase
     try
     {
       reader = new BufferedReader(new FileReader(SECRET_FILEPATH));
-      serverName = reader.readLine();
-      databaseName = reader.readLine();
-      databaseURL = reader.readLine();
-      username = reader.readLine();
-      password = reader.readLine();
+      if (!isOnline) {
+        serverName = reader.readLine();
+        databaseName = reader.readLine();
+        databaseURL = reader.readLine();
+        username = reader.readLine();
+        password = reader.readLine();
+      } else {
+        username = "teramisubird";
+        serverName = "db4free.net:3306";
+        databaseName = "ornify"
+            + "?useUnicode=true"
+            + "&useJDBCCompliantTimezoneShift=true"
+            + "&useLegacyDatetimeCode=false"
+            + "&serverTimezone=UTC"
+            + "&useSSL=false";
+        for(int i=0; i<5; i++) {
+          reader.readLine();
+        }
+        password = reader.readLine();
+      }
       String url = databaseURL + serverName + "/" + databaseName;
+      System.out.println("Attempting to connect to database: " + url + "\n\nWith password = " + password);
       this.connection = DriverManager.getConnection(url, username, password);
     }
     catch (IOException e)

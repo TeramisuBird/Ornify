@@ -10,8 +10,8 @@ public class App
   {
     System.out.println("If you can read this, your pull was successful! - Joey :)\n\n");
     System.out.println("*** Test for SQLDatabase connection ***\n");
-    SQLDatabase connection = new SQLDatabase();
+    SQLDatabase connection = new SQLDatabase(true);
     System.out.println("The following are all birds in database thus far:");
-    connection.printColumnFromQuery(2, "SELECT * FROM BIRD");
+    connection.printColumnFromQuery(2, "SELECT * FROM bird");
   }
 }
