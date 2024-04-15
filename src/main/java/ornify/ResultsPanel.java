@@ -75,6 +75,8 @@ public class ResultsPanel implements ActionListener
     this.pictureDisplay = new JLabel();
     this.resultDisplay = new JPanel();
     resultDisplay.setBackground(new Color(255, 255, 255));
+    this.resultDisplay.add(textPane);
+    this.resultDisplay.add(pictureDisplay);
     
     this.panel.setBackground(BaseApplication.background_color);
     this.panel.add(label);
@@ -91,6 +93,7 @@ public class ResultsPanel implements ActionListener
     {
       case "Return":
         this.panel.remove(resultDisplay);
+        this.nextButton.setVisible(false);
         this.panel.repaint();
         this.matchesText = STARTING_TEXT;
         this.baseApp.handleReturn();
@@ -190,12 +193,12 @@ public class ResultsPanel implements ActionListener
     this.textPane.setVisible(true);
     
     this.pictureDisplay.setBounds((WIDTH / 2), (HEIGHT / 2) - 55, 100, 100);
+    pictureDisplay.setIcon(null);
+    textPane.setText("");
     handleNext();
     
     this.nextButton.setVisible(true);
     this.resultDisplay.setBounds((WIDTH / 2) - 260, (HEIGHT / 2) - 55, WIDTH - 80, 100);
-    this.resultDisplay.add(textPane);
-    this.resultDisplay.add(pictureDisplay);
     this.panel.add(resultDisplay);
     this.panel.repaint();
   }
@@ -255,6 +258,10 @@ public class ResultsPanel implements ActionListener
       {
         e.printStackTrace();
       }
+    }
+    else
+    {
+      System.out.println("Hello");
     }
   }
 }
