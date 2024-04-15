@@ -1,20 +1,11 @@
 package ornify;
 
 import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import javax.swing.ImageIcon;
 
 import visual.Visualization;
 
@@ -47,27 +38,9 @@ public class TitlePanel extends Visualization implements ActionListener
     this.startButton.addActionListener(this);
     
     this.panel.setBackground(BaseApplication.background_color);
-    
-    BufferedImage myPicture;
-    JLabel picLabel;
-    try
-    {
-      myPicture = ImageIO.read(new File("src/main/java/resources/title_bird.png"));
-      Image tmp = myPicture.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-      BufferedImage dimg = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
-      Graphics2D g2d = dimg.createGraphics();
-      g2d.drawImage(tmp, 0, 0, null);
-      g2d.dispose();
-      
-      picLabel = new JLabel(new ImageIcon(dimg));
-      picLabel.setBounds((WIDTH / 2) - (dimg.getWidth() / 2), (HEIGHT / 2) - (dimg.getHeight() / 2), dimg.getWidth(), dimg.getHeight());
-      this.panel.add(picLabel);
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
-    
+    JLabel picLabel = new JLabel(ImageReader.readImage("title_bird.png"));
+    picLabel.setBounds((WIDTH/2) - 100, (HEIGHT/2) - 100, 200, 200);
+    this.panel.add(picLabel);
     this.panel.add(label);
     this.panel.add(this.startButton);
     this.panel.setVisible(true);

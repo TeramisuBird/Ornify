@@ -2,19 +2,11 @@ package ornify;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -222,7 +214,7 @@ public class ResultsPanel implements ActionListener
         this.questionDisplay.setFont(new Font("Verdana", Font.BOLD, 20));
         this.questionDisplay.setText("Oops! That bird doesn't seem to exist.");
         this.textPane.setText("Doesn't exist");
-        this.pictureDisplay.setIcon(makeIcon("https://i.redd.it/thlztdwby2ub1.jpg"));
+        this.pictureDisplay.setIcon(ImageReader.downloadImage("https://i.redd.it/thlztdwby2ub1.jpg"));
         this.panel.remove(nextButton);
         this.panel.remove(returnButton);
         this.panel.remove(restartButton);
@@ -253,14 +245,14 @@ public class ResultsPanel implements ActionListener
         if (set.next())
         {
           this.textPane.setText(set.getString(1));
-          this.pictureDisplay.setIcon(makeIcon(set.getString(2)));
+          this.pictureDisplay.setIcon(ImageReader.downloadImage(set.getString(2)));
         }
         else
         {
           if (set.first())
           {
             this.textPane.setText(set.getString(1));
-            this.pictureDisplay.setIcon(makeIcon(set.getString(2)));
+            this.pictureDisplay.setIcon(ImageReader.downloadImage(set.getString(2)));
           }
         }
       }
@@ -273,29 +265,5 @@ public class ResultsPanel implements ActionListener
     {
       System.out.println("ResultSet is null. Something must be wrong.");
     }
-  }
-  
-  private ImageIcon makeIcon(String path) {
-    ImageIcon icon = null;
-    try
-    {
-      URL url = new URL(path);
-      BufferedImage img = ImageIO.read(url);
-      Image tmp = img.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
-      BufferedImage dimg = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
-      Graphics2D g2d = dimg.createGraphics();
-      g2d.drawImage(tmp, 0, 0, null);
-      g2d.dispose();
-      icon = new ImageIcon(dimg);
-    }
-    catch (MalformedURLException e)
-    {
-      e.printStackTrace();
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
-    return icon;
   }
 }
