@@ -1,28 +1,25 @@
 package ornify;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
 
 public class BeakPanel extends CustomPanel implements ItemListener
 {
   private static final String[] OPTIONS = {"----", "Cone", "Chisel", "Pointy", "Hooked", "Flat", "Probing"};
-  private JComboBox<String> combo;
-  private String currentOption;
+  private JComboBox<String> combo = new JComboBox<String>(OPTIONS);;
+  private String currentOption = OPTIONS[0];
   
   public BeakPanel(String question, BaseApplication ba)
   {
     super(question, ba);
-    this.combo = new JComboBox<String>(OPTIONS);
-    combo.setBounds((WIDTH / 2) - 50, (HEIGHT / 2), 100, 50);
+    combo.setPreferredSize(new Dimension(200, 30));
     combo.addItemListener(this);
-    JPanel panel = this.getPanel();
-    panel.add(combo);
-    
-    currentOption = OPTIONS[0];
+    super.image.setIcon(ImageReader.readImage("beak_types.png", 550, 450));
+    super.comboPanel.add(combo);
   }
   
   @Override

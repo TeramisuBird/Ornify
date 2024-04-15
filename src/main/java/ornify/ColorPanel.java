@@ -5,7 +5,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
 
 public class ColorPanel extends CustomPanel implements ItemListener
 {
@@ -38,52 +37,32 @@ public class ColorPanel extends CustomPanel implements ItemListener
 //  private static final String[] REGIONS = {"Beak", "Crown", "Supercilium", "Eyestripe", "Auriculars", "Throat",
 //      "Breast", "Wing", "Coverts", " Feet"};
   
-  private JComboBox<String> beakCombo;
-  private JComboBox<String> crownCombo;
-  private JComboBox<String> superciliumCombo;
-  private JComboBox<String> eyestripeCombo;
-  private JComboBox<String> auricularCombo;
-  private JComboBox<String> throatCombo;
-  private JComboBox<String> breastCombo;
-  private JComboBox<String> wingCombo;
-  private JComboBox<String> covertCombo;
-  private JComboBox<String> feetCombo;
-  private String currentBeak;
-  private String currentCrown;
-  private String currentSupercilium;
-  private String currentEyestripe;
-  private String currentAuricular;
-  private String currentThroat;
-  private String currentBreast;
-  private String currentWing;
-  private String currentCovert;
-  private String currentFeet;
+  private JComboBox<String> beakCombo = new JComboBox<String>(BEAK);
+  private JComboBox<String> crownCombo = new JComboBox<String>(CROWN);
+  private JComboBox<String> superciliumCombo = new JComboBox<String>(SUPERCILIUM);
+  private JComboBox<String> eyestripeCombo = new JComboBox<String>(EYESTRIPE);
+  private JComboBox<String> auricularCombo = new JComboBox<String>(AURICULARS);
+  private JComboBox<String> throatCombo = new JComboBox<String>(THROAT);
+  private JComboBox<String> breastCombo = new JComboBox<String>(BREAST);
+  private JComboBox<String> wingCombo = new JComboBox<String>(WING);
+  private JComboBox<String> covertCombo = new JComboBox<String>(COVERTS);
+  private JComboBox<String> feetCombo = new JComboBox<String>(FEET);
+  private String currentBeak = BEAK[0];
+  private String currentCrown = CROWN[0];
+  private String currentSupercilium = SUPERCILIUM[0];
+  private String currentEyestripe = EYESTRIPE[0];
+  private String currentAuricular = AURICULARS[0];
+  private String currentThroat = THROAT[0];
+  private String currentBreast = BREAST[0];
+  private String currentWing = WING[0];
+  private String currentCovert = COVERTS[0];
+  private String currentFeet = FEET[0];
 
   public ColorPanel(String question, BaseApplication ba)
   {
     super(question, ba);
     
-    this.beakCombo = new JComboBox<String>(BEAK);
-    this.crownCombo = new JComboBox<String>(CROWN);
-    this.superciliumCombo = new JComboBox<String>(SUPERCILIUM);
-    this.eyestripeCombo = new JComboBox<String>(EYESTRIPE);
-    this.auricularCombo = new JComboBox<String>(AURICULARS);
-    this.throatCombo = new JComboBox<String>(THROAT);
-    this.breastCombo = new JComboBox<String>(BREAST);
-    this.wingCombo = new JComboBox<String>(WING);
-    this.covertCombo = new JComboBox<String>(COVERTS);
-    this.feetCombo = new JComboBox<String>(FEET);
-
-    beakCombo.setBounds((WIDTH / 2) - 260, (HEIGHT / 2) - 55, 100, 50);
-    crownCombo.setBounds((WIDTH / 2) - 155, (HEIGHT / 2) - 55, 100, 50);
-    superciliumCombo.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) - 55, 100, 50);
-    eyestripeCombo.setBounds((WIDTH / 2) + 55, (HEIGHT / 2) - 55, 100, 50);
-    auricularCombo.setBounds((WIDTH / 2) + 160, (HEIGHT / 2) - 55, 100, 50);
-    throatCombo.setBounds((WIDTH / 2) - 260, (HEIGHT / 2), 100, 50);
-    breastCombo.setBounds((WIDTH / 2) - 155, (HEIGHT / 2), 100, 50);
-    wingCombo.setBounds((WIDTH / 2) - 50, (HEIGHT / 2), 100, 50);
-    covertCombo.setBounds((WIDTH / 2) + 55, (HEIGHT / 2), 100, 50);
-    feetCombo.setBounds((WIDTH / 2) + 160, (HEIGHT / 2), 100, 50);
+    super.image.setIcon(ImageReader.readImage("bird_parts.jpg", 450, 350));
     
     beakCombo.addItemListener(this);
     crownCombo.addItemListener(this);
@@ -96,83 +75,39 @@ public class ColorPanel extends CustomPanel implements ItemListener
     covertCombo.addItemListener(this);
     feetCombo.addItemListener(this);
     
-    JPanel panel = this.getPanel();
-    panel.add(beakCombo);
-    panel.add(crownCombo);
-    panel.add(superciliumCombo);
-    panel.add(eyestripeCombo);
-    panel.add(auricularCombo);
-    panel.add(throatCombo);
-    panel.add(breastCombo);
-    panel.add(wingCombo);
-    panel.add(covertCombo);
-    panel.add(feetCombo);
-
-    currentBeak = BEAK[0];
-    currentCrown = CROWN[0];
-    currentSupercilium = SUPERCILIUM[0];
-    currentEyestripe = EYESTRIPE[0];
-    currentAuricular = AURICULARS[0];
-    currentThroat = THROAT[0];
-    currentBreast = BREAST[0];
-    currentWing = WING[0];
-    currentCovert = COVERTS[0];
-    currentFeet = FEET[0];
+    super.comboPanel.add(beakCombo);
+    super.comboPanel.add(crownCombo);
+    super.comboPanel.add(superciliumCombo);
+    super.comboPanel.add(eyestripeCombo);
+    super.comboPanel.add(auricularCombo);
+    super.comboPanel.add(throatCombo);
+    super.comboPanel.add(breastCombo);
+    super.comboPanel.add(wingCombo);
+    super.comboPanel.add(covertCombo);
+    super.comboPanel.add(feetCombo);
+  }
+  
+  private void withChoice(ItemEvent e, JComboBox<String> combo, String choice, int n) {
+    if (e.getSource() == combo) {
+      choice = (String) combo.getSelectedItem();
+      this.baseApp.addChoice(choice, n);
+    }
   }
   
   @Override
   public void itemStateChanged(ItemEvent e)
   {
     // if the state combobox is changed
-    if (e.getSource() == beakCombo) {
-      currentBeak = (String) beakCombo.getSelectedItem();
-      this.baseApp.addChoice(currentBeak, 8);
-    }
-    
-    if (e.getSource() == crownCombo) {
-      currentCrown = (String) crownCombo.getSelectedItem();
-      this.baseApp.addChoice(currentCrown, 2);
-    }
-    
-    if (e.getSource() == superciliumCombo) {
-      currentSupercilium = (String) superciliumCombo.getSelectedItem();
-      this.baseApp.addChoice(currentSupercilium, 3);
-    }
-    
-    if (e.getSource() == eyestripeCombo) {
-      currentEyestripe = (String) eyestripeCombo.getSelectedItem();
-      this.baseApp.addChoice(currentEyestripe, 4);
-    }
-    
-    if (e.getSource() == auricularCombo) {
-      currentAuricular = (String) auricularCombo.getSelectedItem();
-      this.baseApp.addChoice(currentAuricular, 5);
-    }
-    
-    if (e.getSource() == throatCombo) {
-      currentThroat = (String) throatCombo.getSelectedItem();
-      this.baseApp.addChoice(currentThroat, 9);
-    }
-    
-    if (e.getSource() == breastCombo) {
-      currentBreast = (String) breastCombo.getSelectedItem();
-      this.baseApp.addChoice(currentBreast, 10);
-    }
-    
-    if (e.getSource() == wingCombo) {
-      currentWing = (String) wingCombo.getSelectedItem();
-      this.baseApp.addChoice(currentWing, 12);
-    }
-    
-    if (e.getSource() == covertCombo) {
-      currentCovert = (String) covertCombo.getSelectedItem();
-      this.baseApp.addChoice(currentCovert, 11);
-    }
-    
-    if (e.getSource() == feetCombo) {
-      currentFeet = (String) feetCombo.getSelectedItem();
-      this.baseApp.addChoice(currentFeet, 14);
-    }
+    withChoice(e, beakCombo, currentBeak, 8);
+    withChoice(e, crownCombo, currentCrown, 2);
+    withChoice(e, superciliumCombo, currentSupercilium, 3);
+    withChoice(e, eyestripeCombo, currentEyestripe, 4);
+    withChoice(e, auricularCombo, currentAuricular, 5);
+    withChoice(e, throatCombo, currentThroat, 9);
+    withChoice(e, breastCombo, currentBreast, 10);
+    withChoice(e, wingCombo, currentWing, 12);
+    withChoice(e, covertCombo, currentCovert, 11);
+    withChoice(e, feetCombo, currentFeet, 14);
   }
   
 //  public String getOption()
