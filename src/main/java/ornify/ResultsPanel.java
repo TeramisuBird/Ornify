@@ -23,10 +23,10 @@ import javax.swing.SwingConstants;
 
 public class ResultsPanel implements ActionListener
 {
-  // private static final long serialVersionUID = -167346073358446237L;
   private static final String STARTING_TEXT = "Possible matches are:\n";
   public static final int WIDTH = 600;
   public static final int HEIGHT = 600;
+  public static final boolean IS_ONLINE = true;
   
   private SQLDatabase db;
   public JTextPane textPane;
@@ -46,7 +46,7 @@ public class ResultsPanel implements ActionListener
   
   public ResultsPanel(String question, BaseApplication ba)
   {
-    this.db = new SQLDatabase(true);
+    this.db = new SQLDatabase(IS_ONLINE);
     this.matchesText = STARTING_TEXT;
     this.baseApp = ba;
     this.panel = new JPanel();
@@ -79,9 +79,15 @@ public class ResultsPanel implements ActionListener
     
     
     this.textPane = new JTextPane();
+    this.textPane.setBounds((WIDTH / 2) - 200, (HEIGHT / 2) - 55, 300, 300);
+    
     this.pictureDisplay = new JLabel();
+    this.pictureDisplay.setBounds((WIDTH / 2), (HEIGHT / 2) - 55, 300, 300);
+    
     this.resultDisplay = new JPanel();
-    resultDisplay.setBackground(new Color(255, 255, 255));
+    this.resultDisplay.setBackground(new Color(255, 255, 255));
+    this.resultDisplay.setBounds((WIDTH / 2) - 260, (HEIGHT / 2) - 150, WIDTH - 80, 250);
+    
     this.resultDisplay.add(textPane);
     this.resultDisplay.add(pictureDisplay);
     
@@ -205,15 +211,9 @@ public class ResultsPanel implements ActionListener
     }
     
     String query = select + from + where + conditions;
-//    System.out.println(query);
-
     ResultSet matches = this.db.getResultsFromQuery(query);
     this.set = matches;
-    
-    this.textPane.setBounds((WIDTH / 2) - 260, (HEIGHT / 2) - 55, 100, 100);
     this.textPane.setVisible(true);
-    
-    this.pictureDisplay.setBounds((WIDTH / 2), (HEIGHT / 2) - 55, 300, 400);
     pictureDisplay.setIcon(null);
     textPane.setText("");
     try
@@ -222,15 +222,7 @@ public class ResultsPanel implements ActionListener
         this.questionDisplay.setFont(new Font("Verdana", Font.BOLD, 20));
         this.questionDisplay.setText("Oops! That bird doesn't seem to exist.");
         this.textPane.setText("Doesn't exist");
-        URL url = new URL("https://i.redd.it/thlztdwby2ub1.jpg");
-        BufferedImage img = ImageIO.read(url);
-        Image tmp = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        BufferedImage dimg = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = dimg.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-        ImageIcon icon = new ImageIcon(dimg);
-        this.pictureDisplay.setIcon(icon);
+        this.pictureDisplay.setIcon(makeIcon("https://i.redd.it/thlztdwby2ub1.jpg"));
         this.panel.remove(nextButton);
         this.panel.remove(returnButton);
         this.panel.remove(restartButton);
@@ -241,18 +233,8 @@ public class ResultsPanel implements ActionListener
     {
       e.printStackTrace();
     }
-    catch (MalformedURLException e)
-    {
-      e.printStackTrace();
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
     handleNext();
-    
     this.nextButton.setVisible(true);
-    this.resultDisplay.setBounds((WIDTH / 2) - 260, (HEIGHT / 2) - 55, WIDTH - 80, 100);
     this.panel.add(resultDisplay);
     this.panel.repaint();
   }
@@ -271,42 +253,16 @@ public class ResultsPanel implements ActionListener
         if (set.next())
         {
           this.textPane.setText(set.getString(1));
-          URL url = new URL(set.getString(2));
-          BufferedImage img = ImageIO.read(url);
-          Image tmp = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-          BufferedImage dimg = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-          Graphics2D g2d = dimg.createGraphics();
-          g2d.drawImage(tmp, 0, 0, null);
-          g2d.dispose();
-          
-          ImageIcon icon = new ImageIcon(dimg);
-          this.pictureDisplay.setIcon(icon);
+          this.pictureDisplay.setIcon(makeIcon(set.getString(2)));
         }
         else
         {
           if (set.first())
           {
             this.textPane.setText(set.getString(1));
-            URL url = new URL(set.getString(2));
-            BufferedImage img = ImageIO.read(url);
-            Image tmp = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            BufferedImage dimg = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = dimg.createGraphics();
-            g2d.drawImage(tmp, 0, 0, null);
-            g2d.dispose();
-            
-            ImageIcon icon = new ImageIcon(dimg);
-            this.pictureDisplay.setIcon(icon);
+            this.pictureDisplay.setIcon(makeIcon(set.getString(2)));
           }
         }
-      }
-      catch (MalformedURLException e)
-      {
-        e.printStackTrace();
-      }
-      catch (IOException e)
-      {
-        e.printStackTrace();
       }
       catch (SQLException e)
       {
@@ -317,5 +273,29 @@ public class ResultsPanel implements ActionListener
     {
       System.out.println("ResultSet is null. Something must be wrong.");
     }
+  }
+  
+  private ImageIcon makeIcon(String path) {
+    ImageIcon icon = null;
+    try
+    {
+      URL url = new URL(path);
+      BufferedImage img = ImageIO.read(url);
+      Image tmp = img.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+      BufferedImage dimg = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
+      Graphics2D g2d = dimg.createGraphics();
+      g2d.drawImage(tmp, 0, 0, null);
+      g2d.dispose();
+      icon = new ImageIcon(dimg);
+    }
+    catch (MalformedURLException e)
+    {
+      e.printStackTrace();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+    return icon;
   }
 }
