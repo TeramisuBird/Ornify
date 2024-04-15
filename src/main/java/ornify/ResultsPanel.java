@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 
 public class ResultsPanel implements ActionListener
 {
+  // private static final long serialVersionUID = -167346073358446237L;
   private static final String STARTING_TEXT = "Possible matches are:\n";
   public static final int WIDTH = 600;
   public static final int HEIGHT = 600;
@@ -31,10 +32,12 @@ public class ResultsPanel implements ActionListener
   public JTextPane textPane;
   private JPanel resultDisplay;
   private JLabel pictureDisplay;
+  private JLabel questionDisplay;
   
   public JButton returnButton;
   public JButton nextButton;
-  public JButton getResultsButton;
+  public JButton restartButton;
+  public JButton tryAnotherButton;
   public JPanel panel;
   public BaseApplication baseApp;
   public String matchesText;
@@ -43,7 +46,7 @@ public class ResultsPanel implements ActionListener
   
   public ResultsPanel(String question, BaseApplication ba)
   {
-    this.db = new SQLDatabase(true);
+    this.db = new SQLDatabase(false);
     this.matchesText = STARTING_TEXT;
     this.baseApp = ba;
     this.panel = new JPanel();
@@ -51,24 +54,28 @@ public class ResultsPanel implements ActionListener
     this.panel.setBounds(0, 0, WIDTH, HEIGHT);
     
     String html = "<html><body style='width: %1spx'>%1s";
-    JLabel label = new JLabel(String.format(html, 300, question));
-    label.setHorizontalAlignment(SwingConstants.CENTER);
-    label.setFont(new Font("Verdana", Font.BOLD, 30));
-
-    label.setBounds((WIDTH / 2) - 200, 50, 500, 100);
     
-    this.returnButton = new JButton("Return");
+    questionDisplay = new JLabel(String.format(html, 300, question));
+    questionDisplay.setHorizontalAlignment(SwingConstants.CENTER);
+    questionDisplay.setFont(new Font("Verdana", Font.BOLD, 30));
+    questionDisplay.setBounds((WIDTH / 2) - 200, 50, 500, 100);
+    
+    this.tryAnotherButton = new JButton("Try another?");
+    this.tryAnotherButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
+    this.tryAnotherButton.addActionListener(this);
+    
+    this.returnButton = new JButton("Previous");
     this.returnButton.setBounds((WIDTH / 2) + 100, (HEIGHT / 2) + 100, 100, 50);
     this.returnButton.addActionListener(this);
     
-    this.nextButton = new JButton("Next");
+    this.nextButton = new JButton("No");
     this.nextButton.setBounds((WIDTH / 2) - 100, (HEIGHT / 2) + 100, 100, 50);
     this.nextButton.setVisible(false);
     this.nextButton.addActionListener(this);
     
-    this.getResultsButton = new JButton("Find Matches");
-    this.getResultsButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
-    this.getResultsButton.addActionListener(this);
+    this.restartButton = new JButton("Yes");
+    this.restartButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
+    this.restartButton.addActionListener(this);
     
     
     this.textPane = new JTextPane();
@@ -79,9 +86,9 @@ public class ResultsPanel implements ActionListener
     this.resultDisplay.add(pictureDisplay);
     
     this.panel.setBackground(BaseApplication.background_color);
-    this.panel.add(label);
+    this.panel.add(questionDisplay);
     this.panel.add(this.returnButton);
-    this.panel.add(this.getResultsButton);
+    this.panel.add(this.restartButton);
     this.panel.add(nextButton);
     this.panel.setVisible(true);
   }
@@ -91,25 +98,39 @@ public class ResultsPanel implements ActionListener
   {
     switch (e.getActionCommand())
     {
-      case "Return":
+      case "Previous":
         this.panel.remove(resultDisplay);
         this.nextButton.setVisible(false);
         this.panel.repaint();
         this.matchesText = STARTING_TEXT;
         this.baseApp.handleReturn();
         break;
-      case "Find Matches":
-        buildResults();
+      case "No":
+        this.handleNext();
         break;
-      case "Next":
-        handleNext();
+      case "Yes":
+        this.restartButton.setText("Start over?");
+        break;
+      case "Try another?":
+        this.panel.add(returnButton);
+        this.panel.add(nextButton);
+        this.panel.add(restartButton);
+        this.panel.remove(tryAnotherButton);
+        this.questionDisplay.setFont(new Font("Verdana", Font.BOLD, 30));
+        this.questionDisplay.setText("Is this your bird?");
+      case "Start over?":
+        this.panel.remove(resultDisplay);
+        this.nextButton.setVisible(false);
+        this.panel.repaint();
+        this.matchesText = STARTING_TEXT;
+        this.baseApp.handleRestart();
         break;
       default:
         break;
     }
   }
   
-  private void buildResults() {
+  protected void buildResults() {
     String select = "select name, image_url, sound_url ";
     String from = "from bird";
     String where = " where ";
@@ -192,9 +213,42 @@ public class ResultsPanel implements ActionListener
     this.textPane.setBounds((WIDTH / 2) - 260, (HEIGHT / 2) - 55, 100, 100);
     this.textPane.setVisible(true);
     
-    this.pictureDisplay.setBounds((WIDTH / 2), (HEIGHT / 2) - 55, 100, 100);
+    this.pictureDisplay.setBounds((WIDTH / 2), (HEIGHT / 2) - 55, 300, 400);
     pictureDisplay.setIcon(null);
     textPane.setText("");
+    try
+    {
+      if (!set.isBeforeFirst()) {
+        this.questionDisplay.setFont(new Font("Verdana", Font.BOLD, 20));
+        this.questionDisplay.setText("Oops! That bird doesn't seem to exist.");
+        this.textPane.setText("Doesn't exist");
+        URL url = new URL("https://i.redd.it/thlztdwby2ub1.jpg");
+        BufferedImage img = ImageIO.read(url);
+        Image tmp = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        BufferedImage dimg = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = dimg.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        ImageIcon icon = new ImageIcon(dimg);
+        this.pictureDisplay.setIcon(icon);
+        this.panel.remove(nextButton);
+        this.panel.remove(returnButton);
+        this.panel.remove(restartButton);
+        this.panel.add(tryAnotherButton);
+      }
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+    catch (MalformedURLException e)
+    {
+      e.printStackTrace();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
     handleNext();
     
     this.nextButton.setVisible(true);
@@ -261,7 +315,7 @@ public class ResultsPanel implements ActionListener
     }
     else
     {
-      System.out.println("Hello");
+      System.out.println("ResultSet is null. Something must be wrong.");
     }
   }
 }

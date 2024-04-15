@@ -189,7 +189,8 @@ public class ColorPanel extends CustomPanel implements ItemListener
         this.baseApp.handleReturn();
         break;
       case "Next":
-        this.baseApp.handleNext();
+        //this.baseApp.handleNext();
+        this.baseApp.handleResults();
         break;
       default:
         break;

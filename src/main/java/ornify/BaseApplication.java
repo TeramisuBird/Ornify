@@ -25,6 +25,7 @@ public class BaseApplication extends JApplication implements ActionListener
 
   public String[] userChoices;
   private JPanel curPanel;
+  private ResultsPanel resultPanel;
   private int index;
   private ArrayList<JPanel> panels;
   
@@ -116,18 +117,35 @@ public class BaseApplication extends JApplication implements ActionListener
    */
   protected void handleNext()
   {
-    if (index + 1 < panels.size())
-    {
-      JPanel panel = (JPanel) this.getContentPane();
-      panel.remove(curPanel);
+    JPanel panel = (JPanel) this.getContentPane();
+    panel.remove(curPanel);
+    if (index<7) {
       index++;
-      
-      curPanel = panels.get(index);
-      curPanel.setVisible(true);
-      panel.add(curPanel);
-      panel.revalidate();
-      panel.repaint();
+    } else {
+      index = 0;
     }
+    curPanel = panels.get(index);
+    curPanel.setVisible(true);
+    panel.add(curPanel);
+    panel.revalidate();
+    panel.repaint();
+  }
+  
+  public void handleRestart() {
+    JPanel panel = (JPanel) this.getContentPane();
+    panel.remove(curPanel);
+    index = 0;
+    curPanel = panels.get(index);
+    curPanel.setVisible(true);
+    panel.add(curPanel);
+    panel.revalidate();
+    panel.repaint();
+  }
+  
+  public void handleResults() {
+    resultPanel.buildResults();
+    System.out.println("Building your results...");
+    handleNext();
   }
   
   /**
@@ -136,11 +154,13 @@ public class BaseApplication extends JApplication implements ActionListener
    * @throws IOException
    */
   public void handleReturn()
-  {
+  { 
+
     JPanel panel = (JPanel) this.getContentPane();
     panel.remove(curPanel);
-    index = 0;
-    
+    if (index!=0) {
+      index--;
+    }
     curPanel = panels.get(index);
     curPanel.setVisible(true);
     panel.add(curPanel);
@@ -151,6 +171,7 @@ public class BaseApplication extends JApplication implements ActionListener
   @Override
   public void init()
   {
+    System.out.println("Entering init...");
     // Add the panel to the main window
     JPanel panel = (JPanel) this.getContentPane();
     panel.setLayout(null);
@@ -163,7 +184,7 @@ public class BaseApplication extends JApplication implements ActionListener
     CustomPanel beakPanel = new BeakPanel("What is the beak shape?", this);
     CustomPanel beakLenPanel = new BeakLenPanel("What is the beak length?", this);  
     CustomPanel colorPanel = new ColorPanel("What color was this bird?", this);
-    ResultsPanel resultPanel = new ResultsPanel("Is this your bird?", this);
+    resultPanel = new ResultsPanel("Is this your bird?", this);
     
     //    add to panel list
     panels.add(titlePanel.getPanel());

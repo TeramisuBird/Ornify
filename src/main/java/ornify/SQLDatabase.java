@@ -67,7 +67,9 @@ public class SQLDatabase
       }
       String url = databaseURL + serverName + "/" + databaseName;
       System.out.println("Attempting to connect to database: " + url + "\n\nWith password = " + password);
-      this.connection = DriverManager.getConnection(url, username, password);
+      if (connection==null) {
+        this.connection = DriverManager.getConnection(url, username, password);
+      }
     }
     catch (IOException e)
     {
