@@ -46,7 +46,7 @@ public class ResultsPanel implements ActionListener
   
   public ResultsPanel(String question, BaseApplication ba)
   {
-    this.db = new SQLDatabase(false);
+    this.db = new SQLDatabase(true);
     this.matchesText = STARTING_TEXT;
     this.baseApp = ba;
     this.panel = new JPanel();
