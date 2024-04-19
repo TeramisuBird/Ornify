@@ -94,7 +94,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
   {
     String select = "select name, image_url, sound_url ";
     String from = "from bird";
-    String where = " where ";
+    String where = "";
     String conditions = "";
 
     int fieldsEntered = 0;
@@ -163,6 +163,11 @@ public class ResultsPanel extends CustomPanel implements ActionListener
             break;
         }
       }
+    }
+    
+    if (fieldsEntered != 0)
+    {
+      where = " where ";
     }
 
     String query = select + from + where + conditions;
