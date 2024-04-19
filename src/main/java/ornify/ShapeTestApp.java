@@ -34,7 +34,6 @@ public class ShapeTestApp extends JApplication
     this.panel = (JPanel) new ShapeTestPanel(outline);
     
     this.panel.setVisible(true);
-    this.panel.repaint();
   }
   
   public static void main(String[] args)

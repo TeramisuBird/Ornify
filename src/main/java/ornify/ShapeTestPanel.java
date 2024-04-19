@@ -27,6 +27,7 @@ public class ShapeTestPanel extends JPanel
     super.paintComponents(g);
 
     g.setColor(Color.BLACK);
-    g.drawPolygon(poly);
+//    g.drawPolygon(poly);
+    g.fillPolygon(poly);
   } 
 }
