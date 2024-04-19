@@ -1,7 +1,6 @@
 package ornify;
 
-import java.awt.Shape;
-import java.awt.geom.Path2D;
+import java.awt.Polygon;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -46,9 +45,11 @@ public class PolygonReader
    * @param name for name of stream
    * @return shape read from stream
    */
-  public Shape read(final String name)
+  public Polygon read(final String name)
   {
-    Path2D.Double sh = new Path2D.Double();
+    Polygon poly = new Polygon();
+
+    int points = 0;
     BufferedReader br = null;
     
     if (this.finder == null)
@@ -75,27 +76,20 @@ public class PolygonReader
       while (line != null)
       {
         String[] fields = line.split(",");
-        double x = Integer.valueOf(fields[1]);
-        double y = Integer.valueOf(fields[2]);
-        if (fields[0].equals("4"))
-        {
-          sh.moveTo(x, y);
-        }
-        else
-        {
-          sh.lineTo(x, y);
-        }
+        int x = Integer.valueOf(fields[1]);
+        int y = Integer.valueOf(fields[2]);
+        poly.addPoint(x, y);
         
+        points++;
         line = br.readLine();
-      }
-      
-      sh.closePath();
+      }      
     }
     catch (IOException e)
     {
       e.printStackTrace();
     }
     
-    return sh;
+    poly.npoints = points;
+    return poly;
   }
 }

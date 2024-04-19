@@ -1,12 +1,6 @@
 package ornify;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.Shape;
-import java.util.ArrayList;
-
 import javax.swing.JPanel;
 
 import app.JApplication;
@@ -21,7 +15,7 @@ public class ShapeTestApp extends JApplication
   
   public JPanel panel;
   public ResourceFinder jarFinder;
-  public Shape outline;
+  public Polygon outline;
 
   public ShapeTestApp(String[] args)
   {
@@ -31,17 +25,16 @@ public class ShapeTestApp extends JApplication
   }
   
   @Override
-  public void init() {
+  public void init()
+  {
     PolygonReader pr = new PolygonReader(jarFinder);
     
     this.outline = pr.read("bird.map");
     
-
-    this.panel = new ShapeTestPanel(outline);
-    
-//    this.panel.paintComponents((Graphics2D) outline);
+    this.panel = (JPanel) new ShapeTestPanel(outline);
     
     this.panel.setVisible(true);
+    this.panel.repaint();
   }
   
   public static void main(String[] args)
