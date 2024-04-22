@@ -1,33 +1,35 @@
 package ornify;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Polygon;
 
-import javax.swing.JPanel;
+import io.ResourceFinder;
+import resources.Marker;
+import visual.Visualization;
+import visual.statik.described.Content;
 
-public class ShapeTestPanel extends JPanel
+public class ShapeTestPanel extends Visualization
 {
+  private PolygonReader reader;
+  private ResourceFinder jarFinder;
 
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
-  
-  private Polygon poly;
-
-  public ShapeTestPanel(Polygon poly)
+  public ShapeTestPanel()
   {
-    this.poly = poly;
+    this.jarFinder = ResourceFinder.createInstance(new Marker());
+    this.reader = new PolygonReader(jarFinder);
+    
+    this.getView().setSize(600, 600);
   }
   
-  @Override
-  protected void paintComponent(Graphics g){
-
-    super.paintComponents(g);
-
-    g.setColor(Color.BLACK);
-//    g.drawPolygon(poly);
-    g.fillPolygon(poly);
-  } 
+  public void read(String name)
+  {
+    Content content = new Content();
+    Polygon poly = reader.read(name);
+    
+    content.setShape(poly);
+    content.setColor(new Color(255, 0, 0));
+    content.setPaint(new Color(255, 255, 255));
+    
+    this.add(content);
+  }
 }

@@ -1,11 +1,6 @@
 package ornify;
 
-import java.awt.Polygon;
-import javax.swing.JPanel;
-
 import app.JApplication;
-import io.ResourceFinder;
-import resources.Marker;
 
 public class ShapeTestApp extends JApplication
 {
@@ -13,27 +8,21 @@ public class ShapeTestApp extends JApplication
   private static final int WIDTH = 600;
   private static final int HEIGHT = 600;
   
-  public JPanel panel;
-  public ResourceFinder jarFinder;
-  public Polygon outline;
+  private ShapeTestPanel shapeTestPanel;
 
   public ShapeTestApp(String[] args)
   {
     super(args, WIDTH, HEIGHT);
-    
-    this.jarFinder = ResourceFinder.createInstance(new Marker());
   }
   
   @Override
   public void init()
   {
-    PolygonReader pr = new PolygonReader(jarFinder);
+    this.shapeTestPanel = new ShapeTestPanel();
+    shapeTestPanel.read("bird.map");
+    shapeTestPanel.read("bird2.map");
     
-    this.outline = pr.read("bird.map");
-    
-    this.panel = (JPanel) new ShapeTestPanel(outline);
-    
-    this.panel.setVisible(true);
+    this.getContentPane().add(shapeTestPanel.getView());
   }
   
   public static void main(String[] args)
