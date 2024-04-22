@@ -50,10 +50,7 @@ public class SizePanel extends CustomPanel implements ItemListener
         this.baseApp.handleReturn();
         break;
       case "Next":
-        if (!currentOption.equals(OPTIONS[0]))
-        {
-          this.baseApp.handleNext();
-        }
+        this.baseApp.handleNext();
         break;
       default:
         break;
