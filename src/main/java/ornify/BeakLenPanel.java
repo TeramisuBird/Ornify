@@ -9,16 +9,15 @@ import javax.swing.JComboBox;
 
 public class BeakLenPanel extends CustomPanel implements ItemListener
 {
-  private static final String[] OPTIONS = {"----", "Short", "Average", "Long"};
-  private JComboBox<String> combo = new JComboBox<String>(OPTIONS);;
-  private String currentOption = OPTIONS[0];;
+  private JComboBox<String> combo = new JComboBox<String>(Model.BEAK_LENGTH);
+  private String currentOption = Model.BEAK_LENGTH[0];
   
   public BeakLenPanel(String question, BaseApplication ba)
   {
     super(question, ba);
     combo.setPreferredSize(new Dimension(200, 30));
     combo.addItemListener(this);
-    super.image.setIcon(ImageReader.readImage("lorikeet_beak.jpg", 500, 300));
+    super.image.setIcon(Model.BEAKLEN_IMAGE);
     super.comboPanel.add(combo);
   }
   

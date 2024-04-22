@@ -8,61 +8,32 @@ import javax.swing.JComboBox;
 
 public class ColorPanel extends CustomPanel implements ItemListener
 {
-  
-//  private static final String[] COLORS = {"Orange", "Red", "Black", "Brown", "Tan", "Green",
-//      "Yellow", "White", "Gray", "Blue"};
-  
-  private static final String[] BEAK = {"Beak", "Orange", "Red", "Black", "Brown", "Tan", 
-      "Green", "Yellow", "White", "Gray", "Blue", "Light Tan"};
-  private static final String[] CROWN = {"Crown", "Orange", "Red", "Black", "Brown", 
-      "Tan", "Green", "Yellow", "White", "Gray", "Blue", "Mute Tan", "Iridescent"};
-  private static final String[] SUPERCILIUM = {"Supercilium", "Orange", "Red", "Black", 
-      "Brown", "Tan", "Green", "Yellow", "White", "Gray", "Blue", 
-      "Mute Tan", "Iridescent", "White Tan"};
-  private static final String[] EYESTRIPE = {"Eyestripe", "Orange", "Red", "Black", 
-      "Brown", "Tan", "Green", "Yellow", "White", "Gray", "Blue"};
-  private static final String[] AURICULARS = {"Auriculars", "Orange", "Red", "Black", 
-      "Brown", "Tan", "Green", "Yellow", "White", "Gray", "Blue", "Mute Tan", "White Tan"};
-  private static final String[] THROAT = {"Throat", "Orange", "Red", "Black", "Brown", 
-      "Tan", "Green", "Yellow", "White", "Gray", "Blue"};
-  private static final String[] BREAST = {"Breast", "Orange", "Red", "Black", "Brown", 
-      "Tan", "Green", "Yellow", "White", "Gray", "Blue", "Tan"};
-  private static final String[] WING = {"Wing", "Orange", "Red", "Black", "Brown", 
-      "Tan", "Green", "Yellow", "White", "Gray", "Blue"};
-  private static final String[] COVERTS = {"Coverts", "Orange", "Red", "Black", "Brown", 
-      "Tan", "Green", "Yellow", "White", "Gray", "Blue"};
-  private static final String[] FEET = {"Feet", "Orange", "Red", "Black", "Brown", 
-      "Tan", "Green", "Yellow", "White", "Gray", "Blue"};
-  
-//  private static final String[] REGIONS = {"Beak", "Crown", "Supercilium", "Eyestripe", "Auriculars", "Throat",
-//      "Breast", "Wing", "Coverts", " Feet"};
-  
-  private JComboBox<String> beakCombo = new JComboBox<String>(BEAK);
-  private JComboBox<String> crownCombo = new JComboBox<String>(CROWN);
-  private JComboBox<String> superciliumCombo = new JComboBox<String>(SUPERCILIUM);
-  private JComboBox<String> eyestripeCombo = new JComboBox<String>(EYESTRIPE);
-  private JComboBox<String> auricularCombo = new JComboBox<String>(AURICULARS);
-  private JComboBox<String> throatCombo = new JComboBox<String>(THROAT);
-  private JComboBox<String> breastCombo = new JComboBox<String>(BREAST);
-  private JComboBox<String> wingCombo = new JComboBox<String>(WING);
-  private JComboBox<String> covertCombo = new JComboBox<String>(COVERTS);
-  private JComboBox<String> feetCombo = new JComboBox<String>(FEET);
-  private String currentBeak = BEAK[0];
-  private String currentCrown = CROWN[0];
-  private String currentSupercilium = SUPERCILIUM[0];
-  private String currentEyestripe = EYESTRIPE[0];
-  private String currentAuricular = AURICULARS[0];
-  private String currentThroat = THROAT[0];
-  private String currentBreast = BREAST[0];
-  private String currentWing = WING[0];
-  private String currentCovert = COVERTS[0];
-  private String currentFeet = FEET[0];
+  private JComboBox<String> beakCombo = new JComboBox<String>(Model.BEAK_COLOR);
+  private JComboBox<String> crownCombo = new JComboBox<String>(Model.CROWN_COLOR);
+  private JComboBox<String> superciliumCombo = new JComboBox<String>(Model.SUPERCILIUM_COLOR);
+  private JComboBox<String> eyestripeCombo = new JComboBox<String>(Model.EYESTRIPE_COLOR);
+  private JComboBox<String> auricularCombo = new JComboBox<String>(Model.AURICULARS_COLOR);
+  private JComboBox<String> throatCombo = new JComboBox<String>(Model.THROAT_COLOR);
+  private JComboBox<String> breastCombo = new JComboBox<String>(Model.BREAST_COLOR);
+  private JComboBox<String> wingCombo = new JComboBox<String>(Model.WING_COLOR);
+  private JComboBox<String> covertCombo = new JComboBox<String>(Model.COVERTS_COLOR);
+  private JComboBox<String> feetCombo = new JComboBox<String>(Model.FOOT_COLOR);
+  private String currentBeak = Model.BEAK_COLOR[0];
+  private String currentCrown = Model.CROWN_COLOR[0];
+  private String currentSupercilium = Model.SUPERCILIUM_COLOR[0];
+  private String currentEyestripe = Model.EYESTRIPE_COLOR[0];
+  private String currentAuricular = Model.AURICULARS_COLOR[0];
+  private String currentThroat = Model.THROAT_COLOR[0];
+  private String currentBreast = Model.BREAST_COLOR[0];
+  private String currentWing = Model.WING_COLOR[0];
+  private String currentCovert = Model.COVERTS_COLOR[0];
+  private String currentFeet = Model.FOOT_COLOR[0];
 
   public ColorPanel(String question, BaseApplication ba)
   {
     super(question, ba);
     
-    super.image.setIcon(ImageReader.readImage("bird_parts.jpg", 450, 350));
+    super.image.setIcon(Model.COLOR_IMAGE);
     
     beakCombo.addItemListener(this);
     crownCombo.addItemListener(this);

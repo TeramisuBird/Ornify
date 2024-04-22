@@ -10,20 +10,18 @@ import javax.swing.JComboBox;
 public class SizePanel extends CustomPanel implements ItemListener
 {
   
-  private static final String[] OPTIONS = {"----", "Tiny", "Small", "Medium", "Large"};
   private JComboBox<String> combo;
   private String currentOption;
 
   public SizePanel(String question, BaseApplication ba)
   {
     super(question, ba);
-    this.combo = new JComboBox<String>(OPTIONS);
-    //combo.setBounds((WIDTH / 2) - 50, (HEIGHT / 2), 100, 50);
+    this.combo = new JComboBox<String>(Model.SIZE);
     combo.setPreferredSize(new Dimension(200, 30));
     combo.addItemListener(this);
-    super.image.setIcon(ImageReader.readImage("bird_sizes.png", 500, 300));
+    super.image.setIcon(Model.SIZE_IMAGE);
     super.comboPanel.add(combo);
-    currentOption = OPTIONS[0];
+    currentOption = Model.SIZE[0];
   }
 
   @Override

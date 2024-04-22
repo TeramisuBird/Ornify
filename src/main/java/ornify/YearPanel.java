@@ -9,22 +9,18 @@ import javax.swing.JComboBox;
 
 public class YearPanel extends CustomPanel implements ItemListener
 {
-  private static final String[] OPTIONS = {"----", "Migration", "Breeding", "Non-breeding", "All-year"};
   private JComboBox<String> combo;
   private String currentOption;
 
   public YearPanel(String question, BaseApplication ba)
   {
     super(question, ba);
-    this.combo = new JComboBox<String>(OPTIONS);
+    this.combo = new JComboBox<String>(Model.YEAR);
     combo.setPreferredSize(new Dimension(200, 30));
-    //combo.setBounds((WIDTH / 2) - 50, (HEIGHT / 2), 100, 50);
     combo.addItemListener(this);
-    //JPanel panel = this.getPanel();
-    //panel.add(combo);
-    super.image.setIcon(ImageReader.readImage("cardinal_in_snow.jpg", 600, 400));
+    super.image.setIcon(Model.YEAR_IMAGE);
     super.comboPanel.add(combo);
-    currentOption = OPTIONS[0];
+    currentOption = Model.YEAR[0];
   }
   
   @Override

@@ -36,13 +36,10 @@ public class CustomPanel implements ActionListener
     text = new JLabel(String.format(HTML, 300, question));
     text.setHorizontalAlignment(SwingConstants.CENTER);
     text.setFont(new Font("Verdana", Font.BOLD, 30));
-    //label.setBounds((WIDTH / 2) - 200, 50, 500, 100);
     
     this.nextButton.setPreferredSize(new Dimension(100, 30));
-   // this.nextButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
     this.nextButton.addActionListener(this);
     this.returnButton.setPreferredSize (new Dimension(100, 30));
-    //this.returnButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 100, 100, 50);
     this.returnButton.addActionListener(this);
     
     this.questionPanel.setBackground(BaseApplication.background_color);

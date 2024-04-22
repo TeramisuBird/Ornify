@@ -38,7 +38,7 @@ public class TitlePanel extends Visualization implements ActionListener
     this.startButton.addActionListener(this);
     
     this.panel.setBackground(BaseApplication.background_color);
-    JLabel picLabel = new JLabel(ImageReader.readImage("title_bird.png"));
+    JLabel picLabel = new JLabel(Model.TITLE_IMAGE);
     picLabel.setBounds((WIDTH/2) - 100, (HEIGHT/2) - 100, 200, 200);
     this.panel.add(picLabel);
     this.panel.add(label);
