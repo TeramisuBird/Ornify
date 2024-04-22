@@ -20,7 +20,7 @@ public class ShapeTestApp extends JApplication
   {
     this.shapeTestPanel = new ShapeTestPanel();
     shapeTestPanel.read("bird.map");
-    shapeTestPanel.read("bird2.map");
+//    shapeTestPanel.read("bird2.map");
     
     this.getContentPane().add(shapeTestPanel.getView());
   }
