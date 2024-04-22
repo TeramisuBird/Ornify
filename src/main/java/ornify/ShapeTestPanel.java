@@ -21,14 +21,22 @@ public class ShapeTestPanel extends Visualization
     this.getView().setSize(600, 600);
   }
   
-  public void read(String name)
+  public void read(String name, boolean bigOutline)
   {
     Content content = new Content();
     Polygon poly = reader.read(name);
     
     content.setShape(poly);
-    content.setColor(new Color(255, 0, 0));
-    content.setPaint(new Color(255, 255, 255));
+    if (bigOutline)
+    {
+      content.setColor(new Color(255, 0, 0));
+      content.setPaint(new Color(255, 255, 255));
+    }
+    else
+    {
+      content.setColor(new Color(0, 255, 0));
+      content.setPaint(new Color(255, 255, 255));
+    }
     
     this.add(content);
   }

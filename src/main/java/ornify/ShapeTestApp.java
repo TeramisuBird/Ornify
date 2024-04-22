@@ -19,8 +19,17 @@ public class ShapeTestApp extends JApplication
   public void init()
   {
     this.shapeTestPanel = new ShapeTestPanel();
-    shapeTestPanel.read("bird.map");
-//    shapeTestPanel.read("bird2.map");
+    shapeTestPanel.read("full_bird.map", true);
+    shapeTestPanel.read("foot.map", false);
+    shapeTestPanel.read("crown.map", false);
+    shapeTestPanel.read("beak.map", false);
+    shapeTestPanel.read("supercilium.map", false);
+    shapeTestPanel.read("auriculars.map", false);
+//    shapeTestPanel.read("crown.map", false);
+//    shapeTestPanel.read("crown.map", false);
+//    shapeTestPanel.read("crown.map", false);
+//    shapeTestPanel.read("crown.map", false);
+//    shapeTestPanel.read("crown.map", false);
     
     this.getContentPane().add(shapeTestPanel.getView());
   }
