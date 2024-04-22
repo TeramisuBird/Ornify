@@ -102,65 +102,78 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     {
       if (this.baseApp.userChoices[i] != null)
       {
-        String text = this.baseApp.userChoices[i].toLowerCase();
-        switch (i)
+        if (this.baseApp.userChoices[i] != "----")
         {
-          case (0):
-            conditions = conditions + "season='" + text + "'";
-            fieldsEntered++;
-            break;
-          case (1):
-            if (fieldsEntered == 0)
-            {
+          String text = this.baseApp.userChoices[i].toLowerCase();
+          if (fieldsEntered > 0)
+          {
+            conditions = conditions + " and ";
+          }
+          switch (i)
+          {
+            case (0):
+              conditions = conditions + "season='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (1):
               conditions = conditions + "size='" + text + "'";
-            }
-            else
-            {
-              conditions = conditions + " and size='" + text + "'";
-            }
-            break;
-          case (2):
-            conditions = conditions + " and crown='" + text + "'";
-            break;
-          case (3):
-            conditions = conditions + " and supercilium='" + text + "'";
-            break;
-          case (4):
-            conditions = conditions + " and eyestripe='" + text + "'";
-            break;
-          case (5):
-            conditions = conditions + " and auriculars='" + text + "'";
-            break;
-          case (6):
-            conditions = conditions + " and beak_shape='" + text + "'";
-            break;
-          case (7):
-            conditions = conditions + " and beak_length='" + text + "'";
-            break;
-          case (8):
-            conditions = conditions + " and beak_color='" + text + "'";
-            break;
-          case (9):
-            conditions = conditions + " and throat='" + text + "'";
-            break;
-          case (10):
-            conditions = conditions + " and breast='" + text + "'";
-            break;
-          case (11):
-            conditions = conditions + " and coverts='" + text + "'";
-            break;
-          case (12):
-            conditions = conditions + " and wing='" + text + "'";
-            break;
-          case (13):
-            conditions = conditions + " and foot_shape='" + text + "'";
-            break;
-          case (14):
-            conditions = conditions + " and foot_color='" + text + "'";
-            break;
-          default:
-            System.out.println("error - unreachable switch case found");
-            break;
+              fieldsEntered++;
+              break;
+            case (2):
+              conditions = conditions + "crown='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (3):
+              conditions = conditions + "supercilium='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (4):
+              conditions = conditions + "eyestripe='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (5):
+              conditions = conditions + "auriculars='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (6):
+              conditions = conditions + "beak_shape='" + text + "'";
+              break;
+            case (7):
+              conditions = conditions + "beak_length='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (8):
+              conditions = conditions + "beak_color='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (9):
+              conditions = conditions + "throat='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (10):
+              conditions = conditions + "breast='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (11):
+              conditions = conditions + "coverts='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (12):
+              conditions = conditions + "wing='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (13):
+              conditions = conditions + "foot_shape='" + text + "'";
+              fieldsEntered++;
+              break;
+            case (14):
+              conditions = conditions + "foot_color='" + text + "'";
+              fieldsEntered++;
+              break;
+            default:
+              System.out.println("error - unreachable switch case found");
+              break;
+          }
         }
       }
     }
@@ -171,6 +184,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     }
 
     String query = select + from + where + conditions;
+    System.out.println(query);
     ResultSet matches = this.db.getResultsFromQuery(query);
     this.set = matches;
     textPane.setText("");
