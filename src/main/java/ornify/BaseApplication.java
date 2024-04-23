@@ -107,7 +107,6 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.add(curPanel);
     panel.revalidate();
     panel.repaint();
-//    userChoices = new String[15];
   }
   
   /**

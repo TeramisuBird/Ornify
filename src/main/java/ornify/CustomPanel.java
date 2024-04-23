@@ -84,4 +84,19 @@ public class CustomPanel implements ActionListener
         break;
     }
   }
+  
+  protected void setChoice(JButton[] buttons, String size)
+  {
+    for (int i = 0; i < buttons.length; i++)
+    {
+      if (buttons[i].getText() == size)
+      {
+        buttons[i].setEnabled(false);
+      }
+      else
+      {
+        buttons[i].setEnabled(true);
+      }
+    }
+  }
 }

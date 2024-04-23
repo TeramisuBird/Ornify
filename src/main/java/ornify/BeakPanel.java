@@ -1,33 +1,26 @@
 package ornify;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
-import javax.swing.JComboBox;
+import javax.swing.JButton;
 
-public class BeakPanel extends CustomPanel implements ItemListener
+public class BeakPanel extends CustomPanel
 {
-  private JComboBox<String> combo = new JComboBox<String>(Model.BEAK_SHAPE);
-  private String currentOption = Model.BEAK_SHAPE[0];
+  private String currentOption;
+  private JButton[] buttons;
   
   public BeakPanel(String question, BaseApplication ba)
   {
     super(question, ba);
-    combo.setPreferredSize(new Dimension(200, 30));
-    combo.addItemListener(this);
     super.image.setIcon(Model.BEAK_IMAGE);
-    super.comboPanel.add(combo);
-  }
-  
-  @Override
-  public void itemStateChanged(ItemEvent e)
-  {
-    // if the state combobox is changed
-    if (e.getSource() == combo) {
-      currentOption = (String) combo.getSelectedItem();
-      this.baseApp.addChoice(currentOption, 6);
+    this.currentOption = null;
+    
+    this.buttons = new JButton[Model.BEAK_SHAPE.length];
+    for (int i = 0; i < buttons.length; i++)
+    {
+      buttons[i] = new JButton(Model.BEAK_SHAPE[i]);
+      buttons[i].addActionListener(this);
+      super.comboPanel.add(buttons[i]);
     }
   }
   
@@ -48,6 +41,8 @@ public class BeakPanel extends CustomPanel implements ItemListener
         this.baseApp.handleNext();
         break;
       default:
+        super.setChoice(buttons, e.getActionCommand());
+        this.currentOption = e.getActionCommand();
         break;
     }
   }

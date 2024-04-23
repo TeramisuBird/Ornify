@@ -1,36 +1,28 @@
 package ornify;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
-import javax.swing.JComboBox;
+import javax.swing.JButton;
 
-public class SizePanel extends CustomPanel implements ItemListener
+public class SizePanel extends CustomPanel
 {
   
-  private JComboBox<String> combo;
   private String currentOption;
+  
+  private JButton[] buttons;
 
   public SizePanel(String question, BaseApplication ba)
   {
     super(question, ba);
-    this.combo = new JComboBox<String>(Model.SIZE);
-    combo.setPreferredSize(new Dimension(200, 30));
-    combo.addItemListener(this);
     super.image.setIcon(Model.SIZE_IMAGE);
-    super.comboPanel.add(combo);
-    currentOption = Model.SIZE[0];
-  }
-
-  @Override
-  public void itemStateChanged(ItemEvent e)
-  {
-    // if the state combobox is changed
-    if (e.getSource() == combo) {
-      currentOption = (String) combo.getSelectedItem();
-      this.baseApp.addChoice(currentOption, 1);
+    currentOption = null;
+    
+    this.buttons = new JButton[Model.SIZE.length];
+    for (int i = 0; i < buttons.length; i++)
+    {
+      buttons[i] = new JButton(Model.SIZE[i]);
+      buttons[i].addActionListener(this);
+      super.comboPanel.add(buttons[i]);
     }
   }
   
@@ -51,6 +43,8 @@ public class SizePanel extends CustomPanel implements ItemListener
         this.baseApp.handleNext();
         break;
       default:
+        super.setChoice(buttons, e.getActionCommand());
+        this.currentOption = e.getActionCommand();
         break;
     }
   }

@@ -2,33 +2,31 @@ package ornify;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
-import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class BeakLenPanel extends CustomPanel implements ItemListener
+public class BeakLenPanel extends CustomPanel implements ChangeListener
 {
-  private JComboBox<String> combo = new JComboBox<String>(Model.BEAK_LENGTH);
-  private String currentOption = Model.BEAK_LENGTH[0];
+  private JSlider slider;
+  private JLabel value;
+  private String currentOption;
   
   public BeakLenPanel(String question, BaseApplication ba)
   {
     super(question, ba);
-    combo.setPreferredSize(new Dimension(200, 30));
-    combo.addItemListener(this);
+    this.slider = new JSlider(0, 100, 50);
+    slider.addChangeListener(this);
+    
+    this.value = new JLabel("The current value is: 5.0 inches");
+    value.setPreferredSize(new Dimension(200, 30));
     super.image.setIcon(Model.BEAKLEN_IMAGE);
-    super.comboPanel.add(combo);
-  }
-  
-  @Override
-  public void itemStateChanged(ItemEvent e)
-  {
-    // if the state combobox is changed
-    if (e.getSource() == combo) {
-      currentOption = (String) combo.getSelectedItem();
-      this.baseApp.addChoice(currentOption, 7);
-    }
+    this.currentOption = null;
+    
+    super.comboPanel.add(slider);
+    super.comboPanel.add(value);
   }
   
   public String getOption()
@@ -50,5 +48,12 @@ public class BeakLenPanel extends CustomPanel implements ItemListener
       default:
         break;
     }
+  }
+
+  @Override
+  public void stateChanged(ChangeEvent e)
+  {
+    float val = (float)slider.getValue();
+    value.setText("The current value is: " + val / 10 + " inches");
   }
 }
