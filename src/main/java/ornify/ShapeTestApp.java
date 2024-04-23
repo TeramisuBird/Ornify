@@ -25,11 +25,12 @@ public class ShapeTestApp extends JApplication
     shapeTestPanel.read("beak.map", false);
     shapeTestPanel.read("supercilium.map", false);
     shapeTestPanel.read("eyestripe.map", false);
-//    shapeTestPanel.read("crown.map", false);
-//    shapeTestPanel.read("crown.map", false);
-//    shapeTestPanel.read("crown.map", false);
-//    shapeTestPanel.read("crown.map", false);
-//    shapeTestPanel.read("crown.map", false);
+    shapeTestPanel.read("auriculars.map", false);
+    shapeTestPanel.read("throat.map", false);
+    shapeTestPanel.read("breast.map", false);
+    shapeTestPanel.read("coverts.map", false);
+    shapeTestPanel.read("wing.map", false);
+    shapeTestPanel.read("eyehole.map", true);
     
     this.getContentPane().add(shapeTestPanel.getView());
   }
