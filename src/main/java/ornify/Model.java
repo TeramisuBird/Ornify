@@ -8,11 +8,11 @@ public class Model
   public static final String[] BEAK_LENGTH = {"Short", "Average", "Long"};
   public static final String[] FOOT_SHAPE = {"Clawed", "Climbing", "Perching", "Wading", "Webbed"};
   public static final String[] BEAK_SHAPE = {"Cone", "Chisel", "Pointy", "Hooked", "Flat", "Probing"};
-  public static final String[] YEAR = {"----", "Migration", "Breeding", "Non-breeding", "All-year"};
+  public static final String[] YEAR = {"Migration", "Breeding", "Non-breeding", "All-year"};
   public static final String[] BEAK_COLOR = {"Beak", "Orange", "Red", "Black", "Brown", "Tan", 
       "Green", "Yellow", "White", "Gray", "Blue", "Light Tan"};
   public static final String[] CROWN_COLOR = {"Crown", "Orange", "Red", "Black", "Brown", 
-      "Tan", "Green", "Yellow", "White", "Gray", "Blue", "Mute Tan", "Iridescent"};
+      "Tan", "Green", "Yellow", "White", "Gray", "Blue", "Mute Tan"};
   public static final String[] SUPERCILIUM_COLOR = {"Supercilium", "Orange", "Red", "Black", 
       "Brown", "Tan", "Green", "Yellow", "White", "Gray", "Blue", 
       "Mute Tan", "Iridescent", "White Tan"};
