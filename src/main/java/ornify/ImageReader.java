@@ -89,6 +89,35 @@ public class ImageReader
     }
     return icon;
   }
+  
+  public static BufferedImage readBuffered(String path)
+  {
+    BufferedImage image = null;
+    InputStream stream = null;
+    stream = finder.findInputStream(path);
+    try
+    {
+      image = ImageIO.read(stream);
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+    
+    return image;
+  }
+  
+  public static BufferedImage resizeImage(BufferedImage image, int x, int y)
+  {
+    Image tmp = image.getScaledInstance(x, y, Image.SCALE_SMOOTH);
+    BufferedImage dimg = new BufferedImage(x, y, BufferedImage.TYPE_INT_ARGB);
+
+    Graphics2D g2d = dimg.createGraphics();
+    g2d.drawImage(tmp, 0, 0, null);
+    g2d.dispose();
+
+    return dimg;
+  }
 
   /**
    * Downloads an image in 250x250 pixel format.
