@@ -26,6 +26,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     this.shapes = new HashMap<Polygon,String>();
     
     this.getView().setSize(600, 600);
+    this.getView().addMouseListener(this);
   }
   
   public void read(String name, boolean bigOutline)
@@ -55,6 +56,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     int xPos = e.getX();
     int yPos = e.getY();
     Point mousePosition = new Point(xPos, yPos);
+//    System.out.println(mousePosition);
     
     for (Polygon p : this.shapes.keySet())
     {
@@ -62,36 +64,30 @@ public class ShapeTestPanel extends Visualization implements MouseListener
       {
         System.out.println(this.shapes.get(p));
       }
-      else
-      {
-        System.out.println("not contained");
-      }
     }
   }
 
   @Override
   public void mousePressed(MouseEvent e)
   {
-    System.out.println("Pressed");
+    
   }
 
   @Override
   public void mouseReleased(MouseEvent e)
   {
-    System.out.println("Released");
+    
   }
 
   @Override
   public void mouseEntered(MouseEvent e)
   {
-    System.out.println("Entered");
+    
   }
 
   @Override
   public void mouseExited(MouseEvent e)
   {
-    System.out.println("Exited");
+    
   }
-  
-  
 }
