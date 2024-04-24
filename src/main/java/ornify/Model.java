@@ -40,7 +40,7 @@ public class Model
   public static final ImageIcon COLOR_IMAGE = ImageReader.readImage("bird_parts.jpg", 450, 350);
   
   //private static final String[] COLORS = {"Orange", "Red", "Black", "Brown", "Tan", "Green",
-  //"Yellow", "White", "Gray", "Blue"}; 
+  //"Yellow", "White", "Gray", "Blue"};
   //private static final String[] REGIONS = {"Beak", "Crown", "Supercilium", "Eyestripe", "Auriculars", "Throat",
   //"Breast", "Wing", "Coverts", " Feet"};
 
