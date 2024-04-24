@@ -19,18 +19,18 @@ public class ShapeTestApp extends JApplication
   public void init()
   {
     this.shapeTestPanel = new ShapeTestPanel();
-    shapeTestPanel.read("full_bird.map", true);
-    shapeTestPanel.read("foot.map", false);
-    shapeTestPanel.read("crown.map", false);
-    shapeTestPanel.read("beak.map", false);
-    shapeTestPanel.read("supercilium.map", false);
-    shapeTestPanel.read("eyestripe.map", false);
-    shapeTestPanel.read("auriculars.map", false);
-    shapeTestPanel.read("throat.map", false);
-    shapeTestPanel.read("breast.map", false);
-    shapeTestPanel.read("coverts.map", false);
-    shapeTestPanel.read("wing.map", false);
-    shapeTestPanel.read("eyehole.map", true);
+    shapeTestPanel.read("full_bird", true);
+    shapeTestPanel.read("foot", false);
+    shapeTestPanel.read("crown", false);
+    shapeTestPanel.read("beak", false);
+    shapeTestPanel.read("supercilium", false);
+    shapeTestPanel.read("eyestripe", false);
+    shapeTestPanel.read("auriculars", false);
+    shapeTestPanel.read("throat", false);
+    shapeTestPanel.read("breast", false);
+    shapeTestPanel.read("coverts", false);
+    shapeTestPanel.read("wing", false);
+    shapeTestPanel.read("eyehole", true);
     
     this.getContentPane().add(shapeTestPanel.getView());
   }
