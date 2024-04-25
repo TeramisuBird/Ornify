@@ -90,7 +90,7 @@ public class ImageReader
     return icon;
   }
   
-  public static BufferedImage readBuffered(String path)
+  public static Image readBuffered(String path)
   {
     BufferedImage image = null;
     InputStream stream = null;
@@ -107,7 +107,7 @@ public class ImageReader
     return image;
   }
   
-  public static BufferedImage resizeImage(BufferedImage image, int x, int y)
+  public static Image resizeImage(Image image, int x, int y)
   {
     Image tmp = image.getScaledInstance(x, y, Image.SCALE_SMOOTH);
     BufferedImage dimg = new BufferedImage(x, y, BufferedImage.TYPE_INT_ARGB);

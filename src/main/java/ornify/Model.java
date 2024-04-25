@@ -1,5 +1,7 @@
 package ornify;
 
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 
 public class Model
@@ -36,8 +38,10 @@ public class Model
   public static final ImageIcon FOOT_IMAGE = ImageReader.readImage("feet_types.png", 400, 450);
   public static final ImageIcon SIZE_IMAGE = ImageReader.readImage("bird_sizes.png", 500, 300);
   public static final ImageIcon BEAK_IMAGE = ImageReader.readImage("beak_types.png", 550, 450);
-  public static final ImageIcon BEAKLEN_IMAGE = ImageReader.readImage("lorikeet_beak.jpg", 500, 300);
+//  public static final ImageIcon BEAKLEN_IMAGE = ImageReader.readImage("lorikeet_beak.jpg", 500, 300);
   public static final ImageIcon COLOR_IMAGE = ImageReader.readImage("bird_parts.jpg", 450, 350);
+  
+  public static final Image BEAKLEN_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("lorikeet_beak.jpg"), 200, 200);
   
   //private static final String[] COLORS = {"Orange", "Red", "Black", "Brown", "Tan", "Green",
   //"Yellow", "White", "Gray", "Blue"};
