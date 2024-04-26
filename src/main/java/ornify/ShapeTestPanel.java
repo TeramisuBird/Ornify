@@ -78,6 +78,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
         con.setShape(poly);
         con.setColor(new Color(180, 167, 214));
         Color newPaint = null;
+        String colorName = "";
         
         switch (region)
         {
@@ -89,6 +90,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.crownColor.get(index).second;
+            colorName = Model.crownColor.get(index).first;
             break;
           case "supercilium":
             if (index >= Model.superColor.size())
@@ -98,6 +100,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.superColor.get(index).second;
+            colorName = Model.superColor.get(index).first;
             break;
           case "eyestripe":
             if (index >= Model.eyestripeColor.size())
@@ -107,6 +110,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.eyestripeColor.get(index).second;
+            colorName = Model.eyestripeColor.get(index).first;
             break;
           case "auriculars":
             if (index >= Model.auricColor.size())
@@ -116,6 +120,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.auricColor.get(index).second;
+            colorName = Model.auricColor.get(index).first;
             break;
           case "beak":
             if (index >= Model.beakColor.size())
@@ -125,6 +130,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.beakColor.get(index).second;
+            colorName = Model.beakColor.get(index).first;
             break;
           case "throat":
             if (index >= Model.throatColor.size())
@@ -134,6 +140,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.throatColor.get(index).second;
+            colorName = Model.throatColor.get(index).first;
             break;
           case "breast":
             if (index >= Model.breastColor.size())
@@ -143,6 +150,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.breastColor.get(index).second;
+            colorName = Model.breastColor.get(index).first;
             break;
           case "coverts":
             if (index >= Model.covertColor.size())
@@ -152,6 +160,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.covertColor.get(index).second;
+            colorName = Model.covertColor.get(index).first;
             break;
           case "wing":
             if (index >= Model.wingColor.size())
@@ -161,6 +170,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.wingColor.get(index).second;
+            colorName = Model.wingColor.get(index).first;
             break;
           case "foot":
             if (index >= Model.footColor.size())
@@ -170,10 +180,32 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             }
             
             newPaint = Model.footColor.get(index).second;
+            colorName = Model.footColor.get(index).first;
             break;
           default:
             System.out.println("Unknown Bird Region - SHOULD NOT REACH");
             break;
+        }
+        
+        if (region.equals("foot"))
+        {
+          region = "foot_color";
+        }
+        else if (region.equals("beak"))
+        {
+          region = "beak_color";
+        }
+        
+        if (index == 0)
+        {
+          Model.picked[Model.selectionIndicies.get(region)] = false;
+        }
+        else
+        {
+          Model.picked[Model.selectionIndicies.get(region)] = true;
+          
+          String text = region + "='" + colorName +  "'";
+          Model.selections[Model.selectionIndicies.get(region)] = text;
         }
         
         if (newPaint == null)
@@ -202,7 +234,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
         int oldIndex = this.colorIndex.get(name).second;
         Pair<Polygon, Integer> newPair = new Pair<>(p,oldIndex + 1);
         this.colorIndex.put(name, newPair);
-        System.out.println(name);
+//        System.out.println(name);
 
         redraw();
       }
