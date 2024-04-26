@@ -2,34 +2,29 @@ package ornify;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
-import javax.swing.JComboBox;
+import javax.swing.JButton;
 
-public class YearPanel extends CustomPanel implements ItemListener
+public class YearPanel extends CustomPanel
 {
-  private JComboBox<String> combo;
   private String currentOption;
+  
+  private JButton[] buttons;
+  private final String[] seasons = {"Autumn", "Winter", "Spring", "Summer"};
 
   public YearPanel(String question, BaseApplication ba)
   {
     super(question, ba);
-    this.combo = new JComboBox<String>(Model.YEAR);
-    combo.setPreferredSize(new Dimension(200, 30));
-    combo.addItemListener(this);
-    super.image.setIcon(Model.YEAR_IMAGE);
-    super.comboPanel.add(combo);
-    currentOption = Model.YEAR[0];
-  }
-  
-  @Override
-  public void itemStateChanged(ItemEvent e)
-  {
-    // if the state combobox is changed
-    if (e.getSource() == combo) {
-      currentOption = (String) combo.getSelectedItem();
-      this.baseApp.addChoice(currentOption, 0);
+    super.questionPanel.remove(super.image);
+    currentOption = null;
+    
+    this.buttons = new JButton[seasons.length];
+    for (int i = 0; i < buttons.length; i++)
+    {
+      buttons[i] = new JButton(seasons[i]);
+      buttons[i].setPreferredSize(new Dimension(100, 100));
+      buttons[i].addActionListener(this);
+      super.comboPanel.add(buttons[i]);
     }
   }
   
@@ -50,6 +45,27 @@ public class YearPanel extends CustomPanel implements ItemListener
         this.baseApp.handleNext();
         break;
       default:
+        super.setChoice(buttons, e.getActionCommand());
+        getChoice(e.getActionCommand());
+        break;
+    }
+  }
+  
+  private void getChoice(String type)
+  {
+    switch (type)
+    {
+      case "Winter":
+        currentOption = "Migration";
+        break;
+      case "Autumn":
+        currentOption = "Breeding";
+        break;
+      case "Spring":
+        currentOption = "Non-Breeding";
+        break;
+      case "Summer":
+        currentOption = "Something";
         break;
     }
   }
