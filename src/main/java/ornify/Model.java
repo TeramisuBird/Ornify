@@ -3,6 +3,7 @@ package ornify;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 
@@ -60,8 +61,13 @@ public class Model
   public static ArrayList<Pair<String, Color>> wingColor = new ArrayList<Pair<String,Color>>();
   public static ArrayList<Pair<String, Color>> covertColor = new ArrayList<Pair<String,Color>>();
   public static ArrayList<Pair<String, Color>> footColor = new ArrayList<Pair<String,Color>>();
+  
+  public static HashMap<String, Integer> selectionIndicies = new HashMap<String, Integer>();
+  
+  public boolean[] picked = new boolean[15];
+  public String[] selections = new String[15];
 
-  static {    
+  static { 
 //  fill crown color options
     crownColor.add(new Pair<String, Color>("default", new Color(172,91,91)));
     crownColor.add(new Pair<String, Color>("black", new Color(0,0,0)));
@@ -167,5 +173,21 @@ public class Model
     footColor.add(new Pair<String, Color>("gray", new Color(183,183,183)));
     footColor.add(new Pair<String, Color>("orange", new Color(255,153,0)));
     footColor.add(new Pair<String, Color>("black", new Color(0,0,0)));
+    
+    selectionIndicies.put("season", 0);
+    selectionIndicies.put("size", 1);
+    selectionIndicies.put("crown", 2);
+    selectionIndicies.put("supercilium", 3);
+    selectionIndicies.put("eyestripe", 4);
+    selectionIndicies.put("auriculars", 5);
+    selectionIndicies.put("beak_shape", 6);
+    selectionIndicies.put("beak_length", 7);
+    selectionIndicies.put("beak_color", 8);
+    selectionIndicies.put("throat", 9);
+    selectionIndicies.put("breast", 10);
+    selectionIndicies.put("coverts", 11);
+    selectionIndicies.put("wing", 12);
+    selectionIndicies.put("foot_shape", 13);
+    selectionIndicies.put("foot_color", 14);
   }
 }

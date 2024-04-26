@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JComboBox;
+//import javax.swing.JComboBox;
 
 public class ColorPanel extends CustomPanel implements ItemListener
 {
@@ -33,7 +33,7 @@ public class ColorPanel extends CustomPanel implements ItemListener
   {
     super(question, ba);
     
-    super.image.setIcon(Model.COLOR_IMAGE);
+//    super.image.setIcon(Model.COLOR_IMAGE);
     
 //    beakCombo.addItemListener(this);
 //    crownCombo.addItemListener(this);
@@ -46,9 +46,25 @@ public class ColorPanel extends CustomPanel implements ItemListener
 //    covertCombo.addItemListener(this);
 //    feetCombo.addItemListener(this);
     
-//    ShapeTestPanel shapePanel = new ShapeTestPanel();
-//    
-//    super.questionPanel.add(shapePanel.getView());
+    ShapeTestPanel shapePanel = new ShapeTestPanel();
+    
+    shapePanel.read("full_bird", true);
+    shapePanel.read("foot", false);
+    shapePanel.read("crown", false);
+    shapePanel.read("beak", false);
+    shapePanel.read("supercilium", false);
+    shapePanel.read("eyestripe", false);
+    shapePanel.read("auriculars", false);
+    shapePanel.read("throat", false);
+    shapePanel.read("breast", false);
+    shapePanel.read("coverts", false);
+    shapePanel.read("wing", false);
+    shapePanel.read("eyehole", true);
+    
+    shapePanel.getView().setBounds(100, 100, 300, 300);
+    shapePanel.getView().setVisible(true);
+    
+    super.questionPanel.add(shapePanel.getView());
 //    super.comboPanel.add(beakCombo);
 //    super.comboPanel.add(crownCombo);
 //    super.comboPanel.add(superciliumCombo);
@@ -61,12 +77,12 @@ public class ColorPanel extends CustomPanel implements ItemListener
 //    super.comboPanel.add(feetCombo);
   }
   
-  private void withChoice(ItemEvent e, JComboBox<String> combo, String choice, int n) {
-    if (e.getSource() == combo) {
-      choice = (String) combo.getSelectedItem();
-      this.baseApp.addChoice(choice, n);
-    }
-  }
+//  private void withChoice(ItemEvent e, JComboBox<String> combo, String choice, int n) {
+//    if (e.getSource() == combo) {
+//      choice = (String) combo.getSelectedItem();
+//      this.baseApp.addChoice(choice, n);
+//    }
+//  }
   
   @Override
   public void itemStateChanged(ItemEvent e)

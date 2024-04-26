@@ -203,6 +203,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
         int oldIndex = this.colorIndex.get(name).second;
         Pair<Polygon, Integer> newPair = new Pair<>(p,oldIndex + 1);
         this.colorIndex.put(name, newPair);
+        System.out.println(name);
 
         redraw();
       }

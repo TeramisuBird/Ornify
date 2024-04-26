@@ -23,7 +23,7 @@ public class BaseApplication extends JApplication implements ActionListener
   protected static final String RETURN = "Return";
   protected static final String NEXT = "Next";
 
-  public String[] userChoices;
+//  public String[] userChoices;
   private JPanel curPanel;
   private ResultsPanel resultPanel;
   private int index;
@@ -52,7 +52,7 @@ public class BaseApplication extends JApplication implements ActionListener
     super(args, WIDTH, HEIGHT);
     panels = new ArrayList<JPanel>();
     index = 0;
-    userChoices = new String[15];
+//    userChoices = new String[15];
   }
 
   public void actionPerformed(ActionEvent evt)
@@ -77,19 +77,19 @@ public class BaseApplication extends JApplication implements ActionListener
     }
   }
   
-  public void addChoice(final String choice, final int index)
-  {
-    userChoices[index] = choice;
-  }
-  
-  public void dumpResults()
-  {
-   for (int i = 0; i < userChoices.length; i++)
-   {
-     System.out.printf("%d: %s", i, userChoices[i]);
-   }
-   System.out.println();
-  }
+//  public void addChoice(final String choice, final int index)
+//  {
+//    userChoices[index] = choice;
+//  }
+//  
+//  public void dumpResults()
+//  {
+//   for (int i = 0; i < userChoices.length; i++)
+//   {
+//     System.out.printf("%d: %s", i, userChoices[i]);
+//   }
+//   System.out.println();
+//  }
 
   /**
    * Method that controls the start button action.
