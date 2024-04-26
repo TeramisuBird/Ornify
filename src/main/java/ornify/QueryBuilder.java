@@ -21,18 +21,19 @@ public class QueryBuilder
       
       if (Model.picked[index])
       {
-        String chunk = s + "=" + Model.selections[index];
+        String chunk = s + "='" + Model.selections[index] + "'";
         
         if (selections == 0)
         {
-          chunk = " where " + chunk;
+          chunk = " where " + chunk + "";
         }
         else
         {
-          chunk = " and " + chunk;
+          chunk = " and " + chunk + "";
         }
         
-        start.concat(chunk);
+        start = start + chunk;
+        selections++;
       }
     }
     

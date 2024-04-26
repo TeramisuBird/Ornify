@@ -41,8 +41,11 @@ public class BeakPanel extends CustomPanel
         this.baseApp.handleNext();
         break;
       default:
+        int index = Model.selectionIndicies.get("beak_shape");
         super.setChoice(buttons, e.getActionCommand());
         this.currentOption = e.getActionCommand();
+        Model.picked[index] = true;
+        Model.selections[index] = this.currentOption.toLowerCase();
         break;
     }
   }

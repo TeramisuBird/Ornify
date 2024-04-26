@@ -185,7 +185,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
 //    }
 //
     String query = qb.buildQuery();
-//    System.out.println(query);
+    System.out.println(query);
     ResultSet matches = this.db.getResultsFromQuery(query);
     this.set = matches;
     textPane.setText("");
