@@ -4,10 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Polygon;
+import java.awt.geom.Ellipse2D;
+
 import java.awt.event.ActionEvent;
 import java.awt.geom.Point2D;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -21,22 +22,22 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
   private JLabel value;
   private String currentOption;
   
-  private ImageIcon icon;
-  
   private VisualPanel visual_panel;
   private Content top_beak;
   private Content bottom_beak;
+  private Content head_con;
+  private Content eye_con;
   
-  private Point2D[] pairs_top = {new Point2D.Double(0, 0), 
-      new Point2D.Double(200, 10), new Point2D.Double(0, 10), new Point2D.Double(0, 0)};
-  private Point2D[] pairs_bottom = {new Point2D.Double(0, 20), 
-      new Point2D.Double(180, 10), new Point2D.Double(0, 10), new Point2D.Double(0, 20)};
+  private Point2D[] pairs_top = {new Point2D.Double(280, 160), 
+      new Point2D.Double(480, 200), new Point2D.Double(280, 200), new Point2D.Double(280, 200)};
+  private Point2D[] pairs_bottom = {new Point2D.Double(280, 200), 
+      new Point2D.Double(480, 200), new Point2D.Double(280, 240), new Point2D.Double(280, 220)};
   
   public BeakLenPanel(String question, BaseApplication ba)
   {
     super(question, ba);
     this.visual_panel = new VisualPanel();
-    visual_panel.getView().setPreferredSize(new Dimension(200, 200));
+    visual_panel.getView().setPreferredSize(new Dimension(200, 400));
     
     this.top_beak = new Content();
     top_beak.setColor(new Color(0, 0, 0));
@@ -46,11 +47,28 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     bottom_beak.setColor(new Color(0, 0, 0));
     bottom_beak.setPaint(new Color(232, 232, 88));
     
+    this.head_con = new Content();
+    head_con.setColor(new Color(0, 0, 0));
+    head_con.setPaint(Color.RED);
+    
+    this.eye_con = new Content();
+    eye_con.setColor(new Color(0, 0, 0));
+    eye_con.setPaint(new Color(0, 0, 0));
+    
     Polygon shape = createShape(1, pairs_top);
     top_beak.setShape(shape);
     
     Polygon shape_two = createShape(1, pairs_bottom);
     bottom_beak.setShape(shape_two);
+    
+    Ellipse2D head = new Ellipse2D.Double(100, 100, 200, 200);
+    head_con.setShape(head);
+    
+    Ellipse2D eye = new Ellipse2D.Double(230, 140, 20, 20);
+    eye_con.setShape(eye);
+    
+    visual_panel.add(head_con);
+    visual_panel.add(eye_con);
     visual_panel.add(top_beak);
     visual_panel.add(bottom_beak);
     
@@ -61,11 +79,11 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     this.value = new JLabel("The current value is: 50");
     value.setPreferredSize(new Dimension(200, 30));
     
-    this.icon = new ImageIcon(Model.BEAKLEN_IMAGE);
-    super.image.setIcon(icon);
+//    this.icon = new ImageIcon(Model.BEAKLEN_IMAGE);
+//    super.image.setIcon(icon);
     this.currentOption = null;
     
-    super.questionPanel.add(visual_panel.getView(), BorderLayout.EAST);
+    super.questionPanel.add(visual_panel.getView(), BorderLayout.CENTER);
     super.comboPanel.add(slider);
     super.comboPanel.add(value);
   }
@@ -97,7 +115,7 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     float val = slider.getValue();
     String size = "";
     
-    if (inRange(slider.getValue(), 1, 33))
+    if (inRange(slider.getValue(), 0, 33))
     {
       size = "Short";
     }
@@ -145,7 +163,8 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
       }
       else
       {
-        shape.addPoint((int)(points[i].getX() * scale), (int)points[i].getY());
+        float len_dif = 150 - (150 * scale);
+        shape.addPoint((int)(points[i].getX() - len_dif), (int)points[i].getY());
       }
     }
     
