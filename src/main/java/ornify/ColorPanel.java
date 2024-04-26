@@ -8,26 +8,26 @@ import javax.swing.JComboBox;
 
 public class ColorPanel extends CustomPanel implements ItemListener
 {
-  private JComboBox<String> beakCombo = new JComboBox<String>(Model.BEAK_COLOR);
-  private JComboBox<String> crownCombo = new JComboBox<String>(Model.CROWN_COLOR);
-  private JComboBox<String> superciliumCombo = new JComboBox<String>(Model.SUPERCILIUM_COLOR);
-  private JComboBox<String> eyestripeCombo = new JComboBox<String>(Model.EYESTRIPE_COLOR);
-  private JComboBox<String> auricularCombo = new JComboBox<String>(Model.AURICULARS_COLOR);
-  private JComboBox<String> throatCombo = new JComboBox<String>(Model.THROAT_COLOR);
-  private JComboBox<String> breastCombo = new JComboBox<String>(Model.BREAST_COLOR);
-  private JComboBox<String> wingCombo = new JComboBox<String>(Model.WING_COLOR);
-  private JComboBox<String> covertCombo = new JComboBox<String>(Model.COVERTS_COLOR);
-  private JComboBox<String> feetCombo = new JComboBox<String>(Model.FOOT_COLOR);
-  private String currentBeak = Model.BEAK_COLOR[0];
-  private String currentCrown = Model.CROWN_COLOR[0];
-  private String currentSupercilium = Model.SUPERCILIUM_COLOR[0];
-  private String currentEyestripe = Model.EYESTRIPE_COLOR[0];
-  private String currentAuricular = Model.AURICULARS_COLOR[0];
-  private String currentThroat = Model.THROAT_COLOR[0];
-  private String currentBreast = Model.BREAST_COLOR[0];
-  private String currentWing = Model.WING_COLOR[0];
-  private String currentCovert = Model.COVERTS_COLOR[0];
-  private String currentFeet = Model.FOOT_COLOR[0];
+//  private JComboBox<String> beakCombo = new JComboBox<String>(Model.BEAK_COLOR);
+//  private JComboBox<String> crownCombo = new JComboBox<String>(Model.CROWN_COLOR);
+//  private JComboBox<String> superciliumCombo = new JComboBox<String>(Model.SUPERCILIUM_COLOR);
+//  private JComboBox<String> eyestripeCombo = new JComboBox<String>(Model.EYESTRIPE_COLOR);
+//  private JComboBox<String> auricularCombo = new JComboBox<String>(Model.AURICULARS_COLOR);
+//  private JComboBox<String> throatCombo = new JComboBox<String>(Model.THROAT_COLOR);
+//  private JComboBox<String> breastCombo = new JComboBox<String>(Model.BREAST_COLOR);
+//  private JComboBox<String> wingCombo = new JComboBox<String>(Model.WING_COLOR);
+//  private JComboBox<String> covertCombo = new JComboBox<String>(Model.COVERTS_COLOR);
+//  private JComboBox<String> feetCombo = new JComboBox<String>(Model.FOOT_COLOR);
+//  private String currentBeak = Model.BEAK_COLOR[0];
+//  private String currentCrown = Model.CROWN_COLOR[0];
+//  private String currentSupercilium = Model.SUPERCILIUM_COLOR[0];
+//  private String currentEyestripe = Model.EYESTRIPE_COLOR[0];
+//  private String currentAuricular = Model.AURICULARS_COLOR[0];
+//  private String currentThroat = Model.THROAT_COLOR[0];
+//  private String currentBreast = Model.BREAST_COLOR[0];
+//  private String currentWing = Model.WING_COLOR[0];
+//  private String currentCovert = Model.COVERTS_COLOR[0];
+//  private String currentFeet = Model.FOOT_COLOR[0];
 
   public ColorPanel(String question, BaseApplication ba)
   {
@@ -35,27 +35,30 @@ public class ColorPanel extends CustomPanel implements ItemListener
     
     super.image.setIcon(Model.COLOR_IMAGE);
     
-    beakCombo.addItemListener(this);
-    crownCombo.addItemListener(this);
-    superciliumCombo.addItemListener(this);
-    eyestripeCombo.addItemListener(this);
-    auricularCombo.addItemListener(this);
-    throatCombo.addItemListener(this);
-    breastCombo.addItemListener(this);
-    wingCombo.addItemListener(this);
-    covertCombo.addItemListener(this);
-    feetCombo.addItemListener(this);
+//    beakCombo.addItemListener(this);
+//    crownCombo.addItemListener(this);
+//    superciliumCombo.addItemListener(this);
+//    eyestripeCombo.addItemListener(this);
+//    auricularCombo.addItemListener(this);
+//    throatCombo.addItemListener(this);
+//    breastCombo.addItemListener(this);
+//    wingCombo.addItemListener(this);
+//    covertCombo.addItemListener(this);
+//    feetCombo.addItemListener(this);
     
-    super.comboPanel.add(beakCombo);
-    super.comboPanel.add(crownCombo);
-    super.comboPanel.add(superciliumCombo);
-    super.comboPanel.add(eyestripeCombo);
-    super.comboPanel.add(auricularCombo);
-    super.comboPanel.add(throatCombo);
-    super.comboPanel.add(breastCombo);
-    super.comboPanel.add(wingCombo);
-    super.comboPanel.add(covertCombo);
-    super.comboPanel.add(feetCombo);
+//    ShapeTestPanel shapePanel = new ShapeTestPanel();
+//    
+//    super.questionPanel.add(shapePanel.getView());
+//    super.comboPanel.add(beakCombo);
+//    super.comboPanel.add(crownCombo);
+//    super.comboPanel.add(superciliumCombo);
+//    super.comboPanel.add(eyestripeCombo);
+//    super.comboPanel.add(auricularCombo);
+//    super.comboPanel.add(throatCombo);
+//    super.comboPanel.add(breastCombo);
+//    super.comboPanel.add(wingCombo);
+//    super.comboPanel.add(covertCombo);
+//    super.comboPanel.add(feetCombo);
   }
   
   private void withChoice(ItemEvent e, JComboBox<String> combo, String choice, int n) {
@@ -69,16 +72,16 @@ public class ColorPanel extends CustomPanel implements ItemListener
   public void itemStateChanged(ItemEvent e)
   {
     // if the state combobox is changed
-    withChoice(e, beakCombo, currentBeak, 8);
-    withChoice(e, crownCombo, currentCrown, 2);
-    withChoice(e, superciliumCombo, currentSupercilium, 3);
-    withChoice(e, eyestripeCombo, currentEyestripe, 4);
-    withChoice(e, auricularCombo, currentAuricular, 5);
-    withChoice(e, throatCombo, currentThroat, 9);
-    withChoice(e, breastCombo, currentBreast, 10);
-    withChoice(e, wingCombo, currentWing, 12);
-    withChoice(e, covertCombo, currentCovert, 11);
-    withChoice(e, feetCombo, currentFeet, 14);
+//    withChoice(e, beakCombo, currentBeak, 8);
+//    withChoice(e, crownCombo, currentCrown, 2);
+//    withChoice(e, superciliumCombo, currentSupercilium, 3);
+//    withChoice(e, eyestripeCombo, currentEyestripe, 4);
+//    withChoice(e, auricularCombo, currentAuricular, 5);
+//    withChoice(e, throatCombo, currentThroat, 9);
+//    withChoice(e, breastCombo, currentBreast, 10);
+//    withChoice(e, wingCombo, currentWing, 12);
+//    withChoice(e, covertCombo, currentCovert, 11);
+//    withChoice(e, feetCombo, currentFeet, 14);
   }
   
 //  public String getOption()
