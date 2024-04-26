@@ -21,7 +21,7 @@ public class QueryBuilder
       
       if (Model.picked[index])
       {
-        String chunk = s + "='" + Model.selections[index] + "'";
+        String chunk = Model.selections[index];
         
         if (selections == 0)
         {

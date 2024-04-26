@@ -45,7 +45,7 @@ public class FootPanel extends CustomPanel
         super.setChoice(buttons, e.getActionCommand());
         this.currentOption = e.getActionCommand();
         Model.picked[index] = true;
-        Model.selections[index] = this.currentOption.toLowerCase();
+        Model.selections[index] = "foot_shape = '" + this.currentOption.toLowerCase() + "'";
         break;
     }
   }

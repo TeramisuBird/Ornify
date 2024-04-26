@@ -47,6 +47,13 @@ public class YearPanel extends CustomPanel
       default:
         super.setChoice(buttons, e.getActionCommand());
         getChoice(e.getActionCommand());
+        int index = Model.selectionIndicies.get("season");
+        if (currentOption != null)
+        {
+          Model.picked[index] = true;
+          String queryText = "(season = 'all-year' or season = '" + currentOption.toLowerCase() + "')";
+          Model.selections[index] = queryText;
+        }
         break;
     }
   }
@@ -55,17 +62,20 @@ public class YearPanel extends CustomPanel
   {
     switch (type)
     {
-      case "Winter":
+      case "Spring":
         currentOption = "Migration";
         break;
       case "Autumn":
-        currentOption = "Breeding";
+        currentOption = "Migration";
         break;
-      case "Spring":
+      case "Winter":
         currentOption = "Non-Breeding";
         break;
       case "Summer":
-        currentOption = "Something";
+        currentOption = "Breeding";
+        break;
+      default:
+        System.out.println("unreachable");
         break;
     }
   }
