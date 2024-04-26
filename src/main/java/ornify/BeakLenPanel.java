@@ -79,8 +79,6 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     this.value = new JLabel("The current value is: 50");
     value.setPreferredSize(new Dimension(200, 30));
     
-//    this.icon = new ImageIcon(Model.BEAKLEN_IMAGE);
-//    super.image.setIcon(icon);
     this.currentOption = null;
     
     super.questionPanel.add(visual_panel.getView(), BorderLayout.CENTER);
