@@ -64,8 +64,8 @@ public class Model
   
   public static HashMap<String, Integer> selectionIndicies = new HashMap<String, Integer>();
   
-  public boolean[] picked = new boolean[15];
-  public String[] selections = new String[15];
+  public static boolean[] picked = new boolean[15];
+  public static String[] selections = new String[15];
 
   static { 
 //  fill crown color options
