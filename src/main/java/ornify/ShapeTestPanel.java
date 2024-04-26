@@ -1,11 +1,11 @@
 package ornify;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-//import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.ResourceFinder;
@@ -26,9 +26,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     this.reader = new PolygonReader(jarFinder);
     this.shapes = new HashMap<Polygon,String>();
     this.colorIndex = new HashMap<String, Pair<Polygon, Integer>>();
-    
-    this.getView().setSize(600, 600);
-    this.getView().addMouseListener(this);
+    this.addMouseListener(this);
+    this.getView().setSize(new Dimension(600, 600));
   }
   
   public void read(String name, boolean bigOutline)

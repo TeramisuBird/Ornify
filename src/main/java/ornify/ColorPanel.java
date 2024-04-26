@@ -60,21 +60,8 @@ public class ColorPanel extends CustomPanel implements ItemListener
     shapePanel.read("coverts", false);
     shapePanel.read("wing", false);
     shapePanel.read("eyehole", true);
-    
-    shapePanel.getView().setBounds(100, 100, 300, 300);
     shapePanel.getView().setVisible(true);
-    
-    super.questionPanel.add(shapePanel.getView());
-//    super.comboPanel.add(beakCombo);
-//    super.comboPanel.add(crownCombo);
-//    super.comboPanel.add(superciliumCombo);
-//    super.comboPanel.add(eyestripeCombo);
-//    super.comboPanel.add(auricularCombo);
-//    super.comboPanel.add(throatCombo);
-//    super.comboPanel.add(breastCombo);
-//    super.comboPanel.add(wingCombo);
-//    super.comboPanel.add(covertCombo);
-//    super.comboPanel.add(feetCombo);
+    super.getPanel().add(shapePanel.getView());
   }
   
 //  private void withChoice(ItemEvent e, JComboBox<String> combo, String choice, int n) {
