@@ -1,5 +1,10 @@
 package ornify;
 
+/**
+ * Builds an SQL Query to search a database with.
+ * 
+ * @author Grayson Diehl
+ */
 public class QueryBuilder
 {
 

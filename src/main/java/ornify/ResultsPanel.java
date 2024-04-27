@@ -15,7 +15,6 @@ import javax.swing.JTextPane;
 
 public class ResultsPanel extends CustomPanel implements ActionListener
 {
-  // private static final String STARTING_TEXT = "Possible matches are:\n";
   public static final int WIDTH = 600;
   public static final int HEIGHT = 600;
   public static final boolean IS_ONLINE = true;
@@ -93,97 +92,6 @@ public class ResultsPanel extends CustomPanel implements ActionListener
 
   protected void buildResults()
   {
-//    String select = qb.buildQuery();
-//    String from = "from bird";
-//    String where = "";
-//    String conditions = "";
-//
-//    int fieldsEntered = 0;
-//    for (int i = 0; i < 15; i++)
-//    {
-//      if (this.baseApp.userChoices[i] != null)
-//      {
-//        if (this.baseApp.userChoices[i] != "----")
-//        {
-//          String text = this.baseApp.userChoices[i].toLowerCase();
-//          if (fieldsEntered > 0)
-//          {
-//            conditions = conditions + " and ";
-//          }
-//          switch (i)
-//          {
-//            case (0):
-//              conditions = conditions + "season='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (1):
-//              conditions = conditions + "size='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (2):
-//              conditions = conditions + "crown='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (3):
-//              conditions = conditions + "supercilium='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (4):
-//              conditions = conditions + "eyestripe='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (5):
-//              conditions = conditions + "auriculars='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (6):
-//              conditions = conditions + "beak_shape='" + text + "'";
-//              break;
-//            case (7):
-//              conditions = conditions + "beak_length='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (8):
-//              conditions = conditions + "beak_color='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (9):
-//              conditions = conditions + "throat='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (10):
-//              conditions = conditions + "breast='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (11):
-//              conditions = conditions + "coverts='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (12):
-//              conditions = conditions + "wing='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (13):
-//              conditions = conditions + "foot_shape='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            case (14):
-//              conditions = conditions + "foot_color='" + text + "'";
-//              fieldsEntered++;
-//              break;
-//            default:
-//              System.out.println("error - unreachable switch case found");
-//              break;
-//          }
-//        }
-//      }
-//    }
-    
-//    if (fieldsEntered != 0)
-//    {
-//      where = " where ";
-//    }
-//
     String query = qb.buildQuery();
     System.out.println(query);
     ResultSet matches = this.db.getResultsFromQuery(query);

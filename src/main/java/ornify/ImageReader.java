@@ -89,7 +89,14 @@ public class ImageReader
     }
     return icon;
   }
-  
+
+  /**
+   * Reads local image given filepath into Image abstraction.
+   * 
+   * @param path
+   *          The filename of the image.
+   * @return An abstract Image object.
+   */
   public static Image readBuffered(String path)
   {
     BufferedImage image = null;
@@ -103,10 +110,21 @@ public class ImageReader
     {
       e.printStackTrace();
     }
-    
+
     return image;
   }
-  
+
+  /**
+   * Reads in an image abstraction and scales it given x-y scalars.
+   * 
+   * @param image
+   *          The abstract image object to scale.
+   * @param x
+   *          The scale to grow or shrink in x-direction.
+   * @param y
+   *          The scale to grow or shrink in y-direction.
+   * @return A rescaled Image abstraction.
+   */
   public static Image resizeImage(Image image, int x, int y)
   {
     Image tmp = image.getScaledInstance(x, y, Image.SCALE_SMOOTH);

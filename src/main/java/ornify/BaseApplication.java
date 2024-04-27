@@ -22,37 +22,16 @@ public class BaseApplication extends JApplication implements ActionListener
   protected static final String START = "Start";
   protected static final String RETURN = "Return";
   protected static final String NEXT = "Next";
-
-//  public String[] userChoices;
   private JPanel curPanel;
   private ResultsPanel resultPanel;
   private int index;
   private ArrayList<JPanel> panels;
-  
-//  public String[] selections = {
-//    "YEAR",
-//    "SIZE",
-//    "CROWN",
-//    "SUPERCILIUM",
-//    "EYESTRIPE",
-//    "AURICULARS",
-//    "BEAK_SHAPE",
-//    "BEAK_LENGTH",
-//    "BEAK_COLOR",
-//    "THROAT",
-//    "BREAST",
-//    "COVERTS",
-//    "WING",
-//    "FOOT_SHAPE",
-//    "FOOT_COLOR"
-//  };
 
   public BaseApplication(String[] args)
   {
     super(args, WIDTH, HEIGHT);
     panels = new ArrayList<JPanel>();
     index = 0;
-//    userChoices = new String[15];
   }
 
   public void actionPerformed(ActionEvent evt)
@@ -76,20 +55,6 @@ public class BaseApplication extends JApplication implements ActionListener
         break;
     }
   }
-  
-//  public void addChoice(final String choice, final int index)
-//  {
-//    userChoices[index] = choice;
-//  }
-//  
-//  public void dumpResults()
-//  {
-//   for (int i = 0; i < userChoices.length; i++)
-//   {
-//     System.out.printf("%d: %s", i, userChoices[i]);
-//   }
-//   System.out.println();
-//  }
 
   /**
    * Method that controls the start button action.
