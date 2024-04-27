@@ -26,6 +26,7 @@ public class BaseApplication extends JApplication implements ActionListener
   private ResultsPanel resultPanel;
   private int index;
   private ArrayList<JPanel> panels;
+  private static boolean isLastPanel = false;
 
   public BaseApplication(String[] args)
   {
@@ -88,6 +89,7 @@ public class BaseApplication extends JApplication implements ActionListener
     } else {
       index = 0;
     }
+    isLastPanel = (index == 7);
     curPanel = panels.get(index);
     curPanel.setVisible(true);
     panel.add(curPanel);
@@ -99,6 +101,9 @@ public class BaseApplication extends JApplication implements ActionListener
     JPanel panel = (JPanel) this.getContentPane();
     panel.remove(curPanel);
     index = 0;
+    isLastPanel = false;
+    Model.selections[1] = "";
+    Model.selections[7] = "";
     curPanel = panels.get(index);
     curPanel.setVisible(true);
     panel.add(curPanel);
@@ -108,7 +113,6 @@ public class BaseApplication extends JApplication implements ActionListener
   
   public void handleResults() {
     resultPanel.buildResults();
-    System.out.println("Building your results...");
     handleNext();
   }
   
@@ -119,11 +123,13 @@ public class BaseApplication extends JApplication implements ActionListener
    */
   public void handleReturn()
   { 
-
     JPanel panel = (JPanel) this.getContentPane();
     panel.remove(curPanel);
-    if (index!=0) {
+    if (index!=0 && !isLastPanel) {
       index--;
+    }
+    if (isLastPanel) {
+      isLastPanel = false;
     }
     curPanel = panels.get(index);
     curPanel.setVisible(true);

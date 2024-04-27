@@ -7,6 +7,25 @@ import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 
+/**
+ * Database Selections from user
+ * <li> 0. Season
+ * <li> 1. Size
+ * <li> 2. Crown
+ * <li> 3. Supercilium
+ * <li> 4. Eyestripe
+ * <li> 5. Auriculars
+ * <li> 6. Beak Shape
+ * <li> 7. Beak Length
+ * <li> 8. Beak Color
+ * <li> 9. Throat
+ * <li> 10. Breast
+ * <li> 11. Coverts
+ * <li> 12. Wing
+ * <li> 13. Foot Shape
+ * <li> 14. Foot Color
+ *
+ */
 public class Model
 {
   public static final String[] SIZE = {"Tiny", "Small", "Medium", "Large"};
