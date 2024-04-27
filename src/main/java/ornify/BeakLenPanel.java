@@ -87,7 +87,7 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     
     int index = Model.selectionIndicies.get("beak_length");
     Model.picked[index] = true;
-    Model.selections[index] = "beak_length in ('short','average','long')";
+    Model.selections[index] = "";
   }
   
   public String getOption()
@@ -131,7 +131,7 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     }
     
     int index = Model.selectionIndicies.get("beak_length");
-    Model.selections[index] = "beak_length ='" + size.toLowerCase() + "'";
+    Model.selections[index] = "(beak_length ='" + size.toLowerCase() + "')";
     
     value.setText("The current value is: " + size);
     val = val / 100;

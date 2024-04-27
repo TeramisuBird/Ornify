@@ -47,7 +47,7 @@ public class SizePanel extends CustomPanel
         super.setChoice(buttons, e.getActionCommand());
         this.currentOption = e.getActionCommand();
         Model.picked[index] = true;
-        Model.selections[index] = "size = '" + this.currentOption.toLowerCase() + "')";
+        Model.selections[index] = "(size = '" + this.currentOption.toLowerCase() + "')";
         break;
     }
   }
