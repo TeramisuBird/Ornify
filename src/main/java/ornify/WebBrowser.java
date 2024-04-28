@@ -1,6 +1,5 @@
 package ornify;
 
-import com.sun.javafx.application.PlatformImpl;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -13,7 +12,6 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -32,8 +30,13 @@ import javax.swing.JPanel;
  */
 public class WebBrowser extends JPanel
 {
-  public static String savedURL;
+  public static String infoURL;
+  public static String soundURL;
+  public static int web_WIDTH;
+  public static int web_HEIGHT;
+  public static boolean isFirstPage = true;
   private static final long serialVersionUID = 5223405231958560665L;
+  public static JButton linkButton = new JButton("Get more info");
   private JFXPanel jfxPanel;
   private JPanel controlPanel;
   private Stage stage;
@@ -92,10 +95,6 @@ public class WebBrowser extends JPanel
       engine.load(url);
     });
   }
-  
-  public void showStage() {
-    browse(savedURL);
-  }
 
   /**
    * Parses a given iframe for a src file and loads it in this web browser.
@@ -103,7 +102,7 @@ public class WebBrowser extends JPanel
    * @param iframeURL
    *          The full html iframe element.
    */
-  public void iframe(String iframeURL)
+  public static String getiframe(String iframeURL)
   {
     StringTokenizer tokens = new StringTokenizer(iframeURL, "\"");
     tokens.nextToken();
@@ -112,8 +111,9 @@ public class WebBrowser extends JPanel
     int height = Integer.valueOf(tokens.nextToken());
     tokens.nextToken();
     int width = Integer.valueOf(tokens.nextToken());
-    this.setPreferredSize(new Dimension(width, height));
-    browse(url);
+    web_WIDTH = width;
+    web_HEIGHT = height;
+    return url;
   }
 
   /**
@@ -132,19 +132,23 @@ public class WebBrowser extends JPanel
     });
     panel.add(refreshButton);
 
-    // iframe test button
-    JButton iframeTestButton = new JButton("iframe Test");
-    iframeTestButton.addActionListener((ActionEvent e) -> {
-      iframe(Model.endResult.get(2));
+    // Link button
+    linkButton.addActionListener((ActionEvent e) -> {
+      Platform.runLater(()-> {
+        if (isFirstPage) {
+          this.setPreferredSize(new Dimension(web_WIDTH, web_HEIGHT));
+          linkButton.setText("Get more info");
+          browse(soundURL);
+          isFirstPage = false;
+        } else {
+          this.setPreferredSize(new Dimension(1400, 1000));
+          linkButton.setText("Hear bird call");
+          browse(infoURL);
+          isFirstPage = true;
+        }
+      });
     });
-    panel.add(iframeTestButton);
-    
-    // Stage Set Test
-    JButton stageSetButton = new JButton("Stage Set Test");
-    stageSetButton.addActionListener((ActionEvent e) -> {
-      showStage();
-    });
-    panel.add(stageSetButton);
+    panel.add(linkButton);
     
     // Start over button
     JButton restartButton = new JButton("Start over?");
