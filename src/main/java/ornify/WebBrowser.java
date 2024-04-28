@@ -84,7 +84,9 @@ public class WebBrowser extends JPanel
    */
   public void browse(String url)
   {
-    engine.load(url);
+    Platform.runLater(()->{
+      engine.load(url);
+    });
   }
 
   /**
@@ -133,10 +135,8 @@ public class WebBrowser extends JPanel
     // Start over button
     JButton restartButton = new JButton("Start over?");
     restartButton.addActionListener((ActionEvent e) -> {
-      Platform.runLater(() -> {
-        ba.setLayeredPane(Model.overlay);
-        ba.handleRestart();
-      });
+      ba.setLayeredPane(Model.overlay);
+      ba.handleRestart();
     });
     panel.add(restartButton);
     return panel;

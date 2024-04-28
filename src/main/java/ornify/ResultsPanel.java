@@ -27,6 +27,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
   public QueryBuilder qb = new QueryBuilder();
   public String matchesText;
   private BaseApplication ba;
+  private WebDisplayPanel browserOverlay;
 
   private ResultSet set;
   private ResultSetMetaData meta;
@@ -96,9 +97,14 @@ public class ResultsPanel extends CustomPanel implements ActionListener
         break;
       case "Yes":
         populateEndResult();
-        this.restartButton.setText("Start over?");
+        this.restartButton.setText("Loading please wait...");
         set = null;
-        new WebDisplayPanel(ba);
+        if (browserOverlay == null) {
+          browserOverlay = new WebDisplayPanel(ba);
+        } else {
+          browserOverlay.refresh();
+        }
+        this.restartButton.setText("Yes");
         break;
       case "Try another?":
         super.controlPanel.add(super.returnButton);
