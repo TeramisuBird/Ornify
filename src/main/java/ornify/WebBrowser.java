@@ -37,11 +37,22 @@ public class WebBrowser extends JPanel
   private Stage stage;
   private WebView browser;
   private WebEngine engine;
+  private BaseApplication ba;
 
   /**
    * The constructor of this web browser.
    */
   public WebBrowser()
+  {
+    this("http://www.google.com");
+  }
+  
+  public WebBrowser(String url, BaseApplication ba) {
+    this(url);
+    this.ba = ba;
+  }
+  
+  public WebBrowser(String url)
   {
     jfxPanel = new JFXPanel();
     PlatformImpl.startup(() -> {
@@ -52,7 +63,7 @@ public class WebBrowser extends JPanel
       stage.setScene(scene);
       browser = new WebView();
       engine = browser.getEngine();
-      engine.load("http://www.google.com");
+      engine.load(url);
       ObservableList<Node> children = root.getChildren();
       children.add(browser);
       jfxPanel.setScene(scene);
@@ -115,9 +126,19 @@ public class WebBrowser extends JPanel
     JButton iframeTestButton = new JButton("iframe Test");
     iframeTestButton.addActionListener((ActionEvent e) -> {
       Platform.runLater(() -> iframe(
-          "<iframe src=\"https://macaulaylibrary.org/asset/485177/embed\" height=\"498\" width=\"640\" frameborder=\"0\" allowfullscreen></iframe>"));
+          Model.endResult.get(2)));
     });
     panel.add(iframeTestButton);
+    
+    // Start over button
+    JButton restartButton = new JButton("Start over?");
+    restartButton.addActionListener((ActionEvent e) -> {
+      Platform.runLater(() -> {
+        ba.setLayeredPane(Model.overlay);
+        ba.handleRestart();
+      });
+    });
+    panel.add(restartButton);
     return panel;
   }
 }
