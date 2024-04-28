@@ -12,11 +12,11 @@ import app.JApplication;
 
 public class BaseApplication extends JApplication implements ActionListener
 {
-  public static final int WIDTH = 600;
+  public static final int WIDTH = 800;
   public static final int HEIGHT = 600;
   
   public static final Color background_color = new Color(180, 250, 250);
-
+  
   protected static final String ABOUT = "About";
   protected static final String LOAD = "Load";
   protected static final String START = "Start";
@@ -104,6 +104,7 @@ public class BaseApplication extends JApplication implements ActionListener
     isLastPanel = false;
     Model.selections[1] = "";
     Model.selections[7] = "";
+    Model.endResult = new ArrayList<String>();
     curPanel = panels.get(index);
     curPanel.setVisible(true);
     panel.add(curPanel);
@@ -114,6 +115,10 @@ public class BaseApplication extends JApplication implements ActionListener
   public void handleResults() {
     resultPanel.buildResults();
     handleNext();
+  }
+  
+  public JPanel handleBrowserDisplay() {
+    return this.curPanel;
   }
   
   /**
