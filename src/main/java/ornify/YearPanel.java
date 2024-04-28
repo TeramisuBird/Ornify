@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 
-import visual.dynamic.sampled.Screen;
+import visual.dynamic.described.Stage;
 import visual.statik.sampled.Content;
 
 /**
@@ -20,9 +20,9 @@ public class YearPanel extends CustomPanel
 {
   private String currentOption;
   private Image curImage;
-  private Screen screen;
+  private Stage stage;
   
-  private Content[] items;
+  private FallingSprite[] items;
   
   private JButton[] buttons;
   private final String[] seasons = {"Autumn", "Winter", "Spring", "Summer"};
@@ -38,17 +38,17 @@ public class YearPanel extends CustomPanel
     super(question, ba);
     super.questionPanel.remove(super.image);
     
-    this.screen = new Screen(20);
-    screen.setRepeating(true);
-    screen.getView().setPreferredSize(new Dimension(300, 300));
-    screen.setBackground(new Color(180, 250, 250));
+    this.stage = new Stage(20);
+    stage.setBackground(new Color(180, 250, 250));
+    stage.getView().setPreferredSize(new Dimension(300, 300));
     this.curImage = null;
     
-    this.items = new Content[5];
+    this.items = new FallingSprite[10];
     for (int i = 0; i < items.length; i++)
     {
-      items[i] = new FallingContent();
-      screen.add(items[i]);
+      Content con = new Content();
+      items[i] = new FallingSprite(con);
+      stage.add(items[i]);
     }
     
     currentOption = null;
@@ -62,7 +62,7 @@ public class YearPanel extends CustomPanel
       super.comboPanel.add(buttons[i]);
     }
     
-    super.questionPanel.add(screen.getView());
+    super.questionPanel.add(stage.getView());
   }
   
   /**
@@ -135,11 +135,11 @@ public class YearPanel extends CustomPanel
     {
       for (int i = 0; i < items.length; i++)
       {
-        items[i].setImage((BufferedImage) curImage);
+        items[i].setSprite((BufferedImage) curImage);
       }
     }
     
-    screen.start();
-    screen.repaint();
+    stage.start();
+    stage.repaint();
   }
 }

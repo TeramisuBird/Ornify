@@ -1,8 +1,12 @@
 package ornify;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 /**
  * Foot Shape question panel class.
@@ -23,13 +27,21 @@ public class FootPanel extends CustomPanel
   public FootPanel(String question, BaseApplication ba)
   {
     super(question, ba);
-    super.image.setIcon(Model.FOOT_IMAGE);
+    super.questionPanel.remove(super.image);
     currentOption = null;
     
     this.buttons = new JButton[Model.FOOT_SHAPE.length];
+
     for (int i = 0; i < buttons.length; i++)
     {
-      buttons[i] = new JButton(Model.FOOT_SHAPE[i]);
+      buttons[i] = new JButton();
+      ImageIcon icon = new ImageIcon(Model.FEET_IMAGES[i]);
+      buttons[i].setIcon(icon);
+      buttons[i].setIconTextGap(10); // Set gap between icon and text
+      buttons[i].setHorizontalTextPosition(SwingConstants.RIGHT);
+      buttons[i].setText(Model.FOOT_SHAPE[i]);
+      buttons[i].setAlignmentX(Component.CENTER_ALIGNMENT);
+      buttons[i].setPreferredSize(new Dimension(600, 90));
       buttons[i].addActionListener(this);
       super.comboPanel.add(buttons[i]);
     }

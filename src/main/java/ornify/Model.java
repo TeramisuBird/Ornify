@@ -45,16 +45,32 @@ public class Model
   public static final String[] BEAK_SHAPE = {"Cone", "Chisel", "Pointy", "Hooked", "Flat", "Probing"};
   public static final String[] YEAR = {"Migration", "Breeding", "Non-breeding", "All-year"};
   
-  public static final ImageIcon YEAR_IMAGE = ImageReader.readImage("cardinal_in_snow.jpg", 600, 400);
   public static final ImageIcon TITLE_IMAGE = ImageReader.readImage("title_bird.png");
-  public static final ImageIcon FOOT_IMAGE = ImageReader.readImage("feet_types.png", 400, 450);
-  public static final ImageIcon SIZE_IMAGE = ImageReader.readImage("bird_sizes.png", 500, 300);
-  public static final ImageIcon BEAK_IMAGE = ImageReader.readImage("beak_types.png", 550, 450);
-  // public static final ImageIcon BEAKLEN_IMAGE = ImageReader.readImage("lorikeet_beak.jpg", 500, 300);
-  public static final ImageIcon COLOR_IMAGE = ImageReader.readImage("bird_parts.jpg", 450, 350);
   
-  public static final Image BEAKLEN_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("lorikeet_beak.jpg"), 200, 200);
+  //Images for the feet type panel
+  public static final Image TINY_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Tiny.png"), 100, 100);
+  public static final Image SMALL_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Small.png"), 100, 100);
+  public static final Image MEDIUM_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Medium.png"), 100, 100);
+  public static final Image LARGE_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Large.png"), 100, 100);
+  public static final Image[] SIZE_IMAGES = {TINY_IMAGE, SMALL_IMAGE, MEDIUM_IMAGE, LARGE_IMAGE};
+   
+  // Images for the feet type panel
+  public static final Image CLAWED_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Clawed.png"), 85, 85);
+  public static final Image CLIMBING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Climbing.png"), 85, 85);
+  public static final Image PERCHING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Perching.png"), 85, 85);
+  public static final Image WADING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Wading.png"), 85, 85);
+  public static final Image WEBBED_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Webbed.png"), 85, 85);
+  public static final Image[] FEET_IMAGES = {CLAWED_IMAGE, CLIMBING_IMAGE, PERCHING_IMAGE, WADING_IMAGE, WEBBED_IMAGE};
   
+  //Images for the beak type panel
+  public static final Image CONE_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Cone.png"), 85, 85);
+  public static final Image CHISEL_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Chisel.png"), 85, 85);
+  public static final Image POINTY_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Pointy.png"), 85, 85);
+  public static final Image HOOKED_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Hooked.png"), 85, 85);
+  public static final Image FLAT_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Flat.png"), 85, 85);
+  public static final Image PROBING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Probing.png"), 85, 85);
+  public static final Image[] BEAK_IMAGES = {CONE_IMAGE, CHISEL_IMAGE, POINTY_IMAGE, HOOKED_IMAGE, FLAT_IMAGE, PROBING_IMAGE};
+   
   // Images for seasons animation
   public static final Image BUG_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Bug.png"), 50, 50);
   public static final Image LEAF_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Leaf.png"), 50, 50);
