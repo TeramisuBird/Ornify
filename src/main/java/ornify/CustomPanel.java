@@ -14,8 +14,6 @@ import javax.swing.SwingConstants;
 
 public class CustomPanel implements ActionListener
 {
-  public static final int WIDTH = 600;
-  public static final int HEIGHT = 600;
   private static final String HTML = "<html><body style='width: %1spx'>%1s";
   
   public JButton nextButton = new JButton("Next");
@@ -32,7 +30,7 @@ public class CustomPanel implements ActionListener
   {
     this.baseApp = ba;
     this.panel.setLayout(new BorderLayout());
-    this.panel.setBounds(0, 0, WIDTH, HEIGHT);
+    this.panel.setBounds(0, 0, BaseApplication.WIDTH, BaseApplication.HEIGHT);
     text = new JLabel(String.format(HTML, 300, question));
     text.setHorizontalAlignment(SwingConstants.CENTER);
     text.setFont(new Font("Verdana", Font.BOLD, 30));
