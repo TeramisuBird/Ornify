@@ -34,6 +34,8 @@ import javax.swing.JLayeredPane;
  */
 public class Model
 {
+  public static Thread thread;
+  public static WebBrowser browser;
   public static JLayeredPane overlay = null;
   public static ArrayList<String> endResult = new ArrayList<String>();
   

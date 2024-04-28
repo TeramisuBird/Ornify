@@ -101,8 +101,10 @@ public class ResultsPanel extends CustomPanel implements ActionListener
         set = null;
         if (browserOverlay == null) {
           browserOverlay = new WebDisplayPanel(ba);
+          System.out.println("Created a new browser!");
         } else {
           browserOverlay.refresh();
+          System.out.println("Refreshed browser!");
         }
         this.restartButton.setText("Yes");
         break;

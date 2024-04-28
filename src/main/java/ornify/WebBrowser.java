@@ -13,6 +13,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -31,6 +32,7 @@ import javax.swing.JPanel;
  */
 public class WebBrowser extends JPanel
 {
+  public static String savedURL;
   private static final long serialVersionUID = 5223405231958560665L;
   private JFXPanel jfxPanel;
   private JPanel controlPanel;
@@ -55,7 +57,8 @@ public class WebBrowser extends JPanel
   public WebBrowser(String url)
   {
     jfxPanel = new JFXPanel();
-    PlatformImpl.startup(() -> {
+    Platform.setImplicitExit(false);
+    Model.thread = new Thread(()->Platform.runLater(()-> {
       stage = new Stage();
       stage.setResizable(true);
       Group root = new Group();
@@ -67,7 +70,8 @@ public class WebBrowser extends JPanel
       ObservableList<Node> children = root.getChildren();
       children.add(browser);
       jfxPanel.setScene(scene);
-    });
+    }));
+    Model.thread.start();
     this.setLayout(new BorderLayout());
     this.add(jfxPanel, BorderLayout.CENTER);
     controlPanel = new JPanel();
@@ -87,6 +91,10 @@ public class WebBrowser extends JPanel
     Platform.runLater(()->{
       engine.load(url);
     });
+  }
+  
+  public void showStage() {
+    browse(savedURL);
   }
 
   /**
@@ -127,10 +135,16 @@ public class WebBrowser extends JPanel
     // iframe test button
     JButton iframeTestButton = new JButton("iframe Test");
     iframeTestButton.addActionListener((ActionEvent e) -> {
-      Platform.runLater(() -> iframe(
-          Model.endResult.get(2)));
+      iframe(Model.endResult.get(2));
     });
     panel.add(iframeTestButton);
+    
+    // Stage Set Test
+    JButton stageSetButton = new JButton("Stage Set Test");
+    stageSetButton.addActionListener((ActionEvent e) -> {
+      showStage();
+    });
+    panel.add(stageSetButton);
     
     // Start over button
     JButton restartButton = new JButton("Start over?");
