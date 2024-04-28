@@ -16,6 +16,11 @@ import javax.swing.event.ChangeListener;
 
 import visual.statik.described.Content;
 
+/**
+ * Beak-Length question panel class.
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class BeakLenPanel extends CustomPanel implements ChangeListener
 {
   private JSlider slider;
@@ -33,6 +38,12 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
   private Point2D[] pairs_bottom = {new Point2D.Double(280, 200), 
       new Point2D.Double(480, 200), new Point2D.Double(280, 240), new Point2D.Double(280, 220)};
   
+  /**
+   * Panel constructor.
+   * 
+   * @param question for panel's question
+   * @param ba for application to add panel to
+   */
   public BeakLenPanel(String question, BaseApplication ba)
   {
     super(question, ba);
@@ -90,6 +101,11 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     Model.selections[index] = "";
   }
   
+  /**
+   * getter for user's current selection.
+   * 
+   * @return currentOption
+   */
   public String getOption()
   {
     return currentOption;
@@ -144,6 +160,14 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     this.visual_panel.repaint();
   }
   
+  /**
+   * check if value is within some range.
+   * 
+   * @param value for value to check
+   * @param start for range start (exclusive)
+   * @param end for range end (inclusive)
+   * @return result of range check
+   */
   private boolean inRange(int value, int start, int end)
   {
     if (value > start && value <= end)
@@ -156,6 +180,13 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     }
   }
   
+  /**
+   * make a polygon.
+   * 
+   * @param scale for scale of polygon
+   * @param points for points of the polygon
+   * @return created polygon
+   */
   private Polygon createShape(float scale, Point2D[] points)
   {
     Polygon shape = new Polygon();

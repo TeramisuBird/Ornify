@@ -27,6 +27,11 @@ import javax.swing.JLayeredPane;
  * <li> 14. Foot Color
  *
  */
+/**
+ * Collection of various selection options for different panels.
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class Model
 {
   public static JLayeredPane overlay = null;
@@ -64,6 +69,11 @@ public class Model
   public static boolean[] picked = new boolean[15];
   public static String[] selections = new String[15];
 
+  /**
+   * static constructor.
+   * 
+   * fills color option ArrayLists & Selection/Index HashMap
+   */
   static { 
 //  fill crown color options
     crownColor.add(new Pair<String, Color>("default", new Color(172,91,91)));

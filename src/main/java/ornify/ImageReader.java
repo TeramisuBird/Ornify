@@ -17,6 +17,8 @@ import resources.Marker;
 /**
  * Finds local images or downloads images off the web given urls.
  * 
+ * This work complies with the JMU Honor Code.
+ * 
  * @author Joseph Blethen
  * @version 1.0
  *

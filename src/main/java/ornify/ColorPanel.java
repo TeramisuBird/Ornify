@@ -2,9 +2,20 @@ package ornify;
 
 import java.awt.event.ActionEvent;
 
+/**
+ * Color "question" panel class (part 1 of 2)
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class ColorPanel extends CustomPanel
 {
 
+  /**
+   * Panel constructor.
+   * 
+   * @param question for panel's question
+   * @param ba for application to add panel to
+   */
   public ColorPanel(String question, BaseApplication ba)
   {
     super(question, ba);

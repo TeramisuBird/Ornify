@@ -14,8 +14,6 @@ import io.ResourceFinder;
  * Polygon reader.
  * 
  * This work complies with the JMU Honor Code.
- * 
- * @author Grayson Diehl
  */
 public class PolygonReader
 {

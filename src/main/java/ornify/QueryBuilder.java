@@ -3,16 +3,24 @@ package ornify;
 /**
  * Builds an SQL Query to search a database with.
  * 
- * @author Grayson Diehl
+ * This work complies with the JMU Honor Code.
  */
 public class QueryBuilder
 {
 
+  /**
+   * QueryBuilder constructor (purposefully empty).
+   */
   public QueryBuilder()
   {
 
   }
 
+  /**
+   * build the Query to search the SQL db with.
+   * 
+   * @return string of SQL query
+   */
   public String buildQuery()
   {
     String start = "select name, image_url, sound_url from ornify.bird";

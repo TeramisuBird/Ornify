@@ -12,6 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+/**
+ * Parent class for Custom Panels.
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class CustomPanel implements ActionListener
 {
   private static final String HTML = "<html><body style='width: %1spx'>%1s";
@@ -26,6 +31,12 @@ public class CustomPanel implements ActionListener
   public JPanel controlPanel = new JPanel();
   public BaseApplication baseApp;
   
+  /**
+   * Super-class constructor for panels
+   * 
+   * @param question for panel's question
+   * @param ba for application to add panel to
+   */
   public CustomPanel(String question, BaseApplication ba)
   {
     this.baseApp = ba;
@@ -62,6 +73,11 @@ public class CustomPanel implements ActionListener
     this.panel.setVisible(true);
   }
   
+  /**
+   * getter for an instance's panel.
+   * 
+   * @return
+   */
   public JPanel getPanel()
   {
     return this.panel;
@@ -83,6 +99,12 @@ public class CustomPanel implements ActionListener
     }
   }
   
+  /**
+   * disable/enable buttons on a panel after a selection
+   * 
+   * @param buttons for panel's buttons
+   * @param size for string to disable
+   */
   protected void setChoice(JButton[] buttons, String size)
   {
     for (int i = 0; i < buttons.length; i++)

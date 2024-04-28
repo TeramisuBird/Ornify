@@ -4,11 +4,22 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 
+/**
+ * Beak Shape question panel class.
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class BeakPanel extends CustomPanel
 {
   private String currentOption;
   private JButton[] buttons;
   
+  /**
+   * Panel constructor.
+   * 
+   * @param question for panel's question.
+   * @param ba for application to add panel to
+   */
   public BeakPanel(String question, BaseApplication ba)
   {
     super(question, ba);
@@ -24,6 +35,11 @@ public class BeakPanel extends CustomPanel
     }
   }
   
+  /**
+   * getter for user's current selection.
+   * 
+   * @return currentOption
+   */
   public String getOption()
   {
     return currentOption;

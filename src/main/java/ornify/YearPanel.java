@@ -5,6 +5,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 
+/**
+ * Year question panel.
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class YearPanel extends CustomPanel
 {
   private String currentOption;
@@ -12,6 +17,12 @@ public class YearPanel extends CustomPanel
   private JButton[] buttons;
   private final String[] seasons = {"Autumn", "Winter", "Spring", "Summer"};
 
+  /**
+   * Panel constructor.
+   * 
+   * @param question for panel's question
+   * @param ba for application to add panel to
+   */
   public YearPanel(String question, BaseApplication ba)
   {
     super(question, ba);
@@ -28,6 +39,11 @@ public class YearPanel extends CustomPanel
     }
   }
   
+  /**
+   * getter for user's current selection
+   * 
+   * @return currentOption
+   */
   public String getOption()
   {
     return currentOption;
@@ -58,6 +74,11 @@ public class YearPanel extends CustomPanel
     }
   }
   
+  /**
+   * get corresponding text for the user's selection
+   * 
+   * @param type for user visible selection
+   */
   private void getChoice(String type)
   {
     switch (type)

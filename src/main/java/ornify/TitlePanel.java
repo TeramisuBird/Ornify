@@ -11,6 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+/**
+ * Starting Panel.
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class TitlePanel implements ActionListener
 {
   private static final String HTML = "<html><body style='width: %1spx'>%1s";
@@ -21,6 +26,12 @@ public class TitlePanel implements ActionListener
   public JPanel controlPanel = new JPanel();
   public BaseApplication baseApp;
   
+  /**
+   * Panel Constructor.
+   * 
+   * @param title for title screen text
+   * @param ba for application to add panel to
+   */
   public TitlePanel(String title, BaseApplication ba)
   {
     this.baseApp = ba;
@@ -46,6 +57,11 @@ public class TitlePanel implements ActionListener
     this.panel.setVisible(true);
   }
   
+  /**
+   * panel getter.
+   * 
+   * @return for panel to add to application
+   */
   public JPanel getPanel()
   {
     return this.panel;

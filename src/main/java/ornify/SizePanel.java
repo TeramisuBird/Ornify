@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 
+/**
+ * Size question panel.
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class SizePanel extends CustomPanel
 {
   
@@ -11,6 +16,12 @@ public class SizePanel extends CustomPanel
   
   private JButton[] buttons;
 
+  /**
+   * Panel constructor.
+   * 
+   * @param question for panel's question
+   * @param ba fo application to add panel to
+   */
   public SizePanel(String question, BaseApplication ba)
   {
     super(question, ba);
@@ -26,6 +37,11 @@ public class SizePanel extends CustomPanel
     }
   }
   
+  /**
+   * getter for user's selection.
+   * 
+   * @return currentOption
+   */
   public String getOption()
   {
     return currentOption;

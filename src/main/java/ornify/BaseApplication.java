@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 
 import app.JApplication;
 
+/**
+ * Application Starting Point for Ornify
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class BaseApplication extends JApplication implements ActionListener
 {
   public static final int WIDTH = 800;
@@ -28,6 +33,11 @@ public class BaseApplication extends JApplication implements ActionListener
   private ArrayList<JPanel> panels;
   private static boolean isLastPanel = false;
 
+  /**
+   * BaseApplication constructor.
+   * 
+   * @param args for command line args
+   */
   public BaseApplication(String[] args)
   {
     super(args, WIDTH, HEIGHT);
@@ -35,6 +45,11 @@ public class BaseApplication extends JApplication implements ActionListener
     index = 0;
   }
 
+  /**
+   * Perform some action based on an user event.
+   * 
+   * @param evt for Event to handle
+   */
   public void actionPerformed(ActionEvent evt)
   {
     switch (evt.getActionCommand())
@@ -97,6 +112,11 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.repaint();
   }
   
+  /**
+   * Method that controls the restart button action.
+   * 
+   * @throws IOException
+   */
   public void handleRestart() {
     JPanel panel = (JPanel) this.getContentPane();
     panel.remove(curPanel);
@@ -112,11 +132,21 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.repaint();
   }
   
+  /**
+   * Method that controls preparing results for the results panel.
+   * 
+   * @throws IOException
+   */
   public void handleResults() {
     resultPanel.buildResults();
     handleNext();
   }
   
+  /**
+   * Method that controls displaying the browser.
+   * 
+   * @throws IOException
+   */
   public JPanel handleBrowserDisplay() {
     return this.curPanel;
   }
@@ -176,6 +206,11 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.add(curPanel);
   }
 
+  /**
+   * main starting point.
+   * 
+   * @param args for command line args
+   */
   public static void main(String[] args)
   {
     JApplication app = new BaseApplication(args);

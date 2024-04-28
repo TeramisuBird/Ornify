@@ -13,6 +13,11 @@ import resources.Marker;
 import visual.Visualization;
 import visual.statik.described.Content;
 
+/**
+ * Shape "Test" Panel (part 2 of 2 of Color Panel)
+ * 
+ * This work complies with the JMU Honor Code.
+ */
 public class ShapeTestPanel extends Visualization implements MouseListener
 {
   private PolygonReader reader;
@@ -20,6 +25,9 @@ public class ShapeTestPanel extends Visualization implements MouseListener
   private HashMap<Polygon,String> shapes;
   private HashMap<String,Pair<Polygon, Integer>> colorIndex;
 
+  /**
+   * constructor.
+   */
   public ShapeTestPanel()
   {
     this.jarFinder = ResourceFinder.createInstance(new Marker());
@@ -30,6 +38,12 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     this.getView().setSize(new Dimension(600, 600));
   }
   
+  /**
+   * read a single file into a polygon to add to the panel.
+   * 
+   * @param name for name of map file
+   * @param bigOutline is polygon interactable?
+   */
   public void read(String name, boolean bigOutline)
   {
     Content content = new Content();
@@ -47,6 +61,9 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     this.add(content);
   }
   
+  /**
+   * re-draw all shapes into the panel.
+   */
   private void redraw()
   {
     this.clear();
