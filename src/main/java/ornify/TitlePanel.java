@@ -1,48 +1,48 @@
 package ornify;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
-import visual.Visualization;
-
-public class TitlePanel extends Visualization implements ActionListener
+public class TitlePanel implements ActionListener
 {
-  public static final int WIDTH = 600;
-  public static final int HEIGHT = 600;
-  
-  public JButton startButton;
-  public JPanel panel;
+  private static final String HTML = "<html><body style='width: %1spx'>%1s";
+  public JButton startButton = new JButton("Start");
+  public JLabel titleText = new JLabel(" ");
+  public JLabel image = new JLabel(" ");
+  public JPanel panel = new JPanel();
+  public JPanel controlPanel = new JPanel();
   public BaseApplication baseApp;
   
   public TitlePanel(String title, BaseApplication ba)
   {
-    super();
-    this.getView().setSize(WIDTH, HEIGHT);
-    
     this.baseApp = ba;
-    this.panel = new JPanel();
-    this.panel.setLayout(null);
-    this.panel.setBounds(0, 0, WIDTH, HEIGHT);
+    this.panel.setLayout(new BorderLayout());
+    this.panel.setBounds(0, 0, BaseApplication.WIDTH, BaseApplication.HEIGHT);
+    this.panel.setBackground(BaseApplication.background_color);
     
-    JLabel label = new JLabel(title);
-    label.setFont(new Font("Verdana", Font.BOLD, 30));
-
-    label.setBounds((WIDTH / 2) - 50, 50, 500, 100);
+    this.titleText = new JLabel(String.format(HTML, 300, title));
+    this.titleText.setHorizontalAlignment(SwingConstants.CENTER);
+    this.titleText.setFont(new Font("Verdana", Font.BOLD, 120));
     
-    this.startButton = new JButton("Start");
-    this.startButton.setBounds((WIDTH / 2) - 50, (HEIGHT / 2) + 200, 100, 50);
+    this.startButton.setPreferredSize(new Dimension(130, 40));
     this.startButton.addActionListener(this);
     
-    this.panel.setBackground(BaseApplication.background_color);
-    JLabel picLabel = new JLabel(Model.TITLE_IMAGE);
-    picLabel.setBounds((WIDTH/2) - 100, (HEIGHT/2) - 100, 200, 200);
-    this.panel.add(picLabel);
-    this.panel.add(label);
-    this.panel.add(this.startButton);
+    this.image.setHorizontalAlignment(SwingConstants.CENTER);
+    this.image = new JLabel(Model.TITLE_IMAGE);
+    controlPanel.setLayout(new FlowLayout());
+    this.controlPanel.setBackground(BaseApplication.background_color);
+    controlPanel.add(startButton);
+    this.panel.add(titleText, BorderLayout.NORTH);
+    this.panel.add(image, BorderLayout.CENTER);
+    this.panel.add(controlPanel, BorderLayout.SOUTH);
     this.panel.setVisible(true);
   }
   
