@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
@@ -15,8 +16,6 @@ import javax.swing.JTextPane;
 
 public class ResultsPanel extends CustomPanel implements ActionListener
 {
-  public static final int WIDTH = 600;
-  public static final int HEIGHT = 600;
   public static final boolean IS_ONLINE = true;
 
   private SQLDatabase db;
@@ -27,10 +26,14 @@ public class ResultsPanel extends CustomPanel implements ActionListener
   public JButton tryAnotherButton = new JButton("Try another?");
   public QueryBuilder qb = new QueryBuilder();
   public String matchesText;
+  private BaseApplication ba;
 
   private ResultSet set;
-  
-  private void configureResults() {
+  private ResultSetMetaData meta;
+  private int columnCount = 3;
+
+  private void configureResults()
+  {
     textPane.setPreferredSize(new Dimension(200, 50));
     restartButton.setPreferredSize(new Dimension(100, 30));
     yesNoPanel.setLayout(new FlowLayout());
@@ -47,16 +50,37 @@ public class ResultsPanel extends CustomPanel implements ActionListener
   public ResultsPanel(String question, BaseApplication ba)
   {
     super(question, ba);
-    
+
     this.tryAnotherButton.addActionListener(this);
     this.returnButton.addActionListener(this);
     this.nextButton.addActionListener(this);
     this.restartButton.addActionListener(this);
-    
-    configureResults();
-    
-    this.db = new SQLDatabase(IS_ONLINE);
 
+    configureResults();
+
+    this.db = new SQLDatabase(IS_ONLINE);
+    this.ba = ba;
+
+  }
+
+  private void populateEndResult()
+  {
+    try
+    {
+      meta = set.getMetaData();
+      columnCount = meta.getColumnCount();
+      for (int i = 1; i <= columnCount; i++) {
+        Model.endResult.add(set.getString(i));
+        System.out.println(set.getString(i));
+      }
+        
+         
+    }
+    catch (SQLException e)
+    {
+      System.out.println("ERROR: Result set and Metadata set column mismatch.");
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -71,7 +95,10 @@ public class ResultsPanel extends CustomPanel implements ActionListener
         this.handleNext();
         break;
       case "Yes":
+        populateEndResult();
         this.restartButton.setText("Start over?");
+        set = null;
+        new WebDisplayPanel(ba);
         break;
       case "Try another?":
         super.controlPanel.add(super.returnButton);
