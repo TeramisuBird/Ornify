@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
 
 /**
  * Database Selections from user
@@ -28,6 +29,9 @@ import javax.swing.ImageIcon;
  */
 public class Model
 {
+  public static JLayeredPane overlay = null;
+  public static ArrayList<String> endResult = new ArrayList<String>();
+  
   public static final String[] SIZE = {"Tiny", "Small", "Medium", "Large"};
   public static final String[] BEAK_LENGTH = {"Short", "Average", "Long"};
   public static final String[] FOOT_SHAPE = {"Clawed", "Climbing", "Perching", "Wading", "Webbed"};
