@@ -55,6 +55,12 @@ public class Model
   
   public static final Image BEAKLEN_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("lorikeet_beak.jpg"), 200, 200);
   
+  // Images for seasons animation
+  public static final Image BUG_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Bug.png"), 50, 50);
+  public static final Image LEAF_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Leaf.png"), 50, 50);
+  public static final Image RAIN_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("raindrop.png"), 50, 50);
+  public static final Image SNOW_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Snowflake.png"), 50, 50);
+  
   public static ArrayList<Pair<String, Color>> beakColor = new ArrayList<Pair<String,Color>>();
   public static ArrayList<Pair<String, Color>> crownColor = new ArrayList<Pair<String,Color>>();
   public static ArrayList<Pair<String, Color>> superColor = new ArrayList<Pair<String,Color>>();

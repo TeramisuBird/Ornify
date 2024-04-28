@@ -48,7 +48,7 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
   {
     super(question, ba);
     this.visual_panel = new VisualPanel();
-    visual_panel.getView().setPreferredSize(new Dimension(200, 400));
+    visual_panel.getView().setPreferredSize(new Dimension(400, 400));
     
     this.top_beak = new Content();
     top_beak.setColor(new Color(0, 0, 0));
@@ -84,13 +84,13 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     visual_panel.add(bottom_beak);
     
     this.slider = new JSlider(1, 100, 100);
-    slider.setPreferredSize(new Dimension(400, 50));
+    slider.setPreferredSize(new Dimension(600, 50));
     slider.addChangeListener(this);
     
-    this.value = new JLabel("The current value is: 50");
+    this.value = new JLabel("The current value is: Long");
     value.setPreferredSize(new Dimension(200, 30));
     
-    this.currentOption = null;
+    this.currentOption = "Long";
     
     super.questionPanel.add(visual_panel.getView(), BorderLayout.CENTER);
     super.comboPanel.add(slider);

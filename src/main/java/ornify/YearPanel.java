@@ -1,9 +1,15 @@
 package ornify;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
+
+import visual.dynamic.sampled.Screen;
+import visual.statik.sampled.Content;
 
 /**
  * Year question panel.
@@ -13,6 +19,10 @@ import javax.swing.JButton;
 public class YearPanel extends CustomPanel
 {
   private String currentOption;
+  private Image curImage;
+  private Screen screen;
+  
+  private Content[] items;
   
   private JButton[] buttons;
   private final String[] seasons = {"Autumn", "Winter", "Spring", "Summer"};
@@ -27,6 +37,20 @@ public class YearPanel extends CustomPanel
   {
     super(question, ba);
     super.questionPanel.remove(super.image);
+    
+    this.screen = new Screen(20);
+    screen.setRepeating(true);
+    screen.getView().setPreferredSize(new Dimension(300, 300));
+    screen.setBackground(new Color(180, 250, 250));
+    this.curImage = null;
+    
+    this.items = new Content[5];
+    for (int i = 0; i < items.length; i++)
+    {
+      items[i] = new FallingContent();
+      screen.add(items[i]);
+    }
+    
     currentOption = null;
     
     this.buttons = new JButton[seasons.length];
@@ -37,6 +61,8 @@ public class YearPanel extends CustomPanel
       buttons[i].addActionListener(this);
       super.comboPanel.add(buttons[i]);
     }
+    
+    super.questionPanel.add(screen.getView());
   }
   
   /**
@@ -84,20 +110,36 @@ public class YearPanel extends CustomPanel
     switch (type)
     {
       case "Spring":
+        curImage = Model.RAIN_IMAGE;
         currentOption = "Migration";
         break;
       case "Autumn":
+        curImage = Model.LEAF_IMAGE;
         currentOption = "Migration";
         break;
       case "Winter":
+        curImage = Model.SNOW_IMAGE;
         currentOption = "Non-Breeding";
         break;
       case "Summer":
+        curImage = Model.BUG_IMAGE;
         currentOption = "Breeding";
         break;
       default:
         System.out.println("unreachable");
+        curImage = null;
         break;
     }
+    
+    if (curImage != null)
+    {
+      for (int i = 0; i < items.length; i++)
+      {
+        items[i].setImage((BufferedImage) curImage);
+      }
+    }
+    
+    screen.start();
+    screen.repaint();
   }
 }
