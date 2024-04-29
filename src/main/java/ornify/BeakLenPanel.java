@@ -14,6 +14,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import visual.Visualization;
 import visual.statik.described.Content;
 
 /**
@@ -32,7 +33,7 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
   private JLabel value;
   private String currentOption;
 
-  private VisualPanel visualPanel;
+  private Visualization visualPanel;
   private Content topBeak;
   private Content bottomBeak;
   private Content headCon;
@@ -54,7 +55,7 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
   public BeakLenPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
-    this.visualPanel = new VisualPanel();
+    this.visualPanel = new Visualization();
     visualPanel.getView().setPreferredSize(new Dimension(400, 400));
 
     this.topBeak = new Content();
