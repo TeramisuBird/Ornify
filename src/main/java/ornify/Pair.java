@@ -34,7 +34,8 @@ public class Pair<F, S>
    * @param obj
    * @return the equality
    */
-  @Override public boolean equals(final Object obj)
+  @Override
+  public boolean equals(final Object obj)
   {
     boolean result = false;
     if (obj == this)
@@ -52,8 +53,26 @@ public class Pair<F, S>
     return result;
   }
   
+  @Override
+  public int hashCode()
+  {
+    int result = 23;
+    if (first != null)
+    {
+      result = 17 * result + first.hashCode();
+    }
+    if (second != null)
+    {
+      result = 17 * result + second.hashCode();
+    }
+    
+    return result;
+  }
+  
   /**
    * Method that returns the first obj.
+   * 
+   * @return first value of type F
    */
   public F getFirst()
   {
@@ -62,6 +81,8 @@ public class Pair<F, S>
   
   /**
    * Method that returns the second obj.
+   * 
+   * @return second value of type S
    */
   public S getSecond()
   {
