@@ -36,6 +36,8 @@ public class SQLDatabase
    * <li>local database url
    * <li>local database username
    * <li>local database password
+   * 
+   * @param isOnline for determining to use local/online db
    */
   public SQLDatabase(final boolean isOnline)
   {
@@ -88,6 +90,13 @@ public class SQLDatabase
     }
   }
 
+  /**
+   * Valued Constructor.
+   * 
+   * @param url
+   * @param username
+   * @param password
+   */
   public SQLDatabase(final String url, final String username, final String password)
   {
     try
