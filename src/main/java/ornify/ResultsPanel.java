@@ -20,8 +20,14 @@ import javax.swing.JTextPane;
 public class ResultsPanel extends CustomPanel implements ActionListener
 {
   public static final boolean IS_ONLINE = true;
-  protected JButton restartButton = new JButton("Yes");
-  protected JButton tryAnotherButton = new JButton("Try another?");
+  
+  protected String verdana = "Verdana";
+  protected String no = "No";
+  protected String yes = "Yes";
+  protected String another = "Try another?";
+  
+  protected JButton restartButton = new JButton(yes);
+  protected JButton tryAnotherButton = new JButton(another);
   protected QueryBuilder qb = new QueryBuilder();
   protected String matchesText;
   protected JTextPane textPane = new JTextPane();
@@ -64,7 +70,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     textPane.setPreferredSize(new Dimension(200, 50));
     restartButton.setPreferredSize(new Dimension(100, 30));
     yesNoPanel.setLayout(new FlowLayout());
-    super.nextButton.setText("No");
+    super.nextButton.setText(no);
     yesNoPanel.add(super.nextButton);
     yesNoPanel.add(this.restartButton);
     comboGridPanel.setLayout(new BoxLayout(comboGridPanel, BoxLayout.Y_AXIS));
@@ -103,45 +109,58 @@ public class ResultsPanel extends CustomPanel implements ActionListener
    */
   @Override public void actionPerformed(final ActionEvent e)
   {
-    switch (e.getActionCommand())
+    String action = e.getActionCommand();
+    
+    if (action.equals("Return"))
     {
-      case "Return":
-        this.baseApp.handleReturn();
-        break;
-      case "No":
-        this.handleNext();
-        break;
-      case "Yes":
-        populateEndResult();
-        this.restartButton.setText("Loading please wait...");
-        set = null;
-        if (browserOverlay == null)
-        {
-          browserOverlay = new WebDisplayPanel(ba);
-          System.out.println("Created a new browser!");
-        }
-        else
-        {
-          browserOverlay.refresh();
-          System.out.println("Refreshed browser!");
-        }
-        this.restartButton.setText("Yes");
-        break;
-      case "Try another?":
-        super.controlPanel.add(super.returnButton);
-        super.controlPanel.add(super.nextButton);
-        super.controlPanel.add(restartButton);
-        super.controlPanel.remove(tryAnotherButton);
-        super.text.setFont(new Font("Verdana", Font.BOLD, 30));
-        super.text.setText("Is this your bird?");
-      case "Start over?":
-        set = null;
-        this.restartButton.setText("Yes");
-        this.baseApp.handleRestart();
-        break;
-      default:
-        break;
+      this.baseApp.handleReturn();
     }
+    else if (action.equals(no))
+    {
+      this.handleNext();
+    }
+    else if (action.equals(yes))
+    {
+      populateEndResult();
+      this.restartButton.setText("Loading please wait...");
+      set = null;
+      if (browserOverlay == null)
+      {
+        browserOverlay = new WebDisplayPanel(ba);
+        System.out.println("Created a new browser!");
+      }
+      else
+      {
+        browserOverlay.refresh();
+        System.out.println("Refreshed browser!");
+      }
+      this.restartButton.setText(yes);
+    }
+    else if (action.equals(another))
+    {
+      super.controlPanel.add(super.returnButton);
+      super.controlPanel.add(super.nextButton);
+      super.controlPanel.add(restartButton);
+      super.controlPanel.remove(tryAnotherButton);
+      super.text.setFont(new Font(verdana, Font.BOLD, 30));
+      super.text.setText("Is this your bird?");
+      
+      restart();
+    }
+    else if (action.equals("Start over?"))
+    {
+      restart();
+    }
+  }
+  
+  /**
+   * Method that restarts the application.
+   */
+  private void restart()
+  {
+    set = null;
+    this.restartButton.setText(yes);
+    this.baseApp.handleRestart();
   }
 
   /**
@@ -159,7 +178,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     {
       if (!set.isBeforeFirst())
       {
-        super.text.setFont(new Font("Verdana", Font.BOLD, 20));
+        super.text.setFont(new Font(verdana, Font.BOLD, 20));
         super.text.setText("Oops! That bird doesn't seem to exist.");
         this.textPane.setText("Doesn't exist");
         super.image.setIcon(ImageReader.downloadImage("https://i.redd.it/thlztdwby2ub1.jpg"));
