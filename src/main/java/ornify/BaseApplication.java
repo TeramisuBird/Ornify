@@ -128,8 +128,8 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.remove(curPanel);
     index = 0;
     isLastPanel = false;
-    Model.selections[1] = "";
-    Model.selections[7] = "";
+    Model.getSelections()[1] = "";
+    Model.getSelections()[7] = "";
     Model.endResult = new ArrayList<String>();
     curPanel = panels.get(index);
     curPanel.setVisible(true);

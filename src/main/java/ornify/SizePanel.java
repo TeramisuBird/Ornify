@@ -76,11 +76,11 @@ public class SizePanel extends CustomPanel
         this.baseApp.handleNext();
         break;
       default:
-        int index = Model.selectionIndicies.get("size");
+        int index = Model.getIndicies().get("size");
         super.setChoice(buttons, e.getActionCommand());
         this.currentOption = e.getActionCommand();
-        Model.picked[index] = true;
-        Model.selections[index] = "(size = '" + this.currentOption.toLowerCase() + "')";
+        Model.getPicked()[index] = true;
+        Model.getSelections()[index] = "(size = '" + this.currentOption.toLowerCase() + "')";
         break;
     }
   }

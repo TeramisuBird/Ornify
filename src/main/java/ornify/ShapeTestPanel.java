@@ -106,104 +106,104 @@ public class ShapeTestPanel extends Visualization implements MouseListener
         switch (region)
         {
           case "crown":
-            if (index >= Model.crownColor.size())
+            if (index >= Model.getCrownColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.crownColor.get(index).getSecond();
-            colorName = Model.crownColor.get(index).getFirst();
+            newPaint = Model.getCrownColors().get(index).getSecond();
+            colorName = Model.getCrownColors().get(index).getFirst();
             break;
           case "supercilium":
-            if (index >= Model.superColor.size())
+            if (index >= Model.getSuperColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.superColor.get(index).getSecond();
-            colorName = Model.superColor.get(index).getFirst();
+            newPaint = Model.getSuperColors().get(index).getSecond();
+            colorName = Model.getSuperColors().get(index).getFirst();
             break;
           case "eyestripe":
-            if (index >= Model.eyestripeColor.size())
+            if (index >= Model.getEyestrColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.eyestripeColor.get(index).getSecond();
-            colorName = Model.eyestripeColor.get(index).getFirst();
+            newPaint = Model.getEyestrColors().get(index).getSecond();
+            colorName = Model.getEyestrColors().get(index).getFirst();
             break;
           case "auriculars":
-            if (index >= Model.auricColor.size())
+            if (index >= Model.getAuricColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.auricColor.get(index).getSecond();
-            colorName = Model.auricColor.get(index).getFirst();
+            newPaint = Model.getAuricColors().get(index).getSecond();
+            colorName = Model.getAuricColors().get(index).getFirst();
             break;
           case BEAK:
-            if (index >= Model.beakColor.size())
+            if (index >= Model.getBeakColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.beakColor.get(index).getSecond();
-            colorName = Model.beakColor.get(index).getFirst();
+            newPaint = Model.getBeakColors().get(index).getSecond();
+            colorName = Model.getBeakColors().get(index).getFirst();
             break;
           case "throat":
-            if (index >= Model.throatColor.size())
+            if (index >= Model.getThroatColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.throatColor.get(index).getSecond();
-            colorName = Model.throatColor.get(index).getFirst();
+            newPaint = Model.getThroatColors().get(index).getSecond();
+            colorName = Model.getThroatColors().get(index).getFirst();
             break;
           case "breast":
-            if (index >= Model.breastColor.size())
+            if (index >= Model.getBreastColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.breastColor.get(index).getSecond();
-            colorName = Model.breastColor.get(index).getFirst();
+            newPaint = Model.getBreastColors().get(index).getSecond();
+            colorName = Model.getBreastColors().get(index).getFirst();
             break;
           case "coverts":
-            if (index >= Model.covertColor.size())
+            if (index >= Model.getCovertColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.covertColor.get(index).getSecond();
-            colorName = Model.covertColor.get(index).getFirst();
+            newPaint = Model.getCovertColors().get(index).getSecond();
+            colorName = Model.getCovertColors().get(index).getFirst();
             break;
           case "wing":
-            if (index >= Model.wingColor.size())
+            if (index >= Model.getWingColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.wingColor.get(index).getSecond();
-            colorName = Model.wingColor.get(index).getFirst();
+            newPaint = Model.getWingColors().get(index).getSecond();
+            colorName = Model.getWingColors().get(index).getFirst();
             break;
           case FOOT:
-            if (index >= Model.footColor.size())
+            if (index >= Model.getFootColors().size())
             {
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.footColor.get(index).getSecond();
-            colorName = Model.footColor.get(index).getFirst();
+            newPaint = Model.getFootColors().get(index).getSecond();
+            colorName = Model.getFootColors().get(index).getFirst();
             break;
           default:
             System.out.println("Unknown Bird Region - SHOULD NOT REACH");
@@ -217,14 +217,14 @@ public class ShapeTestPanel extends Visualization implements MouseListener
 
         if (index == 0)
         {
-          Model.picked[Model.selectionIndicies.get(region + add)] = false;
+          Model.getPicked()[Model.getIndicies().get(region + add)] = false;
         }
         else
         {
-          Model.picked[Model.selectionIndicies.get(region + add)] = true;
+          Model.getPicked()[Model.getIndicies().get(region + add)] = true;
 
           String text = region + "='" + colorName + "'";
-          Model.selections[Model.selectionIndicies.get(region)] = text;
+          Model.getSelections()[Model.getIndicies().get(region)] = text;
         }
 
         if (newPaint == null)

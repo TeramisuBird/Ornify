@@ -39,23 +39,6 @@ public class Model
   public static JLayeredPane overlay = null;
   public static ArrayList<String> endResult = new ArrayList<String>();
 
-  public static ArrayList<Pair<String, Color>> beakColor = new ArrayList<Pair<String, Color>>();
-  public static ArrayList<Pair<String, Color>> crownColor = new ArrayList<Pair<String, Color>>();
-  public static ArrayList<Pair<String, Color>> superColor = new ArrayList<Pair<String, Color>>();
-  public static ArrayList<Pair<String, Color>> eyestripeColor 
-      = new ArrayList<Pair<String, Color>>();
-  public static ArrayList<Pair<String, Color>> auricColor = new ArrayList<Pair<String, Color>>();
-  public static ArrayList<Pair<String, Color>> throatColor = new ArrayList<Pair<String, Color>>();
-  public static ArrayList<Pair<String, Color>> breastColor = new ArrayList<Pair<String, Color>>();
-  public static ArrayList<Pair<String, Color>> wingColor = new ArrayList<Pair<String, Color>>();
-  public static ArrayList<Pair<String, Color>> covertColor = new ArrayList<Pair<String, Color>>();
-  public static ArrayList<Pair<String, Color>> footColor = new ArrayList<Pair<String, Color>>();
-
-  public static HashMap<String, Integer> selectionIndicies = new HashMap<String, Integer>();
-
-  public static boolean[] picked = new boolean[15];
-  public static String[] selections = new String[15];
-
   // Images for seasons animation
   public static final Image BUG_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Bug.png"),
       50, 50);
@@ -138,6 +121,24 @@ public class Model
       .resizeImage(ImageReader.readBuffered("Probing.png"), BEAK_X, BEAK_Y);
   public static final Image[] BEAK_IMAGES = {CONE_IMAGE, CHISEL_IMAGE, POINTY_IMAGE, HOOKED_IMAGE,
       FLAT_IMAGE, PROBING_IMAGE};
+  
+  private static ArrayList<Pair<String, Color>> beakColor = new ArrayList<Pair<String, Color>>();
+  private static ArrayList<Pair<String, Color>> crownColor = new ArrayList<Pair<String, Color>>();
+  private static ArrayList<Pair<String, Color>> superColor = new ArrayList<Pair<String, Color>>();
+  private static ArrayList<Pair<String, Color>> eyestripeColor 
+      = new ArrayList<Pair<String, Color>>();
+  private static ArrayList<Pair<String, Color>> auricColor = new ArrayList<Pair<String, Color>>();
+  private static ArrayList<Pair<String, Color>> throatColor = new ArrayList<Pair<String, Color>>();
+  private static ArrayList<Pair<String, Color>> breastColor = new ArrayList<Pair<String, Color>>();
+  private static ArrayList<Pair<String, Color>> wingColor = new ArrayList<Pair<String, Color>>();
+  private static ArrayList<Pair<String, Color>> covertColor = new ArrayList<Pair<String, Color>>();
+  private static ArrayList<Pair<String, Color>> footColor = new ArrayList<Pair<String, Color>>();
+  
+  private static boolean[] picked = new boolean[15];
+  
+  private static HashMap<String, Integer> selectionIndicies = new HashMap<String, Integer>();
+  
+  private static String[] selections = new String[15];
 
   /**
    * static constructor.
@@ -268,4 +269,135 @@ public class Model
     selectionIndicies.put("foot_shape", 13);
     selectionIndicies.put("foot_color", 14);
   }
+  
+  /**
+   * get auricular colors.
+   * 
+   * @return array of beak auricular options
+   */
+  public static ArrayList<Pair<String, Color>> getAuricColors()
+  {
+    return Model.auricColor;
+  }
+  
+  /**
+   * get beak colors.
+   * 
+   * @return array of beak color options
+   */
+  public static ArrayList<Pair<String, Color>> getBeakColors()
+  {
+    return Model.beakColor;
+  }
+  
+  /**
+   * get breast colors.
+   * 
+   * @return array of breast color options
+   */
+  public static ArrayList<Pair<String, Color>> getBreastColors()
+  {
+    return Model.breastColor;
+  }
+  
+  /**
+   * get covert colors.
+   * 
+   * @return array of covert color options
+   */
+  public static ArrayList<Pair<String, Color>> getCovertColors()
+  {
+    return Model.covertColor;
+  }
+  
+  /**
+   * get crown colors.
+   * 
+   * @return array of crown color options
+   */
+  public static ArrayList<Pair<String, Color>> getCrownColors()
+  {
+    return Model.crownColor;
+  }
+  
+  /**
+   * get eyestripe colors.
+   * 
+   * @return array of eyestripe color options
+   */
+  public static ArrayList<Pair<String, Color>> getEyestrColors()
+  {
+    return Model.eyestripeColor;
+  }
+  
+  /**
+   * get foot colors.
+   * 
+   * @return array of foot color options
+   */
+  public static ArrayList<Pair<String, Color>> getFootColors()
+  {
+    return Model.beakColor;
+  }
+
+  /**
+   * SelectionIndicies HashMap getter.
+   * 
+   * @return hashMap of Indicies & their name
+   */
+  public static HashMap<String, Integer> getIndicies()
+  {
+    return Model.selectionIndicies;
+  }
+  
+  /**
+   * get boolean array for option selected.
+   * 
+   * @return array of booleans
+   */
+  public static boolean[] getPicked()
+  {
+    return Model.picked;
+  }
+  
+  /**
+   * get string array of user selections.
+   * 
+   * @return array of selections
+   */
+  public static String[] getSelections()
+  {
+    return Model.selections;
+  }
+  
+  /**
+   * get supercilium colors.
+   * 
+   * @return array of supercilium color options
+   */
+  public static ArrayList<Pair<String, Color>> getSuperColors()
+  {
+    return Model.superColor;
+  }
+  
+  /**
+   * get throat colors.
+   * 
+   * @return array of throat color options
+   */
+  public static ArrayList<Pair<String, Color>> getThroatColors()
+  {
+    return Model.throatColor;
+  }
+  
+  /**
+   * get wing colors.
+   * 
+   * @return array of wing color options
+   */
+  public static ArrayList<Pair<String, Color>> getWingColors()
+  {
+    return Model.footColor;
+  }
+  
 }

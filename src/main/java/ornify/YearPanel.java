@@ -105,13 +105,13 @@ public class YearPanel extends CustomPanel
       default:
         super.setChoice(buttons, e.getActionCommand());
         getChoice(e.getActionCommand());
-        int index = Model.selectionIndicies.get("season");
+        int index = Model.getIndicies().get("season");
         if (currentOption != null)
         {
-          Model.picked[index] = true;
+          Model.getPicked()[index] = true;
           String queryText = "(season = 'all-year' or season = '" 
               + currentOption.toLowerCase() + "')";
-          Model.selections[index] = queryText;
+          Model.getSelections()[index] = queryText;
         }
         break;
     }

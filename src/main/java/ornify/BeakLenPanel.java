@@ -104,9 +104,9 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     super.comboPanel.add(slider);
     super.comboPanel.add(value);
 
-    int index = Model.selectionIndicies.get(BEAK_LEN);
-    Model.picked[index] = true;
-    Model.selections[index] = "";
+    int index = Model.getIndicies().get(BEAK_LEN);
+    Model.getPicked()[index] = true;
+    Model.getSelections()[index] = "";
   }
 
   /**
@@ -160,8 +160,8 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
       size = LONG;
     }
 
-    int index = Model.selectionIndicies.get(BEAK_LEN);
-    Model.selections[index] = "(beak_length ='" + size.toLowerCase() + "')";
+    int index = Model.getIndicies().get(BEAK_LEN);
+    Model.getSelections()[index] = "(beak_length ='" + size.toLowerCase() + "')";
 
     value.setText("The current value is: " + size);
     val = val / 100;

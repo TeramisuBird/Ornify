@@ -28,9 +28,9 @@ public class QueryBuilder
     boolean firstSelection = true;
 
     // Checks for zero selections.
-    for (int i = 0; i < Model.selections.length; i++)
+    for (int i = 0; i < Model.getSelections().length; i++)
     {
-      if (Model.selections[i] == null || Model.selections[i].isBlank())
+      if (Model.getSelections()[i] == null || Model.getSelections()[i].isBlank())
       {
         emptySelections++;
       }
@@ -41,13 +41,13 @@ public class QueryBuilder
     }
 
     // Must have some selection.
-    for (String s : Model.selectionIndicies.keySet())
+    for (String s : Model.getIndicies().keySet())
     {
-      int index = Model.selectionIndicies.get(s);
+      int index = Model.getIndicies().get(s);
 
-      if (Model.picked[index])
+      if (Model.getPicked()[index])
       {
-        String chunk = Model.selections[index];
+        String chunk = Model.getSelections()[index];
 
         if (chunk == null || chunk.isBlank())
         {
