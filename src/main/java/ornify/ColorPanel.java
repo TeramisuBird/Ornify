@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
  */
 public class ColorPanel extends CustomPanel
 {
-
   /**
    * Panel constructor.
    * 
@@ -40,8 +39,11 @@ public class ColorPanel extends CustomPanel
     super.getPanel().add(shapePanel.getView());
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  /**
+   * Method that checks for the action performed.
+   * @param e the action
+   */
+  @Override public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {

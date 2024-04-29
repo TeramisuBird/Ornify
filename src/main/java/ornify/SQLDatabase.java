@@ -22,6 +22,9 @@ public class SQLDatabase
   private final String SECRET_FILEPATH = "sql_secret.txt";
   private Connection connection;
 
+  /**
+   * Constructor.
+   */
   public SQLDatabase()
   {
     this(false);

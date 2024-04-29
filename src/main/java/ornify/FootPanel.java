@@ -59,8 +59,11 @@ public class FootPanel extends CustomPanel
     return currentOption;
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  /**
+   * Method that checks for an action performed.
+   * @param e the action
+   */
+  @Override public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {

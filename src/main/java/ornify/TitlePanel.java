@@ -19,12 +19,14 @@ import javax.swing.SwingConstants;
 public class TitlePanel implements ActionListener
 {
   private static final String HTML = "<html><body style='width: %1spx'>%1s";
-  public JButton startButton = new JButton("Start");
-  public JLabel titleText = new JLabel(" ");
-  public JLabel image = new JLabel(" ");
-  public JPanel panel = new JPanel();
-  public JPanel controlPanel = new JPanel();
-  public BaseApplication baseApp;
+  
+  private String start = "Start";
+  private JButton startButton = new JButton(start);
+  private JLabel titleText = new JLabel(" ");
+  private JLabel image = new JLabel("");
+  private JPanel panel = new JPanel();
+  private JPanel controlPanel = new JPanel();
+  private BaseApplication baseApp;
 
   /**
    * Panel Constructor.
@@ -34,7 +36,7 @@ public class TitlePanel implements ActionListener
    * @param ba
    *          for application to add panel to
    */
-  public TitlePanel(String title, BaseApplication ba)
+  public TitlePanel(final String title, final BaseApplication ba)
   {
     this.baseApp = ba;
     this.panel.setLayout(new BorderLayout());
@@ -69,16 +71,15 @@ public class TitlePanel implements ActionListener
     return this.panel;
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e)
+  /**
+   * Method that checks for action performed.
+   * @param e the action
+   */
+  @Override public void actionPerformed(final ActionEvent e)
   {
-    switch (e.getActionCommand())
+    if (e.getActionCommand().equals(start))
     {
-      case "Start":
-        this.baseApp.handleStart();
-        break;
-      default:
-        break;
+      this.baseApp.handleStart();
     }
   }
 }

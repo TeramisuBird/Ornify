@@ -25,7 +25,12 @@ public class YearPanel extends CustomPanel
   private FallingSprite[] items;
   
   private JButton[] buttons;
-  private final String[] seasons = {"Autumn", "Winter", "Spring", "Summer"};
+  
+  private String autumn = "Autumn";
+  private String winter = "Winter";
+  private String spring = "Spring";
+  private String summer = "Summer";
+  private final String[] seasons = {autumn, winter, spring, summer};
 
   /**
    * Panel constructor.
@@ -33,7 +38,7 @@ public class YearPanel extends CustomPanel
    * @param question for panel's question
    * @param ba for application to add panel to
    */
-  public YearPanel(String question, BaseApplication ba)
+  public YearPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
     super.questionPanel.remove(super.image);
@@ -74,7 +79,7 @@ public class YearPanel extends CustomPanel
   }
   
   /**
-   * getter for user's current selection
+   * getter for user's current selection.
    * 
    * @return currentOption
    */
@@ -83,8 +88,11 @@ public class YearPanel extends CustomPanel
     return currentOption;
   }
   
-  @Override
-  public void actionPerformed(ActionEvent e)
+  /**
+   * Method that checks for action performed.
+   * @param e the action
+   */
+  @Override public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {
@@ -101,7 +109,8 @@ public class YearPanel extends CustomPanel
         if (currentOption != null)
         {
           Model.picked[index] = true;
-          String queryText = "(season = 'all-year' or season = '" + currentOption.toLowerCase() + "')";
+          String queryText = "(season = 'all-year' or season = '" 
+              + currentOption.toLowerCase() + "')";
           Model.selections[index] = queryText;
         }
         break;
@@ -109,34 +118,32 @@ public class YearPanel extends CustomPanel
   }
   
   /**
-   * get corresponding text for the user's selection
+   * get corresponding text for the user's selection.
    * 
    * @param type for user visible selection
    */
-  private void getChoice(String type)
+  private void getChoice(final String type)
   {
-    switch (type)
+    String mig = "Migration";
+    if (type.equals(autumn))
     {
-      case "Spring":
-        curImage = Model.RAIN_IMAGE;
-        currentOption = "Migration";
-        break;
-      case "Autumn":
-        curImage = Model.LEAF_IMAGE;
-        currentOption = "Migration";
-        break;
-      case "Winter":
-        curImage = Model.SNOW_IMAGE;
-        currentOption = "Non-Breeding";
-        break;
-      case "Summer":
-        curImage = Model.BUG_IMAGE;
-        currentOption = "Breeding";
-        break;
-      default:
-        System.out.println("unreachable");
-        curImage = null;
-        break;
+      curImage = Model.LEAF_IMAGE;
+      currentOption = mig;
+    }
+    else if (type.equals(winter))
+    {
+      curImage = Model.SNOW_IMAGE;
+      currentOption = "Non-Breeding";
+    }
+    else if (type.equals(spring))
+    {
+      curImage = Model.RAIN_IMAGE;
+      currentOption = mig;
+    }
+    else if (type.equals(summer))
+    {
+      curImage = Model.BUG_IMAGE;
+      currentOption = "Breeding";
     }
     
     if (curImage != null)

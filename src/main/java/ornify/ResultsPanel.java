@@ -14,18 +14,21 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
+/** 
+ * Class that creates a results panel.
+ */
 public class ResultsPanel extends CustomPanel implements ActionListener
 {
   public static final boolean IS_ONLINE = true;
-
+  protected JButton restartButton = new JButton("Yes");
+  protected JButton tryAnotherButton = new JButton("Try another?");
+  protected QueryBuilder qb = new QueryBuilder();
+  protected String matchesText;
+  protected JTextPane textPane = new JTextPane();
+  
   private SQLDatabase db;
-  public JTextPane textPane = new JTextPane();
   private JPanel yesNoPanel = new JPanel();
   private JPanel comboGridPanel = new JPanel();
-  public JButton restartButton = new JButton("Yes");
-  public JButton tryAnotherButton = new JButton("Try another?");
-  public QueryBuilder qb = new QueryBuilder();
-  public String matchesText;
   private BaseApplication ba;
   private WebDisplayPanel browserOverlay;
 
@@ -33,6 +36,29 @@ public class ResultsPanel extends CustomPanel implements ActionListener
   private ResultSetMetaData meta;
   private int columnCount = 3;
 
+  /**
+   * Constructor.
+   * @param question
+   * @param ba
+   */
+  public ResultsPanel(final String question, final BaseApplication ba)
+  {
+    super(question, ba);
+
+    this.tryAnotherButton.addActionListener(this);
+    this.returnButton.addActionListener(this);
+    this.nextButton.addActionListener(this);
+    this.restartButton.addActionListener(this);
+
+    configureResults();
+
+    this.db = new SQLDatabase(IS_ONLINE);
+    this.ba = ba;
+  }
+  
+  /**
+   * Method that configures the results.
+   */
   private void configureResults()
   {
     textPane.setPreferredSize(new Dimension(200, 50));
@@ -48,22 +74,9 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     super.controlPanel.remove(nextButton);
   }
 
-  public ResultsPanel(final String question, final BaseApplication ba)
-  {
-    super(question, ba);
-
-    this.tryAnotherButton.addActionListener(this);
-    this.returnButton.addActionListener(this);
-    this.nextButton.addActionListener(this);
-    this.restartButton.addActionListener(this);
-
-    configureResults();
-
-    this.db = new SQLDatabase(IS_ONLINE);
-    this.ba = ba;
-
-  }
-
+  /**
+   * Method that populates the results.
+   */
   private void populateEndResult()
   {
     try
@@ -84,8 +97,11 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     }
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  /**
+   * Method that checks for action performed.
+   * @param e the action
+   */
+  @Override public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {
@@ -128,6 +144,9 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     }
   }
 
+  /**
+   * Method that builds the results.
+   */
   protected void buildResults()
   {
     String query = qb.buildQuery();
@@ -160,11 +179,18 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     handleNext();
   }
 
+  /**
+   * Method that gets the panel.
+   * @return the panel
+   */
   public JPanel getPanel()
   {
     return this.panel;
   }
 
+  /**
+   * Method that handles the next transition.
+   */
   protected void handleNext()
   {
     if (set != null)

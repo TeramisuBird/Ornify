@@ -12,8 +12,8 @@ package ornify;
  */
 public class Pair<F, S>
 {
-  public F first;
-  public S second;
+  private F first;
+  private S second;
 
   /**
    * Pair constructor.
@@ -29,8 +29,12 @@ public class Pair<F, S>
     this.second = second;
   }
 
-  @Override
-  public boolean equals(final Object obj)
+  /**
+   * Method that checks for equality.
+   * @param obj
+   * @return the equality
+   */
+  @Override public boolean equals(final Object obj)
   {
     boolean result = false;
     if (obj == this)
@@ -46,5 +50,21 @@ public class Pair<F, S>
     }
 
     return result;
+  }
+  
+  /**
+   * Method that returns the first obj.
+   */
+  public F getFirst()
+  {
+    return first;
+  }
+  
+  /**
+   * Method that returns the second obj.
+   */
+  public S getSecond()
+  {
+    return second;
   }
 }

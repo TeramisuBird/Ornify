@@ -21,15 +21,18 @@ public class CustomPanel implements ActionListener
 {
   private static final String HTML = "<html><body style='width: %1spx'>%1s";
 
-  public JButton nextButton = new JButton("Next");
-  public JButton returnButton = new JButton("Return");
-  public JLabel text = new JLabel(" ");
-  public JLabel image = new JLabel(" ");
-  public JPanel panel = new JPanel();
-  public JPanel questionPanel = new JPanel();
-  public JPanel comboPanel = new JPanel();
-  public JPanel controlPanel = new JPanel();
-  public BaseApplication baseApp;
+  protected String next = "Next";
+  protected String ret = "Return";
+  
+  protected JButton nextButton = new JButton(next);
+  protected JButton returnButton = new JButton(ret);
+  protected JLabel text = new JLabel(" ");
+  protected JLabel image = new JLabel("");
+  protected JPanel panel = new JPanel();
+  protected JPanel questionPanel = new JPanel();
+  protected JPanel comboPanel = new JPanel();
+  protected JPanel controlPanel = new JPanel();
+  protected BaseApplication baseApp;
 
   /**
    * Super-class constructor for panels.
@@ -85,19 +88,19 @@ public class CustomPanel implements ActionListener
     return this.panel;
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  /**
+   * Method that checks for an action performed.
+   * @param e the action
+   */
+  @Override public void actionPerformed(final ActionEvent e)
   {
-    switch (e.getActionCommand())
+    if (e.getActionCommand().equals(next))
     {
-      case "Return":
-        this.baseApp.handleReturn();
-        break;
-      case "Next":
-        this.baseApp.handleNext();
-        break;
-      default:
-        break;
+      this.baseApp.handleNext();
+    }
+    else if (e.getActionCommand().equals(ret))
+    {
+      this.baseApp.handleReturn();
     }
   }
 

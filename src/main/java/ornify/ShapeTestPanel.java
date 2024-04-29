@@ -75,7 +75,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     Content con = new Content();
     String constReg1 = "full_bird";
     String constReg2 = "eyehole";
-    Polygon poly = this.colorIndex.get(constReg1).first;
+    Polygon poly = this.colorIndex.get(constReg1).getFirst();
 
     con.setShape(poly);
     con.setColor(new Color(180, 167, 214));
@@ -83,7 +83,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     this.add(con);
 
     con = new Content();
-    poly = this.colorIndex.get(constReg2).first;
+    poly = this.colorIndex.get(constReg2).getFirst();
     con.setShape(poly);
     con.setColor(new Color(180, 167, 214));
     con.setPaint(new Color(172, 91, 91));
@@ -94,8 +94,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
       if (!region.equals(constReg1) && !region.equals(constReg2))
       {
         con = new Content();
-        poly = this.colorIndex.get(region).first;
-        int index = this.colorIndex.get(region).second;
+        poly = this.colorIndex.get(region).getFirst();
+        int index = this.colorIndex.get(region).getSecond();
 
         con.setShape(poly);
         con.setColor(new Color(180, 167, 214));
@@ -112,8 +112,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.crownColor.get(index).second;
-            colorName = Model.crownColor.get(index).first;
+            newPaint = Model.crownColor.get(index).getSecond();
+            colorName = Model.crownColor.get(index).getFirst();
             break;
           case "supercilium":
             if (index >= Model.superColor.size())
@@ -122,8 +122,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.superColor.get(index).second;
-            colorName = Model.superColor.get(index).first;
+            newPaint = Model.superColor.get(index).getSecond();
+            colorName = Model.superColor.get(index).getFirst();
             break;
           case "eyestripe":
             if (index >= Model.eyestripeColor.size())
@@ -132,8 +132,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.eyestripeColor.get(index).second;
-            colorName = Model.eyestripeColor.get(index).first;
+            newPaint = Model.eyestripeColor.get(index).getSecond();
+            colorName = Model.eyestripeColor.get(index).getFirst();
             break;
           case "auriculars":
             if (index >= Model.auricColor.size())
@@ -142,8 +142,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.auricColor.get(index).second;
-            colorName = Model.auricColor.get(index).first;
+            newPaint = Model.auricColor.get(index).getSecond();
+            colorName = Model.auricColor.get(index).getFirst();
             break;
           case BEAK:
             if (index >= Model.beakColor.size())
@@ -152,8 +152,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.beakColor.get(index).second;
-            colorName = Model.beakColor.get(index).first;
+            newPaint = Model.beakColor.get(index).getSecond();
+            colorName = Model.beakColor.get(index).getFirst();
             break;
           case "throat":
             if (index >= Model.throatColor.size())
@@ -162,8 +162,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.throatColor.get(index).second;
-            colorName = Model.throatColor.get(index).first;
+            newPaint = Model.throatColor.get(index).getSecond();
+            colorName = Model.throatColor.get(index).getFirst();
             break;
           case "breast":
             if (index >= Model.breastColor.size())
@@ -172,8 +172,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.breastColor.get(index).second;
-            colorName = Model.breastColor.get(index).first;
+            newPaint = Model.breastColor.get(index).getSecond();
+            colorName = Model.breastColor.get(index).getFirst();
             break;
           case "coverts":
             if (index >= Model.covertColor.size())
@@ -182,8 +182,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.covertColor.get(index).second;
-            colorName = Model.covertColor.get(index).first;
+            newPaint = Model.covertColor.get(index).getSecond();
+            colorName = Model.covertColor.get(index).getFirst();
             break;
           case "wing":
             if (index >= Model.wingColor.size())
@@ -192,8 +192,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.wingColor.get(index).second;
-            colorName = Model.wingColor.get(index).first;
+            newPaint = Model.wingColor.get(index).getSecond();
+            colorName = Model.wingColor.get(index).getFirst();
             break;
           case FOOT:
             if (index >= Model.footColor.size())
@@ -202,8 +202,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
 
-            newPaint = Model.footColor.get(index).second;
-            colorName = Model.footColor.get(index).first;
+            newPaint = Model.footColor.get(index).getSecond();
+            colorName = Model.footColor.get(index).getFirst();
             break;
           default:
             System.out.println("Unknown Bird Region - SHOULD NOT REACH");
@@ -237,8 +237,11 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     }
   }
 
-  @Override
-  public void mouseClicked(final MouseEvent e)
+  /**
+   * Method that checks for when mouse is clicked.
+   * @param e the click
+   */
+  @Override public void mouseClicked(final MouseEvent e)
   {
     int xPos = e.getX();
     int yPos = e.getY();
@@ -250,7 +253,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
       if (p.contains(mousePosition))
       {
         String name = this.shapes.get(p);
-        int oldIndex = this.colorIndex.get(name).second;
+        int oldIndex = this.colorIndex.get(name).getSecond();
         Pair<Polygon, Integer> newPair = new Pair<>(p, oldIndex + 1);
         this.colorIndex.put(name, newPair);
         // System.out.println(name);
@@ -260,26 +263,38 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     }
   }
 
-  @Override
-  public void mousePressed(final MouseEvent e)
+  /**
+   * Method that checks for when mouse is clicked down.
+   * @param e the event
+   */
+  @Override public void mousePressed(final MouseEvent e)
   {
 
   }
 
-  @Override
-  public void mouseReleased(final MouseEvent e)
+  /**
+   * Method that checks when the mouse button is released.
+   * @param e the event
+   */
+  @Override public void mouseReleased(final MouseEvent e)
   {
 
   }
 
-  @Override
-  public void mouseEntered(final MouseEvent e)
+  /**
+   * Method that checks when the mouse enters an object.
+   * @param e the event
+   */
+  @Override public void mouseEntered(final MouseEvent e)
   {
 
   }
 
-  @Override
-  public void mouseExited(final MouseEvent e)
+  /**
+   * Method that checks when the mouse exits an object.
+   * @param e the event
+   */
+  @Override public void mouseExited(final MouseEvent e)
   {
 
   }

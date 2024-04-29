@@ -118,8 +118,11 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     return currentOption;
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  /**
+   * Method that checks for an action performed.
+   * @param e the action
+   */
+  @Override public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {
@@ -134,8 +137,11 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     }
   }
 
-  @Override
-  public void stateChanged(final ChangeEvent e)
+  /**
+   * Method that checks when the state is changed.
+   * @param e the state
+   */
+  @Override public void stateChanged(final ChangeEvent e)
   {
     float val = slider.getValue();
     String size = "";

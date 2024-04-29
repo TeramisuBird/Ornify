@@ -184,8 +184,10 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.repaint();
   }
 
-  @Override
-  public void init()
+  /**
+   * Method that initializes the application.
+   */
+  @Override public void init()
   {
     System.out.println("Entering init...");
     // Add the panel to the main window
