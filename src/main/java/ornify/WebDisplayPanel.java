@@ -5,22 +5,35 @@ import java.awt.Dimension;
 
 import javax.swing.JLayeredPane;
 
+/**
+ * Class for displaying the web panel.
+ */
 public class WebDisplayPanel
 {
   BaseApplication baseApp;
+  
+  private String over = "/overview";
+  private String url = "https://www.allaboutbirds.org/guide/";
 
-  public WebDisplayPanel(BaseApplication ba)
+  /**
+   * Constructor.
+   * @param ba
+   */
+  public WebDisplayPanel(final BaseApplication ba)
   {
     this.baseApp = ba;
     initialize();
   }
 
+  /**
+   * Method to initialize the panel.
+   */
   public void initialize()
   {
     if (Model.endResult.get(2) != null)
     {
-      WebBrowser.infoURL = "https://www.allaboutbirds.org/guide/" + Model.endResult.get(0)
-          + "/overview";
+      WebBrowser.infoURL = url + Model.endResult.get(0)
+          + over;
       WebBrowser.soundURL = WebBrowser.getiframe(Model.endResult.get(2));
       Model.browser = new WebBrowser(WebBrowser.soundURL, baseApp);
       Model.overlay = baseApp.getLayeredPane();
@@ -32,14 +45,17 @@ public class WebDisplayPanel
     }
   }
 
+  /**
+   * Method to refresh the panel.
+   */
   public void refresh()
   {
     if (Model.endResult.get(2) != null)
     {
       WebBrowser.linkButton.setText("Get more info");
       WebBrowser.isFirstPage = true;
-      WebBrowser.infoURL = "https://www.allaboutbirds.org/guide/" + Model.endResult.get(0)
-          + "/overview";
+      WebBrowser.infoURL = url + Model.endResult.get(0)
+          + over;
       WebBrowser.soundURL = WebBrowser.getiframe(Model.endResult.get(2));
       Model.browser.browse(WebBrowser.soundURL);
       Model.overlay = baseApp.getLayeredPane();

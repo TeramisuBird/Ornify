@@ -34,8 +34,7 @@ public class Pair<F, S>
    * @param obj
    * @return the equality
    */
-  @Override
-  public boolean equals(final Object obj)
+  @Override public boolean equals(final Object obj)
   {
     boolean result = false;
     if (obj == this)
@@ -53,8 +52,11 @@ public class Pair<F, S>
     return result;
   }
   
-  @Override
-  public int hashCode()
+  /**
+   * Method that defines the hashCode.
+   * @return the integer of the hash
+   */
+  @Override  public int hashCode()
   {
     int result = 23;
     if (first != null)

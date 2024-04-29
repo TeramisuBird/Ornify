@@ -30,13 +30,17 @@ import javax.swing.JPanel;
  */
 public class WebBrowser extends JPanel
 {
-  public static String infoURL;
-  public static String soundURL;
-  public static int web_WIDTH;
-  public static int web_HEIGHT;
-  public static boolean isFirstPage = true;
+  protected static String infoURL;
+  protected static String soundURL;
+  protected static boolean isFirstPage = true;
+  
+  private static String info = "Get more info";
+  protected static JButton linkButton = new JButton(info);
+  
+  private static int web_WIDTH;
+  private static int web_HEIGHT;
   private static final long serialVersionUID = 5223405231958560665L;
-  public static JButton linkButton = new JButton("Get more info");
+  
   private JFXPanel jfxPanel;
   private JPanel controlPanel;
   private Stage stage;
@@ -52,17 +56,27 @@ public class WebBrowser extends JPanel
     this("http://www.google.com");
   }
 
-  public WebBrowser(String url, BaseApplication ba)
+  /**
+   * Constructor with parameters.
+   * @param url
+   * @param ba
+   */
+  public WebBrowser(final String url, final BaseApplication ba)
   {
     this(url);
     this.ba = ba;
   }
 
-  public WebBrowser(String url)
+  /**
+   * Constructor without the base application.
+   * @param url
+   */
+  public WebBrowser(final String url)
   {
     jfxPanel = new JFXPanel();
     Platform.setImplicitExit(false);
-    Model.thread = new Thread(() -> Platform.runLater(() -> {
+    Model.thread = new Thread(() -> Platform.runLater(() -> 
+    {
       stage = new Stage();
       stage.setResizable(true);
       Group root = new Group();
@@ -90,9 +104,10 @@ public class WebBrowser extends JPanel
    * @param url
    *          The url to go to.
    */
-  public void browse(String url)
+  public void browse(final String url)
   {
-    Platform.runLater(() -> {
+    Platform.runLater(() -> 
+    {
       engine.load(url);
     });
   }
@@ -102,8 +117,9 @@ public class WebBrowser extends JPanel
    * 
    * @param iframeURL
    *          The full html iframe element.
+   * @return string
    */
-  public static String getiframe(String iframeURL)
+  public static final String getiframe(final String iframeURL)
   {
     StringTokenizer tokens = new StringTokenizer(iframeURL, "\"");
     tokens.nextToken();
@@ -124,22 +140,25 @@ public class WebBrowser extends JPanel
    *          The JPanel to populate with buttons.
    * @return A JPanel fully outfitted with buttons.
    */
-  private JPanel initButtons(JPanel panel)
+  private JPanel initButtons(final JPanel panel)
   {
     // Refresh button
     JButton refreshButton = new JButton("Reload");
-    refreshButton.addActionListener((ActionEvent e) -> {
+    refreshButton.addActionListener((ActionEvent e) -> 
+    {
       Platform.runLater(() -> engine.reload());
     });
     panel.add(refreshButton);
 
     // Link button
-    linkButton.addActionListener((ActionEvent e) -> {
-      Platform.runLater(() -> {
+    linkButton.addActionListener((ActionEvent e) -> 
+    {
+      Platform.runLater(() -> 
+      {
         if (isFirstPage)
         {
           this.setPreferredSize(new Dimension(web_WIDTH, web_HEIGHT));
-          linkButton.setText("Get more info");
+          linkButton.setText(info);
           browse(soundURL);
           isFirstPage = false;
         }
@@ -156,7 +175,8 @@ public class WebBrowser extends JPanel
 
     // Start over button
     JButton restartButton = new JButton("Start over?");
-    restartButton.addActionListener((ActionEvent e) -> {
+    restartButton.addActionListener((ActionEvent e) -> 
+    {
       ba.setLayeredPane(Model.overlay);
       ba.handleRestart();
     });
