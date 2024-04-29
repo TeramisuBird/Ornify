@@ -22,8 +22,8 @@ public class ShapeTestPanel extends Visualization implements MouseListener
 {
   private PolygonReader reader;
   private ResourceFinder jarFinder;
-  private HashMap<Polygon,String> shapes;
-  private HashMap<String,Pair<Polygon, Integer>> colorIndex;
+  private HashMap<Polygon, String> shapes;
+  private HashMap<String, Pair<Polygon, Integer>> colorIndex;
 
   /**
    * constructor.
@@ -32,35 +32,37 @@ public class ShapeTestPanel extends Visualization implements MouseListener
   {
     this.jarFinder = ResourceFinder.createInstance(new Marker());
     this.reader = new PolygonReader(jarFinder);
-    this.shapes = new HashMap<Polygon,String>();
+    this.shapes = new HashMap<Polygon, String>();
     this.colorIndex = new HashMap<String, Pair<Polygon, Integer>>();
     this.addMouseListener(this);
     this.getView().setSize(new Dimension(600, 600));
   }
-  
+
   /**
    * read a single file into a polygon to add to the panel.
    * 
-   * @param name for name of map file
-   * @param bigOutline is polygon interactable?
+   * @param name
+   *          for name of map file
+   * @param bigOutline
+   *          is polygon interactable?
    */
   public void read(String name, boolean bigOutline)
   {
     Content content = new Content();
     Polygon poly = reader.read(name + ".map");
-    
+
     content.setShape(poly);
     content.setColor(new Color(180, 167, 214));
-    content.setPaint(new Color(172,91,91));
+    content.setPaint(new Color(172, 91, 91));
     if (!bigOutline)
     {
       shapes.put(poly, name);
     }
-    
-    colorIndex.put(name, new Pair<Polygon, Integer>(poly,0));
+
+    colorIndex.put(name, new Pair<Polygon, Integer>(poly, 0));
     this.add(content);
   }
-  
+
   /**
    * re-draw all shapes into the panel.
    */
@@ -71,19 +73,19 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     String constReg1 = "full_bird";
     String constReg2 = "eyehole";
     Polygon poly = this.colorIndex.get(constReg1).first;
-    
+
     con.setShape(poly);
     con.setColor(new Color(180, 167, 214));
-    con.setPaint(new Color(172,91,91));
+    con.setPaint(new Color(172, 91, 91));
     this.add(con);
-    
+
     con = new Content();
     poly = this.colorIndex.get(constReg2).first;
     con.setShape(poly);
     con.setColor(new Color(180, 167, 214));
-    con.setPaint(new Color(172,91,91));
+    con.setPaint(new Color(172, 91, 91));
     this.add(con);
-    
+
     for (String region : this.colorIndex.keySet())
     {
       if (!region.equals(constReg1) && !region.equals(constReg2))
@@ -91,12 +93,12 @@ public class ShapeTestPanel extends Visualization implements MouseListener
         con = new Content();
         poly = this.colorIndex.get(region).first;
         int index = this.colorIndex.get(region).second;
-        
+
         con.setShape(poly);
         con.setColor(new Color(180, 167, 214));
         Color newPaint = null;
         String colorName = "";
-        
+
         switch (region)
         {
           case "crown":
@@ -105,7 +107,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.crownColor.get(index).second;
             colorName = Model.crownColor.get(index).first;
             break;
@@ -115,7 +117,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.superColor.get(index).second;
             colorName = Model.superColor.get(index).first;
             break;
@@ -125,7 +127,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.eyestripeColor.get(index).second;
             colorName = Model.eyestripeColor.get(index).first;
             break;
@@ -135,7 +137,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.auricColor.get(index).second;
             colorName = Model.auricColor.get(index).first;
             break;
@@ -145,7 +147,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.beakColor.get(index).second;
             colorName = Model.beakColor.get(index).first;
             break;
@@ -155,7 +157,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.throatColor.get(index).second;
             colorName = Model.throatColor.get(index).first;
             break;
@@ -165,7 +167,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.breastColor.get(index).second;
             colorName = Model.breastColor.get(index).first;
             break;
@@ -175,7 +177,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.covertColor.get(index).second;
             colorName = Model.covertColor.get(index).first;
             break;
@@ -185,7 +187,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.wingColor.get(index).second;
             colorName = Model.wingColor.get(index).first;
             break;
@@ -195,7 +197,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
               index = 0;
               colorIndex.put(region, new Pair<Polygon, Integer>(poly, index));
             }
-            
+
             newPaint = Model.footColor.get(index).second;
             colorName = Model.footColor.get(index).first;
             break;
@@ -203,7 +205,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             System.out.println("Unknown Bird Region - SHOULD NOT REACH");
             break;
         }
-        
+
         if (region.equals("foot"))
         {
           region = "foot_color";
@@ -212,7 +214,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
         {
           region = "beak_color";
         }
-        
+
         if (index == 0)
         {
           Model.picked[Model.selectionIndicies.get(region)] = false;
@@ -220,14 +222,14 @@ public class ShapeTestPanel extends Visualization implements MouseListener
         else
         {
           Model.picked[Model.selectionIndicies.get(region)] = true;
-          
-          String text = region + "='" + colorName +  "'";
+
+          String text = region + "='" + colorName + "'";
           Model.selections[Model.selectionIndicies.get(region)] = text;
         }
-        
+
         if (newPaint == null)
         {
-          newPaint = new Color(172,91,91);
+          newPaint = new Color(172, 91, 91);
         }
         con.setPaint(newPaint);
         this.add(con);
@@ -241,17 +243,17 @@ public class ShapeTestPanel extends Visualization implements MouseListener
     int xPos = e.getX();
     int yPos = e.getY();
     Point mousePosition = new Point(xPos, yPos);
-//    System.out.println(mousePosition);
-    
+    // System.out.println(mousePosition);
+
     for (Polygon p : this.shapes.keySet())
     {
       if (p.contains(mousePosition))
       {
         String name = this.shapes.get(p);
         int oldIndex = this.colorIndex.get(name).second;
-        Pair<Polygon, Integer> newPair = new Pair<>(p,oldIndex + 1);
+        Pair<Polygon, Integer> newPair = new Pair<>(p, oldIndex + 1);
         this.colorIndex.put(name, newPair);
-//        System.out.println(name);
+        // System.out.println(name);
 
         redraw();
       }
@@ -261,24 +263,24 @@ public class ShapeTestPanel extends Visualization implements MouseListener
   @Override
   public void mousePressed(MouseEvent e)
   {
-    
+
   }
 
   @Override
   public void mouseReleased(MouseEvent e)
   {
-    
+
   }
 
   @Override
   public void mouseEntered(MouseEvent e)
   {
-    
+
   }
 
   @Override
   public void mouseExited(MouseEvent e)
   {
-    
+
   }
 }

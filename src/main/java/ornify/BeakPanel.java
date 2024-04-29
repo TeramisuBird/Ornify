@@ -17,19 +17,21 @@ public class BeakPanel extends CustomPanel
 {
   private String currentOption;
   private JButton[] buttons;
-  
+
   /**
    * Panel constructor.
    * 
-   * @param question for panel's question.
-   * @param ba for application to add panel to
+   * @param question
+   *          for panel's question.
+   * @param ba
+   *          for application to add panel to
    */
   public BeakPanel(String question, BaseApplication ba)
   {
     super(question, ba);
     super.questionPanel.remove(super.image);
     this.currentOption = null;
-    
+
     this.buttons = new JButton[Model.BEAK_SHAPE.length];
 
     for (int i = 0; i < buttons.length; i++)
@@ -46,7 +48,7 @@ public class BeakPanel extends CustomPanel
       super.comboPanel.add(buttons[i]);
     }
   }
-  
+
   /**
    * getter for user's current selection.
    * 
@@ -56,7 +58,7 @@ public class BeakPanel extends CustomPanel
   {
     return currentOption;
   }
-  
+
   @Override
   public void actionPerformed(ActionEvent e)
   {

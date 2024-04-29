@@ -51,17 +51,18 @@ public class WebBrowser extends JPanel
   {
     this("http://www.google.com");
   }
-  
-  public WebBrowser(String url, BaseApplication ba) {
+
+  public WebBrowser(String url, BaseApplication ba)
+  {
     this(url);
     this.ba = ba;
   }
-  
+
   public WebBrowser(String url)
   {
     jfxPanel = new JFXPanel();
     Platform.setImplicitExit(false);
-    Model.thread = new Thread(()->Platform.runLater(()-> {
+    Model.thread = new Thread(() -> Platform.runLater(() -> {
       stage = new Stage();
       stage.setResizable(true);
       Group root = new Group();
@@ -91,7 +92,7 @@ public class WebBrowser extends JPanel
    */
   public void browse(String url)
   {
-    Platform.runLater(()->{
+    Platform.runLater(() -> {
       engine.load(url);
     });
   }
@@ -134,13 +135,16 @@ public class WebBrowser extends JPanel
 
     // Link button
     linkButton.addActionListener((ActionEvent e) -> {
-      Platform.runLater(()-> {
-        if (isFirstPage) {
+      Platform.runLater(() -> {
+        if (isFirstPage)
+        {
           this.setPreferredSize(new Dimension(web_WIDTH, web_HEIGHT));
           linkButton.setText("Get more info");
           browse(soundURL);
           isFirstPage = false;
-        } else {
+        }
+        else
+        {
           this.setPreferredSize(new Dimension(1400, 1000));
           linkButton.setText("Hear bird call");
           browse(infoURL);
@@ -149,7 +153,7 @@ public class WebBrowser extends JPanel
       });
     });
     panel.add(linkButton);
-    
+
     // Start over button
     JButton restartButton = new JButton("Start over?");
     restartButton.addActionListener((ActionEvent e) -> {

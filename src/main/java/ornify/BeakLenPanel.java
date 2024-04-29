@@ -26,81 +26,83 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
   private JSlider slider;
   private JLabel value;
   private String currentOption;
-  
-  private VisualPanel visual_panel;
-  private Content top_beak;
-  private Content bottom_beak;
-  private Content head_con;
-  private Content eye_con;
-  
-  private Point2D[] pairs_top = {new Point2D.Double(280, 160), 
-      new Point2D.Double(480, 200), new Point2D.Double(280, 200), new Point2D.Double(280, 200)};
-  private Point2D[] pairs_bottom = {new Point2D.Double(280, 200), 
-      new Point2D.Double(480, 200), new Point2D.Double(280, 240), new Point2D.Double(280, 220)};
-  
+
+  private VisualPanel visualPanel;
+  private Content topBeak;
+  private Content bottomBeak;
+  private Content headCon;
+  private Content eyeCon;
+
+  private Point2D[] pairsTop = {new Point2D.Double(280, 160), new Point2D.Double(480, 200),
+      new Point2D.Double(280, 200), new Point2D.Double(280, 200)};
+  private Point2D[] pairsBottom = {new Point2D.Double(280, 200), new Point2D.Double(480, 200),
+      new Point2D.Double(280, 240), new Point2D.Double(280, 220)};
+
   /**
    * Panel constructor.
    * 
-   * @param question for panel's question
-   * @param ba for application to add panel to
+   * @param question
+   *          for panel's question
+   * @param ba
+   *          for application to add panel to
    */
-  public BeakLenPanel(String question, BaseApplication ba)
+  public BeakLenPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
-    this.visual_panel = new VisualPanel();
-    visual_panel.getView().setPreferredSize(new Dimension(400, 400));
-    
-    this.top_beak = new Content();
-    top_beak.setColor(new Color(0, 0, 0));
-    top_beak.setPaint(new Color(232, 232, 88));
-    
-    this.bottom_beak = new Content();
-    bottom_beak.setColor(new Color(0, 0, 0));
-    bottom_beak.setPaint(new Color(232, 232, 88));
-    
-    this.head_con = new Content();
-    head_con.setColor(new Color(0, 0, 0));
-    head_con.setPaint(Color.RED);
-    
-    this.eye_con = new Content();
-    eye_con.setColor(new Color(0, 0, 0));
-    eye_con.setPaint(new Color(0, 0, 0));
-    
-    Polygon shape = createShape(1, pairs_top);
-    top_beak.setShape(shape);
-    
-    Polygon shape_two = createShape(1, pairs_bottom);
-    bottom_beak.setShape(shape_two);
-    
+    this.visualPanel = new VisualPanel();
+    visualPanel.getView().setPreferredSize(new Dimension(400, 400));
+
+    this.topBeak = new Content();
+    topBeak.setColor(new Color(0, 0, 0));
+    topBeak.setPaint(new Color(232, 232, 88));
+
+    this.bottomBeak = new Content();
+    bottomBeak.setColor(new Color(0, 0, 0));
+    bottomBeak.setPaint(new Color(232, 232, 88));
+
+    this.headCon = new Content();
+    headCon.setColor(new Color(0, 0, 0));
+    headCon.setPaint(Color.RED);
+
+    this.eyeCon = new Content();
+    eyeCon.setColor(new Color(0, 0, 0));
+    eyeCon.setPaint(new Color(0, 0, 0));
+
+    Polygon shape = createShape(1, pairsTop);
+    topBeak.setShape(shape);
+
+    Polygon shapeTwo = createShape(1, pairsBottom);
+    bottomBeak.setShape(shapeTwo);
+
     Ellipse2D head = new Ellipse2D.Double(100, 100, 200, 200);
-    head_con.setShape(head);
-    
+    headCon.setShape(head);
+
     Ellipse2D eye = new Ellipse2D.Double(230, 140, 20, 20);
-    eye_con.setShape(eye);
-    
-    visual_panel.add(head_con);
-    visual_panel.add(eye_con);
-    visual_panel.add(top_beak);
-    visual_panel.add(bottom_beak);
-    
+    eyeCon.setShape(eye);
+
+    visualPanel.add(headCon);
+    visualPanel.add(eyeCon);
+    visualPanel.add(topBeak);
+    visualPanel.add(bottomBeak);
+
     this.slider = new JSlider(1, 100, 100);
     slider.setPreferredSize(new Dimension(600, 50));
     slider.addChangeListener(this);
-    
+
     this.value = new JLabel("The current value is: Long");
     value.setPreferredSize(new Dimension(200, 30));
-    
+
     this.currentOption = "Long";
-    
-    super.questionPanel.add(visual_panel.getView(), BorderLayout.CENTER);
+
+    super.questionPanel.add(visualPanel.getView(), BorderLayout.CENTER);
     super.comboPanel.add(slider);
     super.comboPanel.add(value);
-    
+
     int index = Model.selectionIndicies.get("beak_length");
     Model.picked[index] = true;
     Model.selections[index] = "";
   }
-  
+
   /**
    * getter for user's current selection.
    * 
@@ -110,9 +112,9 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
   {
     return currentOption;
   }
-  
+
   @Override
-  public void actionPerformed(ActionEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {
@@ -128,11 +130,11 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
   }
 
   @Override
-  public void stateChanged(ChangeEvent e)
+  public void stateChanged(final ChangeEvent e)
   {
     float val = slider.getValue();
     String size = "";
-    
+
     if (inRange(slider.getValue(), 0, 33))
     {
       size = "Short";
@@ -145,30 +147,33 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     {
       size = "Long";
     }
-    
+
     int index = Model.selectionIndicies.get("beak_length");
     Model.selections[index] = "(beak_length ='" + size.toLowerCase() + "')";
-    
+
     value.setText("The current value is: " + size);
     val = val / 100;
-    
-    Polygon shape = createShape(val, this.pairs_top);
-    this.top_beak.setShape(shape);
-    
-    Polygon shape_two = createShape(val, this.pairs_bottom);
-    this.bottom_beak.setShape(shape_two);
-    this.visual_panel.repaint();
+
+    Polygon shape = createShape(val, this.pairsTop);
+    this.topBeak.setShape(shape);
+
+    Polygon shapeTwo = createShape(val, this.pairsBottom);
+    this.bottomBeak.setShape(shapeTwo);
+    this.visualPanel.repaint();
   }
-  
+
   /**
    * check if value is within some range.
    * 
-   * @param value for value to check
-   * @param start for range start (exclusive)
-   * @param end for range end (inclusive)
+   * @param value
+   *          for value to check
+   * @param start
+   *          for range start (exclusive)
+   * @param end
+   *          for range end (inclusive)
    * @return result of range check
    */
-  private boolean inRange(int value, int start, int end)
+  private boolean inRange(final int value, final int start, final int end)
   {
     if (value > start && value <= end)
     {
@@ -179,31 +184,33 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
       return false;
     }
   }
-  
+
   /**
    * make a polygon.
    * 
-   * @param scale for scale of polygon
-   * @param points for points of the polygon
+   * @param scale
+   *          for scale of polygon
+   * @param points
+   *          for points of the polygon
    * @return created polygon
    */
   private Polygon createShape(float scale, Point2D[] points)
   {
     Polygon shape = new Polygon();
-    
+
     for (int i = 0; i < points.length; i++)
     {
       if (i != 1)
       {
-        shape.addPoint((int)points[i].getX(), (int)points[i].getY());
+        shape.addPoint((int) points[i].getX(), (int) points[i].getY());
       }
       else
       {
         float len_dif = 150 - (150 * scale);
-        shape.addPoint((int)(points[i].getX() - len_dif), (int)points[i].getY());
+        shape.addPoint((int) (points[i].getX() - len_dif), (int) points[i].getY());
       }
     }
-    
+
     return shape;
   }
 }

@@ -15,23 +15,25 @@ import javax.swing.SwingConstants;
  */
 public class SizePanel extends CustomPanel
 {
-  
+
   private String currentOption;
-  
+
   private JButton[] buttons;
 
   /**
    * Panel constructor.
    * 
-   * @param question for panel's question
-   * @param ba fo application to add panel to
+   * @param question
+   *          for panel's question
+   * @param ba
+   *          fo application to add panel to
    */
   public SizePanel(String question, BaseApplication ba)
   {
     super(question, ba);
     super.questionPanel.remove(super.image);
     currentOption = null;
-    
+
     this.buttons = new JButton[Model.SIZE.length];
 
     for (int i = 0; i < buttons.length; i++)
@@ -48,7 +50,7 @@ public class SizePanel extends CustomPanel
       super.comboPanel.add(buttons[i]);
     }
   }
-  
+
   /**
    * getter for user's selection.
    * 
@@ -58,7 +60,7 @@ public class SizePanel extends CustomPanel
   {
     return currentOption;
   }
-  
+
   @Override
   public void actionPerformed(ActionEvent e)
   {

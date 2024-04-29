@@ -13,8 +13,10 @@ public class ColorPanel extends CustomPanel
   /**
    * Panel constructor.
    * 
-   * @param question for panel's question
-   * @param ba for application to add panel to
+   * @param question
+   *          for panel's question
+   * @param ba
+   *          for application to add panel to
    */
   public ColorPanel(String question, BaseApplication ba)
   {

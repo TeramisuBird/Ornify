@@ -21,15 +21,17 @@ public class FootPanel extends CustomPanel
   /**
    * Panel constructor.
    * 
-   * @param question for panel's question
-   * @param ba for application to add panel to
+   * @param question
+   *          for panel's question
+   * @param ba
+   *          for application to add panel to
    */
   public FootPanel(String question, BaseApplication ba)
   {
     super(question, ba);
     super.questionPanel.remove(super.image);
     currentOption = null;
-    
+
     this.buttons = new JButton[Model.FOOT_SHAPE.length];
 
     for (int i = 0; i < buttons.length; i++)
@@ -46,7 +48,7 @@ public class FootPanel extends CustomPanel
       super.comboPanel.add(buttons[i]);
     }
   }
-  
+
   /**
    * getter for user's current selection
    * 
@@ -56,7 +58,7 @@ public class FootPanel extends CustomPanel
   {
     return currentOption;
   }
-  
+
   @Override
   public void actionPerformed(ActionEvent e)
   {

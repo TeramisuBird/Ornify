@@ -25,38 +25,40 @@ public class TitlePanel implements ActionListener
   public JPanel panel = new JPanel();
   public JPanel controlPanel = new JPanel();
   public BaseApplication baseApp;
-  
+
   /**
    * Panel Constructor.
    * 
-   * @param title for title screen text
-   * @param ba for application to add panel to
+   * @param title
+   *          for title screen text
+   * @param ba
+   *          for application to add panel to
    */
   public TitlePanel(String title, BaseApplication ba)
   {
     this.baseApp = ba;
     this.panel.setLayout(new BorderLayout());
     this.panel.setBounds(0, 0, BaseApplication.WIDTH, BaseApplication.HEIGHT);
-    this.panel.setBackground(BaseApplication.background_color);
-    
+    this.panel.setBackground(BaseApplication.BACKGROUND_COLOR);
+
     this.titleText = new JLabel(String.format(HTML, 300, title));
     this.titleText.setHorizontalAlignment(SwingConstants.CENTER);
     this.titleText.setFont(new Font("Verdana", Font.BOLD, 120));
-    
+
     this.startButton.setPreferredSize(new Dimension(130, 40));
     this.startButton.addActionListener(this);
-    
+
     this.image.setHorizontalAlignment(SwingConstants.CENTER);
     this.image = new JLabel(Model.TITLE_IMAGE);
     controlPanel.setLayout(new FlowLayout());
-    this.controlPanel.setBackground(BaseApplication.background_color);
+    this.controlPanel.setBackground(BaseApplication.BACKGROUND_COLOR);
     controlPanel.add(startButton);
     this.panel.add(titleText, BorderLayout.NORTH);
     this.panel.add(image, BorderLayout.CENTER);
     this.panel.add(controlPanel, BorderLayout.SOUTH);
     this.panel.setVisible(true);
   }
-  
+
   /**
    * panel getter.
    * 
@@ -66,7 +68,7 @@ public class TitlePanel implements ActionListener
   {
     return this.panel;
   }
-  
+
   @Override
   public void actionPerformed(ActionEvent e)
   {
@@ -80,4 +82,3 @@ public class TitlePanel implements ActionListener
     }
   }
 }
-

@@ -18,7 +18,7 @@ import io.ResourceFinder;
 public class PolygonReader
 {
   private ResourceFinder finder;
-  
+
   /**
    * basic constructor.
    */
@@ -26,21 +26,23 @@ public class PolygonReader
   {
     this.finder = null;
   }
-  
+
   /**
    * full constructor.
    * 
-   * @param finder for Resource Finder used (can be null)
+   * @param finder
+   *          for Resource Finder used (can be null)
    */
   public PolygonReader(final ResourceFinder finder)
   {
     this.finder = finder;
   }
-  
+
   /**
    * read a shape from a stream.
    * 
-   * @param name for name of stream
+   * @param name
+   *          for name of stream
    * @return shape read from stream
    */
   public Polygon read(final String name)
@@ -49,7 +51,7 @@ public class PolygonReader
 
     int points = 0;
     BufferedReader br = null;
-    
+
     if (this.finder == null)
     {
       try
@@ -67,7 +69,7 @@ public class PolygonReader
       InputStream is = this.finder.findInputStream(name);
       br = new BufferedReader(new InputStreamReader(is));
     }
-    
+
     try
     {
       String line = br.readLine();
@@ -77,16 +79,16 @@ public class PolygonReader
         int x = Integer.valueOf(fields[1]);
         int y = Integer.valueOf(fields[2]);
         poly.addPoint(x, y);
-        
+
         points++;
         line = br.readLine();
-      }      
+      }
     }
     catch (IOException e)
     {
       e.printStackTrace();
     }
-    
+
     poly.npoints = points;
     return poly;
   }

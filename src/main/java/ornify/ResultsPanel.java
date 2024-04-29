@@ -70,12 +70,12 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     {
       meta = set.getMetaData();
       columnCount = meta.getColumnCount();
-      for (int i = 1; i <= columnCount; i++) {
+      for (int i = 1; i <= columnCount; i++)
+      {
         Model.endResult.add(set.getString(i));
         System.out.println(set.getString(i));
       }
-        
-         
+
     }
     catch (SQLException e)
     {
@@ -99,10 +99,13 @@ public class ResultsPanel extends CustomPanel implements ActionListener
         populateEndResult();
         this.restartButton.setText("Loading please wait...");
         set = null;
-        if (browserOverlay == null) {
+        if (browserOverlay == null)
+        {
           browserOverlay = new WebDisplayPanel(ba);
           System.out.println("Created a new browser!");
-        } else {
+        }
+        else
+        {
           browserOverlay.refresh();
           System.out.println("Refreshed browser!");
         }

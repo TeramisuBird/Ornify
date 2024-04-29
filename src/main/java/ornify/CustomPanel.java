@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 public class CustomPanel implements ActionListener
 {
   private static final String HTML = "<html><body style='width: %1spx'>%1s";
-  
+
   public JButton nextButton = new JButton("Next");
   public JButton returnButton = new JButton("Return");
   public JLabel text = new JLabel(" ");
@@ -30,12 +30,14 @@ public class CustomPanel implements ActionListener
   public JPanel comboPanel = new JPanel();
   public JPanel controlPanel = new JPanel();
   public BaseApplication baseApp;
-  
+
   /**
-   * Super-class constructor for panels
+   * Super-class constructor for panels.
    * 
-   * @param question for panel's question
-   * @param ba for application to add panel to
+   * @param question
+   *          for panel's question
+   * @param ba
+   *          for application to add panel to
    */
   public CustomPanel(String question, BaseApplication ba)
   {
@@ -45,34 +47,34 @@ public class CustomPanel implements ActionListener
     text = new JLabel(String.format(HTML, 300, question));
     text.setHorizontalAlignment(SwingConstants.CENTER);
     text.setFont(new Font("Verdana", Font.BOLD, 30));
-    
+
     this.nextButton.setPreferredSize(new Dimension(100, 30));
     this.nextButton.addActionListener(this);
-    this.returnButton.setPreferredSize (new Dimension(100, 30));
+    this.returnButton.setPreferredSize(new Dimension(100, 30));
     this.returnButton.addActionListener(this);
-    
-    this.questionPanel.setBackground(BaseApplication.background_color);
-    this.comboPanel.setBackground(BaseApplication.background_color);
-    this.controlPanel.setBackground(BaseApplication.background_color);
-    this.panel.setBackground(BaseApplication.background_color);
-    
+
+    this.questionPanel.setBackground(BaseApplication.BACKGROUND_COLOR);
+    this.comboPanel.setBackground(BaseApplication.BACKGROUND_COLOR);
+    this.controlPanel.setBackground(BaseApplication.BACKGROUND_COLOR);
+    this.panel.setBackground(BaseApplication.BACKGROUND_COLOR);
+
     this.questionPanel.setLayout(new BorderLayout());
     this.comboPanel.setLayout(new FlowLayout());
-    
+
     this.controlPanel.setLayout(new FlowLayout());
     this.controlPanel.add(this.returnButton);
     this.controlPanel.add(this.nextButton);
-    
+
     this.image.setHorizontalAlignment(SwingConstants.CENTER);
     questionPanel.add(text, BorderLayout.NORTH);
     questionPanel.add(image, BorderLayout.CENTER);
-    
+
     this.panel.add(questionPanel, BorderLayout.NORTH);
     this.panel.add(comboPanel, BorderLayout.CENTER);
     this.panel.add(controlPanel, BorderLayout.SOUTH);
     this.panel.setVisible(true);
   }
-  
+
   /**
    * getter for an instance's panel.
    * 
@@ -98,12 +100,14 @@ public class CustomPanel implements ActionListener
         break;
     }
   }
-  
+
   /**
    * disable/enable buttons on a panel after a selection
    * 
-   * @param buttons for panel's buttons
-   * @param size for string to disable
+   * @param buttons
+   *          for panel's buttons
+   * @param size
+   *          for string to disable
    */
   protected void setChoice(JButton[] buttons, String size)
   {

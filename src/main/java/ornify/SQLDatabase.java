@@ -21,8 +21,9 @@ public class SQLDatabase
 {
   private final String SECRET_FILEPATH = "sql_secret.txt";
   private Connection connection;
-  
-  public SQLDatabase() {
+
+  public SQLDatabase()
+  {
     this(false);
   }
 
@@ -47,17 +48,16 @@ public class SQLDatabase
     try
     {
       reader = new BufferedReader(new FileReader(SECRET_FILEPATH));
-      if (isOnline) {
+      if (isOnline)
+      {
         password = reader.readLine();
         username = "teramisubird";
         serverName = "db4free.net:3306";
-        databaseName = "ornify"
-            + "?useUnicode=true"
-            + "&useJDBCCompliantTimezoneShift=true"
-            + "&useLegacyDatetimeCode=false"
-            + "&serverTimezone=UTC"
-            + "&useSSL=false";
-      } else {
+        databaseName = "ornify" + "?useUnicode=true" + "&useJDBCCompliantTimezoneShift=true"
+            + "&useLegacyDatetimeCode=false" + "&serverTimezone=UTC" + "&useSSL=false";
+      }
+      else
+      {
         reader.readLine();
         serverName = reader.readLine();
         databaseName = reader.readLine();
@@ -66,8 +66,10 @@ public class SQLDatabase
         password = reader.readLine();
       }
       String url = databaseURL + serverName + "/" + databaseName;
-      System.out.println("Attempting to connect to database: " + url + "\n\nWith password = " + password);
-      if (connection==null) {
+      System.out
+          .println("Attempting to connect to database: " + url + "\n\nWith password = " + password);
+      if (connection == null)
+      {
         this.connection = DriverManager.getConnection(url, username, password);
       }
     }
@@ -195,8 +197,8 @@ public class SQLDatabase
   {
     try
     {
-      Statement statement = getConnection().createStatement(
-          ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      Statement statement = getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+          ResultSet.CONCUR_READ_ONLY);
       return statement.executeQuery(query);
     }
     catch (SQLException e)
