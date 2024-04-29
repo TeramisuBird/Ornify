@@ -173,9 +173,9 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
    *          for range end (inclusive)
    * @return result of range check
    */
-  private boolean inRange(final int value, final int start, final int end)
+  private boolean inRange(final int newValue, final int start, final int end)
   {
-    if (value > start && value <= end)
+    if (newValue > start && newValue <= end)
     {
       return true;
     }
