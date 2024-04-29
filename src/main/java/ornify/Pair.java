@@ -5,15 +5,15 @@ package ornify;
  * 
  * This work complies with the JMU Honor Code.
  * 
- * @param <T1>
+ * @param <F>
  *          for variable type 1
- * @param <T2>
+ * @param <S>
  *          for variable type 2
  */
-public class Pair<T1, T2>
+public class Pair<F, S>
 {
-  public T1 first;
-  public T2 second;
+  public F first;
+  public S second;
 
   /**
    * Pair constructor.
@@ -23,14 +23,14 @@ public class Pair<T1, T2>
    * @param second
    *          for second value
    */
-  public Pair(T1 first, T2 second)
+  public Pair(final F first, final S second)
   {
     this.first = first;
     this.second = second;
   }
 
   @Override
-  public boolean equals(Object obj)
+  public boolean equals(final Object obj)
   {
     boolean result = false;
     if (obj == this)
@@ -41,7 +41,7 @@ public class Pair<T1, T2>
     if (obj instanceof Pair && this.first != null && this.second != null)
     {
       @SuppressWarnings("unchecked")
-      Pair<T1, T2> other = (Pair<T1, T2>) obj;
+      Pair<F, S> other = (Pair<F, S>) obj;
       result = this.first.equals(other.first) && this.second.equals(other.second);
     }
 
