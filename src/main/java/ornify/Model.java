@@ -34,6 +34,13 @@ import javax.swing.JLayeredPane;
  */
 public class Model
 {
+  private static final int BEAK_X = 210;
+  private static final int BEAK_Y = 210;
+  private static final int FEET_X = 210;
+  private static final int FEET_Y = 210;
+  private static final int SIZE_X = 310;
+  private static final int SIZE_Y = 310;
+  
   public static Thread thread;
   public static WebBrowser browser;
   public static JLayeredPane overlay = null;
@@ -46,29 +53,31 @@ public class Model
   public static final String[] YEAR = {"Migration", "Breeding", "Non-breeding", "All-year"};
   
   public static final ImageIcon TITLE_IMAGE = ImageReader.readImage("title_bird.png");
+  // title_bird.png is from 
+  // https://4vector.com/i/free-vector-cartoon-bird-03_098900_cartoon_bird_03.png
   
   //Images for the feet type panel
-  public static final Image TINY_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Tiny.png"), 100, 100);
-  public static final Image SMALL_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Small.png"), 100, 100);
-  public static final Image MEDIUM_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Medium.png"), 100, 100);
-  public static final Image LARGE_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Large.png"), 100, 100);
+  public static final Image TINY_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Tiny.png"), SIZE_X, SIZE_Y);
+  public static final Image SMALL_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Small.png"), SIZE_X, SIZE_Y);
+  public static final Image MEDIUM_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Medium.png"), SIZE_X, SIZE_Y);
+  public static final Image LARGE_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Large.png"), SIZE_X, SIZE_Y);
   public static final Image[] SIZE_IMAGES = {TINY_IMAGE, SMALL_IMAGE, MEDIUM_IMAGE, LARGE_IMAGE};
    
   // Images for the feet type panel
-  public static final Image CLAWED_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Clawed.png"), 85, 85);
-  public static final Image CLIMBING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Climbing.png"), 85, 85);
-  public static final Image PERCHING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Perching.png"), 85, 85);
-  public static final Image WADING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Wading.png"), 85, 85);
-  public static final Image WEBBED_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Webbed.png"), 85, 85);
+  public static final Image CLAWED_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Clawed.png"), FEET_X, FEET_Y);
+  public static final Image CLIMBING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Climbing.png"), FEET_X, FEET_Y);
+  public static final Image PERCHING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Perching.png"), FEET_X, FEET_Y);
+  public static final Image WADING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Wading.png"), FEET_X, FEET_Y);
+  public static final Image WEBBED_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Webbed.png"), FEET_X, FEET_Y);
   public static final Image[] FEET_IMAGES = {CLAWED_IMAGE, CLIMBING_IMAGE, PERCHING_IMAGE, WADING_IMAGE, WEBBED_IMAGE};
   
   //Images for the beak type panel
-  public static final Image CONE_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Cone.png"), 85, 85);
-  public static final Image CHISEL_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Chisel.png"), 85, 85);
-  public static final Image POINTY_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Pointy.png"), 85, 85);
-  public static final Image HOOKED_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Hooked.png"), 85, 85);
-  public static final Image FLAT_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Flat.png"), 85, 85);
-  public static final Image PROBING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Probing.png"), 85, 85);
+  public static final Image CONE_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Cone.png"), BEAK_X, BEAK_Y);
+  public static final Image CHISEL_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Chisel.png"), BEAK_X, BEAK_Y);
+  public static final Image POINTY_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Pointy.png"), BEAK_X, BEAK_Y);
+  public static final Image HOOKED_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Hooked.png"), BEAK_X, BEAK_Y);
+  public static final Image FLAT_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Flat.png"), BEAK_X, BEAK_Y);
+  public static final Image PROBING_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Probing.png"), BEAK_X, BEAK_Y);
   public static final Image[] BEAK_IMAGES = {CONE_IMAGE, CHISEL_IMAGE, POINTY_IMAGE, HOOKED_IMAGE, FLAT_IMAGE, PROBING_IMAGE};
    
   // Images for seasons animation

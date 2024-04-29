@@ -61,6 +61,14 @@ public class YearPanel extends CustomPanel
       buttons[i].addActionListener(this);
       super.comboPanel.add(buttons[i]);
     }
+    buttons[0].setBackground(Color.RED);
+    buttons[0].setForeground(new Color(250, 160, 160));
+    buttons[1].setBackground(Color.BLUE);
+    buttons[1].setForeground(new Color(64, 181, 173));
+    buttons[2].setBackground(Color.GREEN);
+    buttons[2].setForeground(new Color(46, 139, 87));
+    buttons[3].setBackground(Color.YELLOW);
+    buttons[3].setForeground(new Color(228, 208, 10));
     
     super.questionPanel.add(stage.getView());
   }

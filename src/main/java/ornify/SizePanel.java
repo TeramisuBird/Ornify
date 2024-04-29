@@ -1,7 +1,7 @@
 package ornify;
 
-import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
@@ -35,17 +35,17 @@ public class SizePanel extends CustomPanel
     currentOption = null;
 
     this.buttons = new JButton[Model.SIZE.length];
+    super.comboPanel.setLayout(new FlowLayout());
 
     for (int i = 0; i < buttons.length; i++)
     {
       buttons[i] = new JButton();
       ImageIcon icon = new ImageIcon(Model.SIZE_IMAGES[i]);
       buttons[i].setIcon(icon);
-      buttons[i].setIconTextGap(10); // Set gap between icon and text
-      buttons[i].setHorizontalTextPosition(SwingConstants.RIGHT);
+      buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
+      buttons[i].setVerticalTextPosition(SwingConstants.BOTTOM);
       buttons[i].setText(Model.SIZE[i]);
-      buttons[i].setAlignmentX(Component.CENTER_ALIGNMENT);
-      buttons[i].setPreferredSize(new Dimension(600, 115));
+      buttons[i].setPreferredSize(new Dimension(190, 340));
       buttons[i].addActionListener(this);
       super.comboPanel.add(buttons[i]);
     }
