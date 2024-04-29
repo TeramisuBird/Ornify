@@ -28,7 +28,7 @@ public class SizePanel extends CustomPanel
    * @param ba
    *          fo application to add panel to
    */
-  public SizePanel(String question, BaseApplication ba)
+  public SizePanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
     super.questionPanel.remove(super.image);
@@ -62,7 +62,7 @@ public class SizePanel extends CustomPanel
   }
 
   @Override
-  public void actionPerformed(ActionEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {

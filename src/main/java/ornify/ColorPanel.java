@@ -18,7 +18,7 @@ public class ColorPanel extends CustomPanel
    * @param ba
    *          for application to add panel to
    */
-  public ColorPanel(String question, BaseApplication ba)
+  public ColorPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
 
@@ -41,7 +41,7 @@ public class ColorPanel extends CustomPanel
   }
 
   @Override
-  public void actionPerformed(ActionEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {

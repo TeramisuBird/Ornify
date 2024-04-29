@@ -39,7 +39,7 @@ public class CustomPanel implements ActionListener
    * @param ba
    *          for application to add panel to
    */
-  public CustomPanel(String question, BaseApplication ba)
+  public CustomPanel(final String question, final BaseApplication ba)
   {
     this.baseApp = ba;
     this.panel.setLayout(new BorderLayout());
@@ -78,7 +78,7 @@ public class CustomPanel implements ActionListener
   /**
    * getter for an instance's panel.
    * 
-   * @return
+   * @return panel
    */
   public JPanel getPanel()
   {
@@ -86,7 +86,7 @@ public class CustomPanel implements ActionListener
   }
 
   @Override
-  public void actionPerformed(ActionEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {
@@ -102,14 +102,14 @@ public class CustomPanel implements ActionListener
   }
 
   /**
-   * disable/enable buttons on a panel after a selection
+   * disable/enable buttons on a panel after a selection.
    * 
    * @param buttons
    *          for panel's buttons
    * @param size
    *          for string to disable
    */
-  protected void setChoice(JButton[] buttons, String size)
+  protected void setChoice(final JButton[] buttons, final String size)
   {
     for (int i = 0; i < buttons.length; i++)
     {

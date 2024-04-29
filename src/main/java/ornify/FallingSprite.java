@@ -13,7 +13,7 @@ public class FallingSprite extends AbstractSprite
   private Random rng;
   private double speed;
 
-  public FallingSprite(Content content)
+  public FallingSprite(final Content content)
   {
     super();
     this.content = content;
@@ -24,7 +24,7 @@ public class FallingSprite extends AbstractSprite
     setVisible(true);
   }
 
-  public int getRandomNumber(int min, int max)
+  public int getRandomNumber(final int min, final int max)
   {
     return (int) ((Math.random() * (max - min)) + min);
   }
@@ -36,7 +36,7 @@ public class FallingSprite extends AbstractSprite
   }
 
   @Override
-  public void handleTick(int time)
+  public void handleTick(final int time)
   {
     this.setLocation(this.x + getRandomNumber(-1, 1), this.y + (2 * speed));
 
@@ -46,7 +46,7 @@ public class FallingSprite extends AbstractSprite
     }
   }
 
-  public void setImage(BufferedImage im)
+  public void setImage(final BufferedImage im)
   {
     this.content.setImage(im);
   }
@@ -61,7 +61,7 @@ public class FallingSprite extends AbstractSprite
     speed = rng.nextDouble();
   }
 
-  public void setSprite(BufferedImage im)
+  public void setSprite(final BufferedImage im)
   {
     setImage(im);
     setSpeed();

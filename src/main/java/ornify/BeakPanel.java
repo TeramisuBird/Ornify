@@ -26,7 +26,7 @@ public class BeakPanel extends CustomPanel
    * @param ba
    *          for application to add panel to
    */
-  public BeakPanel(String question, BaseApplication ba)
+  public BeakPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
     super.questionPanel.remove(super.image);
@@ -60,7 +60,7 @@ public class BeakPanel extends CustomPanel
   }
 
   @Override
-  public void actionPerformed(ActionEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {

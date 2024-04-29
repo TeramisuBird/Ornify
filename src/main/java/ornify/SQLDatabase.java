@@ -37,7 +37,7 @@ public class SQLDatabase
    * <li>local database username
    * <li>local database password
    */
-  public SQLDatabase(boolean isOnline)
+  public SQLDatabase(final boolean isOnline)
   {
     String serverName = "localhost";
     String databaseName = "birds";
@@ -88,7 +88,7 @@ public class SQLDatabase
     }
   }
 
-  public SQLDatabase(String url, String username, String password)
+  public SQLDatabase(final String url, final String username, final String password)
   {
     try
     {
@@ -113,7 +113,7 @@ public class SQLDatabase
    *          - The SQL query itself.
    * @return An ArrayList of type String
    */
-  public ArrayList<String> getListFromQuery(int column, String query)
+  public ArrayList<String> getListFromQuery(final int column, final String query)
   {
     ResultSet results = getResultsFromQuery(query);
     ArrayList<String> list = new ArrayList<String>();
@@ -141,7 +141,7 @@ public class SQLDatabase
    * @param query
    *          The query to search for.
    */
-  public void printColumnFromQuery(int column, String query)
+  public void printColumnFromQuery(final int column, final String query)
   {
     ResultSet results = getResultsFromQuery(query);
     try
@@ -162,12 +162,14 @@ public class SQLDatabase
    * Will attempt to print a column from a given query. If failure happens, prints error code to
    * console.
    * 
-   * @param column
+   * @param columnA
+   *          The column number in the database.
+   * @param columnB
    *          The column number in the database.
    * @param query
    *          The query to search for.
    */
-  public void printColumnsFromQuery(int columnA, int columnB, String query)
+  public void printColumnsFromQuery(final int columnA, final int columnB, final String query)
   {
     ResultSet results = getResultsFromQuery(query);
     try
@@ -193,7 +195,7 @@ public class SQLDatabase
    * @return A ResultSet object which can be looped through using next() to see the results, null if
    *         error.
    */
-  public ResultSet getResultsFromQuery(String query)
+  public ResultSet getResultsFromQuery(final String query)
   {
     try
     {
@@ -219,7 +221,7 @@ public class SQLDatabase
   }
 
   /**
-   * Will attempt to close this database
+   * Will attempt to close this database.
    * 
    * @return True if successful, otherwise false.
    */

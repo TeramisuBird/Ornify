@@ -41,7 +41,7 @@ public class ImageReader
    *          The resized height.
    * @return A resized image as an ImageIcon object.
    */
-  private static ImageIcon getResizedIcon(BufferedImage img, int x, int y)
+  private static ImageIcon getResizedIcon(final BufferedImage img, final int x, final int y)
   {
     ImageIcon icon = null;
     Image tmp = img.getScaledInstance(x, y, Image.SCALE_SMOOTH);
@@ -60,7 +60,7 @@ public class ImageReader
    *          The filename of the image.
    * @return An ImageIcon object of the local image.
    */
-  public static ImageIcon readImage(String path)
+  public static ImageIcon readImage(final String path)
   {
     return readImage(path, 200, 200);
   }
@@ -76,7 +76,7 @@ public class ImageReader
    *          The pixel height
    * @return An ImageIcon object of the local image.
    */
-  public static ImageIcon readImage(String path, int x, int y)
+  public static ImageIcon readImage(final String path, final int x, final int y)
   {
     ImageIcon icon = null;
     InputStream stream = null;
@@ -99,7 +99,7 @@ public class ImageReader
    *          The filename of the image.
    * @return An abstract Image object.
    */
-  public static Image readBuffered(String path)
+  public static Image readBuffered(final String path)
   {
     BufferedImage image = null;
     InputStream stream = null;
@@ -127,7 +127,7 @@ public class ImageReader
    *          The scale to grow or shrink in y-direction.
    * @return A rescaled Image abstraction.
    */
-  public static Image resizeImage(Image image, int x, int y)
+  public static Image resizeImage(final Image image, final int x, final int y)
   {
     Image tmp = image.getScaledInstance(x, y, Image.SCALE_SMOOTH);
     BufferedImage dimg = new BufferedImage(x, y, BufferedImage.TYPE_INT_ARGB);
@@ -146,7 +146,7 @@ public class ImageReader
    *          The link to the image download.
    * @return A downloaded 250 by 250 image.
    */
-  public static ImageIcon downloadImage(String url)
+  public static ImageIcon downloadImage(final String url)
   {
     return downloadImage(url, 250, 250);
   }
@@ -162,7 +162,7 @@ public class ImageReader
    *          The pixel height
    * @return A downloaded and resized image.
    */
-  public static ImageIcon downloadImage(String url, int x, int y)
+  public static ImageIcon downloadImage(final String url, final int x, final int y)
   {
     ImageIcon icon = null;
     try

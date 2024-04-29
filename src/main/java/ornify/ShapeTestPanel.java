@@ -20,6 +20,9 @@ import visual.statik.described.Content;
  */
 public class ShapeTestPanel extends Visualization implements MouseListener
 {
+  private static final String FOOT = "foot";
+  private static final String BEAK = "beak";
+  
   private PolygonReader reader;
   private ResourceFinder jarFinder;
   private HashMap<Polygon, String> shapes;
@@ -46,7 +49,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
    * @param bigOutline
    *          is polygon interactable?
    */
-  public void read(String name, boolean bigOutline)
+  public void read(final String name, final boolean bigOutline)
   {
     Content content = new Content();
     Polygon poly = reader.read(name + ".map");
@@ -98,6 +101,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
         con.setColor(new Color(180, 167, 214));
         Color newPaint = null;
         String colorName = "";
+        String add = "";
 
         switch (region)
         {
@@ -141,7 +145,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             newPaint = Model.auricColor.get(index).second;
             colorName = Model.auricColor.get(index).first;
             break;
-          case "beak":
+          case BEAK:
             if (index >= Model.beakColor.size())
             {
               index = 0;
@@ -191,7 +195,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             newPaint = Model.wingColor.get(index).second;
             colorName = Model.wingColor.get(index).first;
             break;
-          case "foot":
+          case FOOT:
             if (index >= Model.footColor.size())
             {
               index = 0;
@@ -206,22 +210,18 @@ public class ShapeTestPanel extends Visualization implements MouseListener
             break;
         }
 
-        if (region.equals("foot"))
+        if (region.equals(FOOT) || region.equals(BEAK))
         {
-          region = "foot_color";
-        }
-        else if (region.equals("beak"))
-        {
-          region = "beak_color";
+          add = "_color";
         }
 
         if (index == 0)
         {
-          Model.picked[Model.selectionIndicies.get(region)] = false;
+          Model.picked[Model.selectionIndicies.get(region + add)] = false;
         }
         else
         {
-          Model.picked[Model.selectionIndicies.get(region)] = true;
+          Model.picked[Model.selectionIndicies.get(region + add)] = true;
 
           String text = region + "='" + colorName + "'";
           Model.selections[Model.selectionIndicies.get(region)] = text;
@@ -238,7 +238,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
   }
 
   @Override
-  public void mouseClicked(MouseEvent e)
+  public void mouseClicked(final MouseEvent e)
   {
     int xPos = e.getX();
     int yPos = e.getY();
@@ -261,25 +261,25 @@ public class ShapeTestPanel extends Visualization implements MouseListener
   }
 
   @Override
-  public void mousePressed(MouseEvent e)
+  public void mousePressed(final MouseEvent e)
   {
 
   }
 
   @Override
-  public void mouseReleased(MouseEvent e)
+  public void mouseReleased(final MouseEvent e)
   {
 
   }
 
   @Override
-  public void mouseEntered(MouseEvent e)
+  public void mouseEntered(final MouseEvent e)
   {
 
   }
 
   @Override
-  public void mouseExited(MouseEvent e)
+  public void mouseExited(final MouseEvent e)
   {
 
   }

@@ -23,6 +23,11 @@ import visual.statik.described.Content;
  */
 public class BeakLenPanel extends CustomPanel implements ChangeListener
 {
+  private static final String SHORT = "Short";
+  private static final String AVERAGE = "Average";
+  private static final String LONG = "Long";
+  private static final String BEAK_LEN = "beak_length";
+  
   private JSlider slider;
   private JLabel value;
   private String currentOption;
@@ -92,13 +97,13 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
     this.value = new JLabel("The current value is: Long");
     value.setPreferredSize(new Dimension(200, 30));
 
-    this.currentOption = "Long";
+    this.currentOption = LONG;
 
     super.questionPanel.add(visualPanel.getView(), BorderLayout.CENTER);
     super.comboPanel.add(slider);
     super.comboPanel.add(value);
 
-    int index = Model.selectionIndicies.get("beak_length");
+    int index = Model.selectionIndicies.get(BEAK_LEN);
     Model.picked[index] = true;
     Model.selections[index] = "";
   }
@@ -137,18 +142,18 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
 
     if (inRange(slider.getValue(), 0, 33))
     {
-      size = "Short";
+      size = SHORT;
     }
     else if (inRange(slider.getValue(), 3, 66))
     {
-      size = "Average";
+      size = AVERAGE;
     }
     else
     {
-      size = "Long";
+      size = LONG;
     }
 
-    int index = Model.selectionIndicies.get("beak_length");
+    int index = Model.selectionIndicies.get(BEAK_LEN);
     Model.selections[index] = "(beak_length ='" + size.toLowerCase() + "')";
 
     value.setText("The current value is: " + size);
@@ -165,7 +170,7 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
   /**
    * check if value is within some range.
    * 
-   * @param value
+   * @param newValue
    *          for value to check
    * @param start
    *          for range start (exclusive)
@@ -175,14 +180,7 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
    */
   private boolean inRange(final int newValue, final int start, final int end)
   {
-    if (newValue > start && newValue <= end)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    return newValue > start && newValue <= end;
   }
 
   /**
@@ -194,7 +192,7 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
    *          for points of the polygon
    * @return created polygon
    */
-  private Polygon createShape(float scale, Point2D[] points)
+  private Polygon createShape(final float scale, final Point2D[] points)
   {
     Polygon shape = new Polygon();
 
@@ -206,8 +204,8 @@ public class BeakLenPanel extends CustomPanel implements ChangeListener
       }
       else
       {
-        float len_dif = 150 - (150 * scale);
-        shape.addPoint((int) (points[i].getX() - len_dif), (int) points[i].getY());
+        float lenDif = 150 - (150 * scale);
+        shape.addPoint((int) (points[i].getX() - lenDif), (int) points[i].getY());
       }
     }
 

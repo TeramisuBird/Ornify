@@ -48,7 +48,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     super.controlPanel.remove(nextButton);
   }
 
-  public ResultsPanel(String question, BaseApplication ba)
+  public ResultsPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
 
@@ -85,7 +85,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
   }
 
   @Override
-  public void actionPerformed(ActionEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {

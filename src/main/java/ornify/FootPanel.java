@@ -26,7 +26,7 @@ public class FootPanel extends CustomPanel
    * @param ba
    *          for application to add panel to
    */
-  public FootPanel(String question, BaseApplication ba)
+  public FootPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
     super.questionPanel.remove(super.image);
@@ -50,7 +50,7 @@ public class FootPanel extends CustomPanel
   }
 
   /**
-   * getter for user's current selection
+   * getter for user's current selection.
    * 
    * @return currentOption
    */
@@ -60,7 +60,7 @@ public class FootPanel extends CustomPanel
   }
 
   @Override
-  public void actionPerformed(ActionEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {
