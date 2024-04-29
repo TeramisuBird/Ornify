@@ -53,6 +53,8 @@ public class Model
   public static final String[] YEAR = {"Migration", "Breeding", "Non-breeding", "All-year"};
   
   public static final ImageIcon TITLE_IMAGE = ImageReader.readImage("title_bird.png");
+  // title_bird.png is from 
+  // https://4vector.com/i/free-vector-cartoon-bird-03_098900_cartoon_bird_03.png
   
   //Images for the feet type panel
   public static final Image TINY_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Tiny.png"), SIZE_X, SIZE_Y);
