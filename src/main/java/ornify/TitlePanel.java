@@ -51,7 +51,7 @@ public class TitlePanel implements ActionListener
     this.startButton.addActionListener(this);
 
     this.image.setHorizontalAlignment(SwingConstants.CENTER);
-    this.image = new JLabel(Model.TITLE_IMAGE);
+    this.image = new JLabel(Model.getTitleImage());
     controlPanel.setLayout(new FlowLayout());
     this.controlPanel.setBackground(BaseApplication.BACKGROUND_COLOR);
     controlPanel.add(startButton);

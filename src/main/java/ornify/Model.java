@@ -34,29 +34,28 @@ import javax.swing.JLayeredPane;
  */
 public class Model
 {
-  public static Thread thread;
-  public static WebBrowser browser;
-  public static JLayeredPane overlay = null;
-  public static ArrayList<String> endResult = new ArrayList<String>();
+  private static Thread thread;
+  private static WebBrowser browser;
+  private static JLayeredPane overlay = null;
+  private static ArrayList<String> endResult = new ArrayList<String>();
 
   // Images for seasons animation
-  public static final Image BUG_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Bug.png"),
+  private static final Image BUG_IMAGE = 
+      ImageReader.resizeImage(ImageReader.readBuffered("Bug.png"),
       50, 50);
-  public static final Image LEAF_IMAGE = ImageReader
+  private static final Image LEAF_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Leaf.png"), 50, 50);
-  public static final Image RAIN_IMAGE = ImageReader
+  private static final Image RAIN_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("raindrop.png"), 50, 50);
-  public static final Image SNOW_IMAGE = ImageReader
+  private static final Image SNOW_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Snowflake.png"), 50, 50);
 
-  public static final ImageIcon TITLE_IMAGE = ImageReader.readImage("title_bird.png");
+  private static final ImageIcon TITLE_IMAGE = ImageReader.readImage("title_bird.png");
 
-  public static final String[] SIZE = {"Tiny", "Small", "Medium", "Large"};
-  public static final String[] BEAK_LENGTH = {"Short", "Average", "Long"};
-  public static final String[] FOOT_SHAPE = {"Clawed", "Climbing", "Perching", "Wading", "Webbed"};
-  public static final String[] BEAK_SHAPE = {"Cone", "Chisel", "Pointy", "Hooked", "Flat",
+  private static final String[] SIZE = {"Tiny", "Small", "Medium", "Large"};
+  private static final String[] FOOT_SHAPE = {"Clawed", "Climbing", "Perching", "Wading", "Webbed"};
+  private static final String[] BEAK_SHAPE = {"Cone", "Chisel", "Pointy", "Hooked", "Flat",
       "Probing"};
-  public static final String[] YEAR = {"Migration", "Breeding", "Non-breeding", "All-year"};
 
   private static final int BEAK_X = 210;
   private static final int BEAK_Y = 210;
@@ -82,28 +81,28 @@ public class Model
   // https://4vector.com/i/free-vector-cartoon-bird-03_098900_cartoon_bird_03.png
 
   // Images for the feet type panel
-  public static final Image TINY_IMAGE = ImageReader
+  private static final Image TINY_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Tiny.png"), SIZE_X, SIZE_Y);
-  public static final Image SMALL_IMAGE = ImageReader
+  private static final Image SMALL_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Small.png"), SIZE_X, SIZE_Y);
-  public static final Image MEDIUM_IMAGE = ImageReader
+  private static final Image MEDIUM_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Medium.png"), SIZE_X, SIZE_Y);
-  public static final Image LARGE_IMAGE = ImageReader
+  private static final Image LARGE_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Large.png"), SIZE_X, SIZE_Y);
-  public static final Image[] SIZE_IMAGES = {TINY_IMAGE, SMALL_IMAGE, MEDIUM_IMAGE, LARGE_IMAGE};
+  private static final Image[] SIZE_IMAGES = {TINY_IMAGE, SMALL_IMAGE, MEDIUM_IMAGE, LARGE_IMAGE};
 
   // Images for the feet type panel
-  public static final Image CLAWED_IMAGE = ImageReader
+  private static final Image CLAWED_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Clawed.png"), FEET_X, FEET_Y);
-  public static final Image CLIMBING_IMAGE = ImageReader
+  private static final Image CLIMBING_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Climbing.png"), FEET_X, FEET_Y);
-  public static final Image PERCHING_IMAGE = ImageReader
+  private static final Image PERCHING_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Perching.png"), FEET_X, FEET_Y);
-  public static final Image WADING_IMAGE = ImageReader
+  private static final Image WADING_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Wading.png"), FEET_X, FEET_Y);
-  public static final Image WEBBED_IMAGE = ImageReader
+  private static final Image WEBBED_IMAGE = ImageReader
       .resizeImage(ImageReader.readBuffered("Webbed.png"), FEET_X, FEET_Y);
-  public static final Image[] FEET_IMAGES = {CLAWED_IMAGE, CLIMBING_IMAGE, PERCHING_IMAGE,
+  private static final Image[] FEET_IMAGES = {CLAWED_IMAGE, CLIMBING_IMAGE, PERCHING_IMAGE,
       WADING_IMAGE, WEBBED_IMAGE};
 
   // Images for the beak type panel
@@ -400,4 +399,158 @@ public class Model
     return Model.footColor;
   }
   
+  /**
+   * Method to get the thread.
+   * @return thread
+   */
+  public static Thread getThread()
+  {
+    return thread;
+  }
+  
+  /**
+   * Method to get the browser.
+   * @return web browser
+   */
+  public static WebBrowser getWeb()
+  {
+    return browser;
+  }
+  
+  /**
+   * Method to get the overlay.
+   * @return overlay
+   */
+  public static JLayeredPane getOverlay()
+  {
+    return overlay;
+  }
+  
+  /**
+   * Method to get the results.
+   * @return results
+   */
+  public static ArrayList<String> getEnd()
+  {
+    return endResult;
+  }
+  
+  /**
+   * Method to set the browser.
+   * @param brow
+   */
+  public static void setWeb(final WebBrowser brow)
+  {
+    browser = brow;
+  }
+  
+  /**
+   * Method to set the overlay.
+   * @param brow
+   */
+  public static void setOverlay(final JLayeredPane brow)
+  {
+    overlay = brow;
+  }
+  
+  /**
+   * Method to set the overlay.
+   * @param brow
+   */
+  public static void setEnd(final ArrayList<String> brow)
+  {
+    endResult = brow;
+  }
+  
+  /**
+   * Method to set the overlay.
+   * @param brow
+   */
+  public static void setThread(final Thread brow)
+  {
+    thread = brow;
+  }
+  
+  /**
+   * Method that returns the image type.
+   * @param name
+   * @return the image
+   */
+  public static Image getSeason(final String name)
+  {
+    Image im = null;
+    switch (name)
+    {
+      case "Autumn":
+        im = LEAF_IMAGE;
+        break;
+      case "Winter":
+        im = SNOW_IMAGE;
+        break;
+      case "Spring":
+        im = RAIN_IMAGE;
+        break;
+      case "Summer":
+        im = BUG_IMAGE;
+        break;
+      default:
+        return null;
+    }
+    
+    return im;
+  }
+  
+  /**
+   * Method that returns the array of beaks.
+   * @return the array
+   */
+  public static String[] getBeak()
+  {
+    return BEAK_SHAPE;
+  }
+  
+  /**
+   * Method that returns the array of feet.
+   * @return the array
+   */
+  public static String[] getFoot()
+  {
+    return FOOT_SHAPE;
+  }
+  
+  /**
+   * Method that returns the array of sizes.
+   * @return the array
+   */
+  public static String[] getSize()
+  {
+    return SIZE;
+  }
+  
+  /**
+   * Method that returns the array of beaks.
+   * @return the array
+   */
+  public static ImageIcon getTitleImage()
+  {
+    return TITLE_IMAGE;
+  }
+  
+  /**
+   * Method that returns the array of beaks.
+   * @return the array
+   */
+  public static Image[] getSizeImages()
+  {
+    return SIZE_IMAGES;
+  }
+  
+  /**
+   * Method that returns the array of beaks.
+   * @return the array
+   */
+  public static Image[] getFeetImages()
+  {
+    return FEET_IMAGES;
+  }
 }

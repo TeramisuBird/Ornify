@@ -30,17 +30,17 @@ public class WebDisplayPanel
    */
   public void initialize()
   {
-    if (Model.endResult.get(2) != null)
+    if (Model.getEnd().get(2) != null)
     {
-      WebBrowser.infoURL = url + Model.endResult.get(0)
+      WebBrowser.infoURL = url + Model.getEnd().get(0)
           + over;
-      WebBrowser.soundURL = WebBrowser.getiframe(Model.endResult.get(2));
-      Model.browser = new WebBrowser(WebBrowser.soundURL, baseApp);
-      Model.overlay = baseApp.getLayeredPane();
+      WebBrowser.soundURL = WebBrowser.getiframe(Model.getEnd().get(2));
+      Model.setWeb(new WebBrowser(WebBrowser.soundURL, baseApp));
+      Model.setOverlay(baseApp.getLayeredPane());
       JLayeredPane layeredPane = new JLayeredPane();
       layeredPane.setLayout(new BorderLayout());
       layeredPane.setPreferredSize(new Dimension(1400, 1000));
-      layeredPane.add(Model.browser);
+      layeredPane.add(Model.getWeb());
       baseApp.setLayeredPane(layeredPane);
     }
   }
@@ -50,19 +50,19 @@ public class WebDisplayPanel
    */
   public void refresh()
   {
-    if (Model.endResult.get(2) != null)
+    if (Model.getEnd().get(2) != null)
     {
       WebBrowser.linkButton.setText("Get more info");
       WebBrowser.isFirstPage = true;
-      WebBrowser.infoURL = url + Model.endResult.get(0)
+      WebBrowser.infoURL = url + Model.getEnd().get(0)
           + over;
-      WebBrowser.soundURL = WebBrowser.getiframe(Model.endResult.get(2));
-      Model.browser.browse(WebBrowser.soundURL);
-      Model.overlay = baseApp.getLayeredPane();
+      WebBrowser.soundURL = WebBrowser.getiframe(Model.getEnd().get(2));
+      Model.getWeb().browse(WebBrowser.soundURL);
+      Model.setOverlay(baseApp.getLayeredPane());
       JLayeredPane layeredPane = new JLayeredPane();
       layeredPane.setLayout(new BorderLayout());
       layeredPane.setPreferredSize(new Dimension(1400, 1000));
-      layeredPane.add(Model.browser);
+      layeredPane.add(Model.getWeb());
       baseApp.setLayeredPane(layeredPane);
     }
   }

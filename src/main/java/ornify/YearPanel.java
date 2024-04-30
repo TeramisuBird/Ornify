@@ -127,22 +127,22 @@ public class YearPanel extends CustomPanel
     String mig = "Migration";
     if (type.equals(autumn))
     {
-      curImage = Model.LEAF_IMAGE;
+      curImage = Model.getSeason(autumn);
       currentOption = mig;
     }
     else if (type.equals(winter))
     {
-      curImage = Model.SNOW_IMAGE;
+      curImage = Model.getSeason(winter);
       currentOption = "Non-Breeding";
     }
     else if (type.equals(spring))
     {
-      curImage = Model.RAIN_IMAGE;
+      curImage = Model.getSeason(spring);
       currentOption = mig;
     }
     else if (type.equals(summer))
     {
-      curImage = Model.BUG_IMAGE;
+      curImage = Model.getSeason(summer);
       currentOption = "Breeding";
     }
     

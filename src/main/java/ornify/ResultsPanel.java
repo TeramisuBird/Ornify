@@ -91,7 +91,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
       columnCount = meta.getColumnCount();
       for (int i = 1; i <= columnCount; i++)
       {
-        Model.endResult.add(set.getString(i));
+        Model.getEnd().add(set.getString(i));
         System.out.println(set.getString(i));
       }
 

@@ -130,7 +130,7 @@ public class BaseApplication extends JApplication implements ActionListener
     isLastPanel = false;
     Model.getSelections()[1] = "";
     Model.getSelections()[7] = "";
-    Model.endResult = new ArrayList<String>();
+    Model.setEnd(new ArrayList<String>());
     curPanel = panels.get(index);
     curPanel.setVisible(true);
     panel.add(curPanel);

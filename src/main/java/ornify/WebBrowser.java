@@ -75,7 +75,7 @@ public class WebBrowser extends JPanel
   {
     jfxPanel = new JFXPanel();
     Platform.setImplicitExit(false);
-    Model.thread = new Thread(() -> Platform.runLater(() -> 
+    Model.setThread(new Thread(() -> Platform.runLater(() -> 
     {
       stage = new Stage();
       stage.setResizable(true);
@@ -88,8 +88,8 @@ public class WebBrowser extends JPanel
       ObservableList<Node> children = root.getChildren();
       children.add(browser);
       jfxPanel.setScene(scene);
-    }));
-    Model.thread.start();
+    })));
+    Model.getThread().start();
     this.setLayout(new BorderLayout());
     this.add(jfxPanel, BorderLayout.CENTER);
     controlPanel = new JPanel();
@@ -177,7 +177,7 @@ public class WebBrowser extends JPanel
     JButton restartButton = new JButton("Start over?");
     restartButton.addActionListener((ActionEvent e) -> 
     {
-      ba.setLayeredPane(Model.overlay);
+      ba.setLayeredPane(Model.getOverlay());
       ba.handleRestart();
     });
     panel.add(restartButton);

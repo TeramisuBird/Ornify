@@ -34,17 +34,17 @@ public class SizePanel extends CustomPanel
     super.questionPanel.remove(super.image);
     currentOption = null;
 
-    this.buttons = new JButton[Model.SIZE.length];
+    this.buttons = new JButton[Model.getSize().length];
     super.comboPanel.setLayout(new FlowLayout());
 
     for (int i = 0; i < buttons.length; i++)
     {
       buttons[i] = new JButton();
-      ImageIcon icon = new ImageIcon(Model.SIZE_IMAGES[i]);
+      ImageIcon icon = new ImageIcon(Model.getSizeImages()[i]);
       buttons[i].setIcon(icon);
       buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
       buttons[i].setVerticalTextPosition(SwingConstants.BOTTOM);
-      buttons[i].setText(Model.SIZE[i]);
+      buttons[i].setText(Model.getSize()[i]);
       buttons[i].setPreferredSize(new Dimension(190, 340));
       buttons[i].addActionListener(this);
       super.comboPanel.add(buttons[i]);
