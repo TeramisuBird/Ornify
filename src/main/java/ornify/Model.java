@@ -34,22 +34,18 @@ import javax.swing.JLayeredPane;
  */
 public class Model
 {
-  public static Thread thread;
-  public static WebBrowser browser;
-  public static JLayeredPane overlay = null;
-  public static ArrayList<String> endResult = new ArrayList<String>();
+  public Thread thread;
+  public WebBrowser browser;
+  public JLayeredPane overlay = null;
+  public ArrayList<String> endResult = new ArrayList<String>();
 
   // Images for seasons animation
-  public static final Image BUG_IMAGE = ImageReader.resizeImage(ImageReader.readBuffered("Bug.png"),
-      50, 50);
-  public static final Image LEAF_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Leaf.png"), 50, 50);
-  public static final Image RAIN_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("raindrop.png"), 50, 50);
-  public static final Image SNOW_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Snowflake.png"), 50, 50);
+  public Image BUG_IMAGE;
+  public Image LEAF_IMAGE;
+  public Image RAIN_IMAGE;
+  public Image SNOW_IMAGE;
 
-  public static final ImageIcon TITLE_IMAGE = ImageReader.readImage("title_bird.png");
+  public ImageIcon TITLE_IMAGE;
 
   public static final String[] SIZE = {"Tiny", "Small", "Medium", "Large"};
   public static final String[] BEAK_LENGTH = {"Short", "Average", "Long"};
@@ -82,45 +78,30 @@ public class Model
   // https://4vector.com/i/free-vector-cartoon-bird-03_098900_cartoon_bird_03.png
 
   // Images for the feet type panel
-  public static final Image TINY_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Tiny.png"), SIZE_X, SIZE_Y);
-  public static final Image SMALL_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Small.png"), SIZE_X, SIZE_Y);
-  public static final Image MEDIUM_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Medium.png"), SIZE_X, SIZE_Y);
-  public static final Image LARGE_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Large.png"), SIZE_X, SIZE_Y);
-  public static final Image[] SIZE_IMAGES = {TINY_IMAGE, SMALL_IMAGE, MEDIUM_IMAGE, LARGE_IMAGE};
+  public Image TINY_IMAGE;
+  public Image SMALL_IMAGE;
+  public Image MEDIUM_IMAGE;
+  public Image LARGE_IMAGE;
+  public Image[] SIZE_IMAGES = new Image[4];
 
   // Images for the feet type panel
-  public static final Image CLAWED_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Clawed.png"), FEET_X, FEET_Y);
-  public static final Image CLIMBING_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Climbing.png"), FEET_X, FEET_Y);
-  public static final Image PERCHING_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Perching.png"), FEET_X, FEET_Y);
-  public static final Image WADING_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Wading.png"), FEET_X, FEET_Y);
-  public static final Image WEBBED_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Webbed.png"), FEET_X, FEET_Y);
-  public static final Image[] FEET_IMAGES = {CLAWED_IMAGE, CLIMBING_IMAGE, PERCHING_IMAGE,
-      WADING_IMAGE, WEBBED_IMAGE};
+  public Image CLAWED_IMAGE;
+  public Image CLIMBING_IMAGE;
+  public Image PERCHING_IMAGE;
+  public Image WADING_IMAGE;
+  public Image WEBBED_IMAGE;
+  public Image[] FEET_IMAGES = new Image[5];
 
   // Images for the beak type panel
-  public static final Image CONE_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Cone.png"), BEAK_X, BEAK_Y);
-  public static final Image CHISEL_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Chisel.png"), BEAK_X, BEAK_Y);
-  public static final Image POINTY_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Pointy.png"), BEAK_X, BEAK_Y);
-  public static final Image HOOKED_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Hooked.png"), BEAK_X, BEAK_Y);
-  public static final Image FLAT_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Flat.png"), BEAK_X, BEAK_Y);
-  public static final Image PROBING_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Probing.png"), BEAK_X, BEAK_Y);
-  public static final Image[] BEAK_IMAGES = {CONE_IMAGE, CHISEL_IMAGE, POINTY_IMAGE, HOOKED_IMAGE,
-      FLAT_IMAGE, PROBING_IMAGE};
+  public Image CONE_IMAGE;
+  public Image CHISEL_IMAGE;
+  public Image POINTY_IMAGE;
+  public Image HOOKED_IMAGE;
+  public Image FLAT_IMAGE;
+  public Image PROBING_IMAGE;
+  public Image[] BEAK_IMAGES = new Image[6];
+  
+  public ImageReader reader;
   
   private static ArrayList<Pair<String, Color>> beakColor = new ArrayList<Pair<String, Color>>();
   private static ArrayList<Pair<String, Color>> crownColor = new ArrayList<Pair<String, Color>>();
@@ -139,14 +120,70 @@ public class Model
   private static HashMap<String, Integer> selectionIndicies = new HashMap<String, Integer>();
   
   private static String[] selections = new String[15];
+  
+  public Model(final ImageReader reader) {
+    this.reader = reader;
+    BUG_IMAGE = reader.resizeImage(reader.readBuffered("Bug.png"),
+        50, 50);
+    LEAF_IMAGE = reader
+        .resizeImage(reader.readBuffered("Leaf.png"), 50, 50);
+    RAIN_IMAGE = reader
+        .resizeImage(reader.readBuffered("raindrop.png"), 50, 50);
+    SNOW_IMAGE = reader
+        .resizeImage(reader.readBuffered("Snowflake.png"), 50, 50);
+    TITLE_IMAGE = reader.readImage("title_bird.png");
+    
+    // Images for the feet type panel
+    TINY_IMAGE = reader
+        .resizeImage(reader.readBuffered("tiny.png"), SIZE_X, SIZE_Y);
+    SMALL_IMAGE = reader
+        .resizeImage(reader.readBuffered("small.png"), SIZE_X, SIZE_Y);
+    MEDIUM_IMAGE = reader
+        .resizeImage(reader.readBuffered("medium.png"), SIZE_X, SIZE_Y);
+    LARGE_IMAGE = reader
+        .resizeImage(reader.readBuffered("large.png"), SIZE_X, SIZE_Y);
+    SIZE_IMAGES[0] = TINY_IMAGE;
+    SIZE_IMAGES[1] = SMALL_IMAGE;
+    SIZE_IMAGES[2] = MEDIUM_IMAGE; 
+    SIZE_IMAGES[3] = LARGE_IMAGE;
 
-  /**
-   * static constructor.
-   * 
-   * fills color option ArrayLists & Selection/Index HashMap
-   */
-  static
-  {
+    // Images for the feet type panel
+    CLAWED_IMAGE = reader
+        .resizeImage(reader.readBuffered("Clawed.png"), FEET_X, FEET_Y);
+    CLIMBING_IMAGE = reader
+        .resizeImage(reader.readBuffered("Climbing.png"), FEET_X, FEET_Y);
+    PERCHING_IMAGE = reader
+        .resizeImage(reader.readBuffered("Perching.png"), FEET_X, FEET_Y);
+    WADING_IMAGE = reader
+        .resizeImage(reader.readBuffered("Wading.png"), FEET_X, FEET_Y);
+    WEBBED_IMAGE = reader
+        .resizeImage(reader.readBuffered("Webbed.png"), FEET_X, FEET_Y);
+    FEET_IMAGES[0] = CLAWED_IMAGE;
+    FEET_IMAGES[1] = CLIMBING_IMAGE;
+    FEET_IMAGES[2] = PERCHING_IMAGE;
+    FEET_IMAGES[3] = WADING_IMAGE;
+    FEET_IMAGES[4] = WEBBED_IMAGE;
+    
+    // Images for the beak type panel
+    CONE_IMAGE = reader
+        .resizeImage(reader.readBuffered("Cone.png"), BEAK_X, BEAK_Y);
+    CHISEL_IMAGE = reader
+        .resizeImage(reader.readBuffered("Chisel.png"), BEAK_X, BEAK_Y);
+    POINTY_IMAGE = reader
+        .resizeImage(reader.readBuffered("Pointy.png"), BEAK_X, BEAK_Y);
+    HOOKED_IMAGE = reader
+        .resizeImage(reader.readBuffered("Hooked.png"), BEAK_X, BEAK_Y);
+    FLAT_IMAGE = reader
+        .resizeImage(reader.readBuffered("Flat.png"), BEAK_X, BEAK_Y);
+    PROBING_IMAGE = reader
+        .resizeImage(reader.readBuffered("Probing.png"), BEAK_X, BEAK_Y);
+    BEAK_IMAGES[0] = CONE_IMAGE;
+    BEAK_IMAGES[1] = CHISEL_IMAGE;
+    BEAK_IMAGES[2] = POINTY_IMAGE;
+    BEAK_IMAGES[3] = HOOKED_IMAGE;
+    BEAK_IMAGES[4] = FLAT_IMAGE;
+    BEAK_IMAGES[5] = PROBING_IMAGE;
+    
     // fill crown color options
     crownColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     crownColor.add(new Pair<String, Color>(BLACK, new Color(0, 0, 0)));

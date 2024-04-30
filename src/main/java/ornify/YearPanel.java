@@ -21,6 +21,7 @@ public class YearPanel extends CustomPanel
   private String currentOption;
   private Image curImage;
   private Stage stage;
+  private BaseApplication ba;
   
   private FallingSprite[] items;
   
@@ -41,6 +42,7 @@ public class YearPanel extends CustomPanel
   public YearPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
+    this.ba = ba;
     super.questionPanel.remove(super.image);
     
     this.stage = new Stage(20);
@@ -127,22 +129,22 @@ public class YearPanel extends CustomPanel
     String mig = "Migration";
     if (type.equals(autumn))
     {
-      curImage = Model.LEAF_IMAGE;
+      curImage = ba.model.LEAF_IMAGE;
       currentOption = mig;
     }
     else if (type.equals(winter))
     {
-      curImage = Model.SNOW_IMAGE;
+      curImage = ba.model.SNOW_IMAGE;
       currentOption = "Non-Breeding";
     }
     else if (type.equals(spring))
     {
-      curImage = Model.RAIN_IMAGE;
+      curImage = ba.model.RAIN_IMAGE;
       currentOption = mig;
     }
     else if (type.equals(summer))
     {
-      curImage = Model.BUG_IMAGE;
+      curImage = ba.model.BUG_IMAGE;
       currentOption = "Breeding";
     }
     

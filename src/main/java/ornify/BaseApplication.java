@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import app.JApplication;
+import io.ResourceFinder;
+import resources.Marker;
 
 /**
  * Application Starting Point for Ornify
@@ -21,6 +23,7 @@ public class BaseApplication extends JApplication implements ActionListener
   public static final int HEIGHT = 600;
 
   public static final Color BACKGROUND_COLOR = new Color(180, 250, 250);
+  public Model model;
 
   protected static final String ABOUT = "About";
   protected static final String LOAD = "Load";
@@ -130,7 +133,7 @@ public class BaseApplication extends JApplication implements ActionListener
     isLastPanel = false;
     Model.getSelections()[1] = "";
     Model.getSelections()[7] = "";
-    Model.endResult = new ArrayList<String>();
+    model.endResult = new ArrayList<String>();
     curPanel = panels.get(index);
     curPanel.setVisible(true);
     panel.add(curPanel);
@@ -190,6 +193,9 @@ public class BaseApplication extends JApplication implements ActionListener
   @Override public void init()
   {
     System.out.println("Entering init...");
+    ResourceFinder finder = ResourceFinder.createInstance(new Marker());
+    ImageReader reader = new ImageReader(finder);
+    this.model = new Model(reader);
     // Add the panel to the main window
     JPanel panel = (JPanel) this.getContentPane();
     panel.setLayout(null);

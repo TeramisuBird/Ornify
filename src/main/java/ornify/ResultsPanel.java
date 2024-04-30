@@ -50,7 +50,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
   public ResultsPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
-
+    this.ba = ba;
     this.tryAnotherButton.addActionListener(this);
     this.returnButton.addActionListener(this);
     this.nextButton.addActionListener(this);
@@ -59,7 +59,6 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     configureResults();
 
     this.db = new SQLDatabase(IS_ONLINE);
-    this.ba = ba;
   }
   
   /**
@@ -91,7 +90,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
       columnCount = meta.getColumnCount();
       for (int i = 1; i <= columnCount; i++)
       {
-        Model.endResult.add(set.getString(i));
+        ba.model.endResult.add(set.getString(i));
         System.out.println(set.getString(i));
       }
 
@@ -181,7 +180,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
         super.text.setFont(new Font(verdana, Font.BOLD, 20));
         super.text.setText("Oops! That bird doesn't seem to exist.");
         this.textPane.setText("Doesn't exist");
-        super.image.setIcon(ImageReader.downloadImage("https://i.redd.it/thlztdwby2ub1.jpg"));
+        super.image.setIcon(ba.model.reader.downloadImage("https://i.redd.it/thlztdwby2ub1.jpg"));
 
         super.controlPanel.remove(restartButton);
         super.controlPanel.remove(super.nextButton);
@@ -219,14 +218,14 @@ public class ResultsPanel extends CustomPanel implements ActionListener
         if (set.next())
         {
           this.textPane.setText(set.getString(1));
-          super.image.setIcon(ImageReader.downloadImage(set.getString(2)));
+          super.image.setIcon(ba.model.reader.downloadImage(set.getString(2)));
         }
         else
         {
           if (set.first())
           {
             this.textPane.setText(set.getString(1));
-            super.image.setIcon(ImageReader.downloadImage(set.getString(2)));
+            super.image.setIcon(ba.model.reader.downloadImage(set.getString(2)));
           }
         }
       }

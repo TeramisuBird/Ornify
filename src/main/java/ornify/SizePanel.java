@@ -31,7 +31,7 @@ public class SizePanel extends CustomPanel
   public SizePanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
-    super.questionPanel.remove(super.image);
+    //super.questionPanel.remove(super.image);
     currentOption = null;
 
     this.buttons = new JButton[Model.SIZE.length];
@@ -40,8 +40,10 @@ public class SizePanel extends CustomPanel
     for (int i = 0; i < buttons.length; i++)
     {
       buttons[i] = new JButton();
-      ImageIcon icon = new ImageIcon(Model.SIZE_IMAGES[i]);
-      buttons[i].setIcon(icon);
+      if (ba.model.SIZE_IMAGES[i]!=null) {
+        ImageIcon icon = new ImageIcon(ba.model.SIZE_IMAGES[i]);
+        buttons[i].setIcon(icon);
+      }
       buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
       buttons[i].setVerticalTextPosition(SwingConstants.BOTTOM);
       buttons[i].setText(Model.SIZE[i]);

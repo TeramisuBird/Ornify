@@ -47,22 +47,17 @@ public class WebBrowser extends JPanel
   /**
    * The constructor of this web browser.
    */
-  public WebBrowser()
+  public WebBrowser(BaseApplication ba)
   {
-    this("http://www.google.com");
+    this("http://www.google.com", ba);
   }
 
   public WebBrowser(String url, BaseApplication ba)
   {
-    this(url);
     this.ba = ba;
-  }
-
-  public WebBrowser(String url)
-  {
     jfxPanel = new JFXPanel();
     Platform.setImplicitExit(false);
-    Model.thread = new Thread(() -> Platform.runLater(() -> {
+    ba.model.thread = new Thread(() -> Platform.runLater(() -> {
       stage = new Stage();
       stage.setResizable(true);
       Group root = new Group();
@@ -75,7 +70,7 @@ public class WebBrowser extends JPanel
       children.add(browser);
       jfxPanel.setScene(scene);
     }));
-    Model.thread.start();
+    ba.model.thread.start();
     this.setLayout(new BorderLayout());
     this.add(jfxPanel, BorderLayout.CENTER);
     controlPanel = new JPanel();
@@ -157,7 +152,7 @@ public class WebBrowser extends JPanel
     // Start over button
     JButton restartButton = new JButton("Start over?");
     restartButton.addActionListener((ActionEvent e) -> {
-      ba.setLayeredPane(Model.overlay);
+      ba.setLayeredPane(ba.model.overlay);
       ba.handleRestart();
     });
     panel.add(restartButton);
