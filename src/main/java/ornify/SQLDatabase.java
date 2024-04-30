@@ -19,12 +19,10 @@ import java.util.ArrayList;
  */
 public class SQLDatabase
 {
-  private final String secretFile = "sql_secret.txt";
+  public static final String SECRET_FILEPATH = "sql_secret.txt";
+  public static final String ERROR_MESSAGE = "SQL Error: ";
   private Connection connection;
-  
-  private String root = "root";
-  private String error = "SQL Error: ";
-  
+
   /**
    * Constructor.
    */
@@ -43,19 +41,20 @@ public class SQLDatabase
    * <li>local database username
    * <li>local database password
    * 
-   * @param isOnline for determining to use local/online db
+   * @param isOnline
+   *          for determining to use local/online db
    */
   public SQLDatabase(final boolean isOnline)
   {
     String serverName = "localhost";
     String databaseName = "birds";
     String databaseURL = "jdbc:mysql://";
-    String username = root;
-    String password = root;
+    String username = "root";
+    String password = "password";
     BufferedReader reader;
     try
     {
-      reader = new BufferedReader(new FileReader(secretFile));
+      reader = new BufferedReader(new FileReader(SECRET_FILEPATH));
       if (isOnline)
       {
         password = reader.readLine();
@@ -133,7 +132,7 @@ public class SQLDatabase
     }
     catch (SQLException e)
     {
-      System.out.println(error + e.getErrorCode());
+      System.out.println(ERROR_MESSAGE + e.getErrorCode());
       e.printStackTrace();
     }
     return list;
@@ -160,7 +159,7 @@ public class SQLDatabase
     }
     catch (SQLException e)
     {
-      System.out.println(error + e.getErrorCode());
+      System.out.println(ERROR_MESSAGE + e.getErrorCode());
       e.printStackTrace();
     }
   }
@@ -188,7 +187,7 @@ public class SQLDatabase
     }
     catch (SQLException e)
     {
-      System.out.println(error + e.getErrorCode());
+      System.out.println(ERROR_MESSAGE + e.getErrorCode());
       e.printStackTrace();
     }
   }
@@ -212,7 +211,7 @@ public class SQLDatabase
     }
     catch (SQLException e)
     {
-      System.out.println(error + e.getErrorCode());
+      System.out.println(ERROR_MESSAGE + e.getErrorCode());
       return null;
     }
   }

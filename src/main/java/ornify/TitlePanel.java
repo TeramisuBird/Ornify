@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 public class TitlePanel implements ActionListener
 {
   private static final String HTML = "<html><body style='width: %1spx'>%1s";
-  
+
   private String start = "Start";
   private JButton startButton = new JButton(start);
   private JLabel titleText = new JLabel(" ");
@@ -51,7 +51,7 @@ public class TitlePanel implements ActionListener
     this.startButton.addActionListener(this);
 
     this.image.setHorizontalAlignment(SwingConstants.CENTER);
-    this.image = new JLabel(Model.getTitleImage());
+    this.image = new JLabel(ba.getModel().getTitleImage());
     controlPanel.setLayout(new FlowLayout());
     this.controlPanel.setBackground(BaseApplication.BACKGROUND_COLOR);
     controlPanel.add(startButton);
@@ -73,9 +73,12 @@ public class TitlePanel implements ActionListener
 
   /**
    * Method that checks for action performed.
-   * @param e the action
+   * 
+   * @param e
+   *          the action
    */
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
     if (e.getActionCommand().equals(start))
     {

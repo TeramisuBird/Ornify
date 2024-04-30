@@ -6,64 +6,62 @@ import java.awt.Dimension;
 import javax.swing.JLayeredPane;
 
 /**
- * Class for displaying the web panel.
+ * Creates a WebsiteDisplayPanel to render.
+ * 
+ * @author Joseph Blethen
+ * @version 1.0
+ * 
+ *          This work complies with the JMU Honor Code.
+ *
  */
 public class WebDisplayPanel
 {
-  BaseApplication baseApp;
-  
-  private String over = "/overview";
-  private String url = "https://www.allaboutbirds.org/guide/";
+
+  private BaseApplication ba;
 
   /**
-   * Constructor.
+   * The parameterized constructor of the WebDisplayPanel.
+   * 
    * @param ba
+   *          the BaseApplication that this program is running on.
    */
   public WebDisplayPanel(final BaseApplication ba)
   {
-    this.baseApp = ba;
+    this.ba = ba;
     initialize();
   }
 
   /**
-   * Method to initialize the panel.
+   * The initializer of this program. Can only be ran once.
    */
-  public void initialize()
+  private void initialize()
   {
-    if (Model.getEnd().get(2) != null)
+    if (ba.getModel().getEndResult().get(2) != null)
     {
-      WebBrowser.infoURL = url + Model.getEnd().get(0)
-          + over;
-      WebBrowser.soundURL = WebBrowser.getiframe(Model.getEnd().get(2));
-      Model.setWeb(new WebBrowser(WebBrowser.soundURL, baseApp));
-      Model.setOverlay(baseApp.getLayeredPane());
+      ba.getModel().setBrowser(new WebBrowser(ba));
+      ba.getModel().setOverlay(ba.getLayeredPane());
       JLayeredPane layeredPane = new JLayeredPane();
       layeredPane.setLayout(new BorderLayout());
       layeredPane.setPreferredSize(new Dimension(1400, 1000));
-      layeredPane.add(Model.getWeb());
-      baseApp.setLayeredPane(layeredPane);
+      layeredPane.add(ba.getModel().getBrowser());
+      ba.setLayeredPane(layeredPane);
     }
   }
 
   /**
-   * Method to refresh the panel.
+   * Refreshes this program's web browser when called.
    */
   public void refresh()
   {
-    if (Model.getEnd().get(2) != null)
+    if (ba.getModel().getEndResult().get(2) != null)
     {
-      WebBrowser.linkButton.setText("Get more info");
-      WebBrowser.isFirstPage = true;
-      WebBrowser.infoURL = url + Model.getEnd().get(0)
-          + over;
-      WebBrowser.soundURL = WebBrowser.getiframe(Model.getEnd().get(2));
-      Model.getWeb().browse(WebBrowser.soundURL);
-      Model.setOverlay(baseApp.getLayeredPane());
+      ba.getModel().getBrowser().handleBrowserReload();
+      ba.getModel().setOverlay(ba.getLayeredPane());
       JLayeredPane layeredPane = new JLayeredPane();
       layeredPane.setLayout(new BorderLayout());
       layeredPane.setPreferredSize(new Dimension(1400, 1000));
-      layeredPane.add(Model.getWeb());
-      baseApp.setLayeredPane(layeredPane);
+      layeredPane.add(ba.getModel().getBrowser());
+      ba.setLayeredPane(layeredPane);
     }
   }
 

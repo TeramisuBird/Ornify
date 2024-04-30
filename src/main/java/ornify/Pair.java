@@ -30,6 +30,46 @@ public class Pair<F, S>
   }
 
   /**
+   * Method that checks for equality.
+   * @param obj
+   * @return the equality
+   */
+  @Override
+  public boolean equals(final Object obj)
+  {
+    boolean result = false;
+    if (obj == this)
+    {
+      result = true;
+    }
+
+    if (obj instanceof Pair && this.first != null && this.second != null)
+    {
+      @SuppressWarnings("unchecked")
+      Pair<F, S> other = (Pair<F, S>) obj;
+      result = this.first.equals(other.first) && this.second.equals(other.second);
+    }
+
+    return result;
+  }
+  
+  @Override
+  public int hashCode()
+  {
+    int result = 23;
+    if (first != null)
+    {
+      result = 17 * result + first.hashCode();
+    }
+    if (second != null)
+    {
+      result = 17 * result + second.hashCode();
+    }
+    
+    return result;
+  }
+  
+  /**
    * Method that returns the first obj.
    * 
    * @return first value of type F
@@ -38,7 +78,7 @@ public class Pair<F, S>
   {
     return first;
   }
-
+  
   /**
    * Method that returns the second obj.
    * 

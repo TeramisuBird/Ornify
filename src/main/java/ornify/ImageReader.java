@@ -25,10 +25,22 @@ import resources.Marker;
  */
 public class ImageReader
 {
+  public static final String ERROR_MESSAGE = "Cannot find image: ";
   /**
    * Must be instantiated at local resources folder.
    */
-  private static ResourceFinder finder = ResourceFinder.createInstance(new Marker());
+  private ResourceFinder finder;
+
+  /**
+   * A parameterized constructor which makes an ImageReader object.
+   * 
+   * @param finder
+   *          the given ResourceFinder object created at Marker's location.
+   */
+  public ImageReader(final ResourceFinder finder)
+  {
+    this.finder = (finder == null) ? finder : ResourceFinder.createInstance(new Marker());
+  }
 
   /**
    * Handles the resizing of images.
@@ -41,8 +53,12 @@ public class ImageReader
    *          The resized height.
    * @return A resized image as an ImageIcon object.
    */
-  private static ImageIcon getResizedIcon(final BufferedImage img, final int x, final int y)
+  private ImageIcon getResizedIcon(final BufferedImage img, final int x, final int y)
   {
+    if (img == null)
+    {
+      return null;
+    }
     ImageIcon icon = null;
     Image tmp = img.getScaledInstance(x, y, Image.SCALE_SMOOTH);
     BufferedImage dimg = new BufferedImage(x, y, BufferedImage.TYPE_INT_ARGB);
@@ -60,7 +76,7 @@ public class ImageReader
    *          The filename of the image.
    * @return An ImageIcon object of the local image.
    */
-  public static ImageIcon readImage(final String path)
+  public ImageIcon readImage(final String path)
   {
     return readImage(path, 200, 200);
   }
@@ -76,11 +92,15 @@ public class ImageReader
    *          The pixel height
    * @return An ImageIcon object of the local image.
    */
-  public static ImageIcon readImage(final String path, final int x, final int y)
+  public ImageIcon readImage(final String path, final int x, final int y)
   {
     ImageIcon icon = null;
-    InputStream stream = null;
-    stream = finder.findInputStream(path);
+    InputStream stream = finder.findInputStream(path);
+    if (stream == null)
+    {
+      System.out.println(ERROR_MESSAGE + path);
+      return null;
+    }
     try
     {
       icon = getResizedIcon(ImageIO.read(stream), x, y);
@@ -99,13 +119,18 @@ public class ImageReader
    *          The filename of the image.
    * @return An abstract Image object.
    */
-  public static Image readBuffered(final String path)
+  public Image readBuffered(final String path)
   {
     BufferedImage image = null;
     InputStream stream = null;
     stream = finder.findInputStream(path);
     try
     {
+      if (stream == null)
+      {
+        System.out.println(ERROR_MESSAGE + path);
+        return null;
+      }
       image = ImageIO.read(stream);
     }
     catch (IOException e)
@@ -127,8 +152,12 @@ public class ImageReader
    *          The scale to grow or shrink in y-direction.
    * @return A rescaled Image abstraction.
    */
-  public static Image resizeImage(final Image image, final int x, final int y)
+  public Image resizeImage(final Image image, final int x, final int y)
   {
+    if (image == null)
+    {
+      return null;
+    }
     Image tmp = image.getScaledInstance(x, y, Image.SCALE_SMOOTH);
     BufferedImage dimg = new BufferedImage(x, y, BufferedImage.TYPE_INT_ARGB);
 
@@ -146,7 +175,7 @@ public class ImageReader
    *          The link to the image download.
    * @return A downloaded 250 by 250 image.
    */
-  public static ImageIcon downloadImage(final String url)
+  public ImageIcon downloadImage(final String url)
   {
     return downloadImage(url, 250, 250);
   }
@@ -162,13 +191,20 @@ public class ImageReader
    *          The pixel height
    * @return A downloaded and resized image.
    */
-  public static ImageIcon downloadImage(final String url, final int x, final int y)
+  public ImageIcon downloadImage(final String url, final int x, final int y)
   {
     ImageIcon icon = null;
     try
     {
       URL path = new URL(url);
-      icon = getResizedIcon(ImageIO.read(path), x, y);
+      BufferedImage stream = ImageIO.read(path);
+      if (stream == null)
+      {
+        System.out.println("Cannot download image " + url);
+        return null;
+      }
+      icon = getResizedIcon(stream, x, y);
+
     }
     catch (MalformedURLException e)
     {

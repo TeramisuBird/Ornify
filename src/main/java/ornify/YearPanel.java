@@ -21,11 +21,12 @@ public class YearPanel extends CustomPanel
   private String currentOption;
   private Image curImage;
   private Stage stage;
-  
+  private BaseApplication ba;
+
   private FallingSprite[] items;
-  
+
   private JButton[] buttons;
-  
+
   private String autumn = "Autumn";
   private String winter = "Winter";
   private String spring = "Spring";
@@ -35,19 +36,22 @@ public class YearPanel extends CustomPanel
   /**
    * Panel constructor.
    * 
-   * @param question for panel's question
-   * @param ba for application to add panel to
+   * @param question
+   *          for panel's question
+   * @param ba
+   *          for application to add panel to
    */
   public YearPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
+    this.ba = ba;
     super.questionPanel.remove(super.image);
-    
+
     this.stage = new Stage(20);
     stage.setBackground(new Color(180, 250, 250));
     stage.getView().setPreferredSize(new Dimension(300, 300));
     this.curImage = null;
-    
+
     this.items = new FallingSprite[10];
     for (int i = 0; i < items.length; i++)
     {
@@ -55,9 +59,9 @@ public class YearPanel extends CustomPanel
       items[i] = new FallingSprite(con);
       stage.add(items[i]);
     }
-    
+
     currentOption = null;
-    
+
     this.buttons = new JButton[seasons.length];
     for (int i = 0; i < buttons.length; i++)
     {
@@ -74,10 +78,10 @@ public class YearPanel extends CustomPanel
     buttons[2].setForeground(new Color(46, 139, 87));
     buttons[3].setBackground(Color.YELLOW);
     buttons[3].setForeground(new Color(228, 208, 10));
-    
+
     super.questionPanel.add(stage.getView());
   }
-  
+
   /**
    * getter for user's current selection.
    * 
@@ -87,12 +91,15 @@ public class YearPanel extends CustomPanel
   {
     return currentOption;
   }
-  
+
   /**
    * Method that checks for action performed.
-   * @param e the action
+   * 
+   * @param e
+   *          the action
    */
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {
@@ -109,43 +116,44 @@ public class YearPanel extends CustomPanel
         if (currentOption != null)
         {
           Model.getPicked()[index] = true;
-          String queryText = "(season = 'all-year' or season = '" 
-              + currentOption.toLowerCase() + "')";
+          String queryText = "(season = 'all-year' or season = '" + currentOption.toLowerCase()
+              + "')";
           Model.getSelections()[index] = queryText;
         }
         break;
     }
   }
-  
+
   /**
    * get corresponding text for the user's selection.
    * 
-   * @param type for user visible selection
+   * @param type
+   *          for user visible selection
    */
   private void getChoice(final String type)
   {
     String mig = "Migration";
     if (type.equals(autumn))
     {
-      curImage = Model.getSeason(autumn);
+      curImage = ba.getModel().getSeasonImages()[0];
       currentOption = mig;
     }
     else if (type.equals(winter))
     {
-      curImage = Model.getSeason(winter);
+      curImage = ba.getModel().getSeasonImages()[1];
       currentOption = "Non-Breeding";
     }
     else if (type.equals(spring))
     {
-      curImage = Model.getSeason(spring);
+      curImage = ba.getModel().getSeasonImages()[2];
       currentOption = mig;
     }
     else if (type.equals(summer))
     {
-      curImage = Model.getSeason(summer);
+      curImage = ba.getModel().getSeasonImages()[3];
       currentOption = "Breeding";
     }
-    
+
     if (curImage != null)
     {
       for (int i = 0; i < items.length; i++)
@@ -153,7 +161,7 @@ public class YearPanel extends CustomPanel
         items[i].setSprite((BufferedImage) curImage);
       }
     }
-    
+
     stage.start();
     stage.repaint();
   }

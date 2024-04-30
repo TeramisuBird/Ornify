@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import app.JApplication;
+import io.ResourceFinder;
+import resources.Marker;
 
 /**
  * Application Starting Point for Ornify
@@ -16,18 +18,18 @@ import app.JApplication;
  * This work complies with the JMU Honor Code.
  */
 public class BaseApplication extends JApplication implements ActionListener
-{ 
+{
+
   public static final int WIDTH = 800;
   public static final int HEIGHT = 600;
-
+  public static final String ABOUT = "About";
+  public static final String LOAD = "Load";
+  public static final String START = "Start";
+  public static final String RETURN = "Return";
+  public static final String NEXT = "Next";
   public static final Color BACKGROUND_COLOR = new Color(180, 250, 250);
-
-  protected static final String ABOUT = "About";
-  protected static final String LOAD = "Load";
-  protected static final String START = "Start";
-  protected static final String RETURN = "Return";
-  protected static final String NEXT = "Next";
   private static boolean isLastPanel = false;
+  private Model model;
   private JPanel curPanel;
   private ResultsPanel resultPanel;
   private int index;
@@ -44,6 +46,16 @@ public class BaseApplication extends JApplication implements ActionListener
     super(args, WIDTH, HEIGHT);
     panels = new ArrayList<JPanel>();
     index = 0;
+  }
+
+  /**
+   * Gets the model of this program.
+   * 
+   * @return a model object
+   */
+  public Model getModel()
+  {
+    return this.model;
   }
 
   /**
@@ -128,9 +140,11 @@ public class BaseApplication extends JApplication implements ActionListener
     panel.remove(curPanel);
     index = 0;
     isLastPanel = false;
-    Model.getSelections()[1] = "";
-    Model.getSelections()[7] = "";
-    Model.setEnd(new ArrayList<String>());
+    for (int i=0; i<Model.getSelections().length; i++) 
+    {
+    	Model.getSelections()[i] = "";
+    }
+    model.setEndResult(new ArrayList<String>());
     curPanel = panels.get(index);
     curPanel.setVisible(true);
     panel.add(curPanel);
@@ -187,9 +201,13 @@ public class BaseApplication extends JApplication implements ActionListener
   /**
    * Method that initializes the application.
    */
-  @Override public void init()
+  @Override
+  public void init()
   {
     System.out.println("Entering init...");
+    ResourceFinder finder = ResourceFinder.createInstance(new Marker());
+    ImageReader reader = new ImageReader(finder);
+    this.model = new Model(reader);
     // Add the panel to the main window
     JPanel panel = (JPanel) this.getContentPane();
     panel.setLayout(null);

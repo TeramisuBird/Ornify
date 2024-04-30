@@ -32,17 +32,17 @@ public class BeakPanel extends CustomPanel
     super.questionPanel.remove(super.image);
     this.currentOption = null;
 
-    this.buttons = new JButton[Model.getBeak().length];
+    this.buttons = new JButton[Model.BEAK_SHAPE.length];
     super.comboPanel.setLayout(new FlowLayout());
 
     for (int i = 0; i < buttons.length; i++)
     {
       buttons[i] = new JButton();
-      ImageIcon icon = new ImageIcon(Model.BEAK_IMAGES[i]);
+      ImageIcon icon = new ImageIcon(ba.getModel().getBeakImages()[i]);
       buttons[i].setIcon(icon);
       buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
       buttons[i].setVerticalTextPosition(SwingConstants.BOTTOM);
-      buttons[i].setText(Model.getBeak()[i]);
+      buttons[i].setText(Model.BEAK_SHAPE[i]);
       buttons[i].setPreferredSize(new Dimension(210, 240));
       buttons[i].addActionListener(this);
       super.comboPanel.add(buttons[i]);

@@ -32,17 +32,17 @@ public class FootPanel extends CustomPanel
     super.questionPanel.remove(super.image);
     currentOption = null;
 
-    this.buttons = new JButton[Model.getFoot().length];
+    this.buttons = new JButton[Model.FOOT_SHAPE.length];
     super.comboPanel.setLayout(new FlowLayout());
 
     for (int i = 0; i < buttons.length; i++)
     {
       buttons[i] = new JButton();
-      ImageIcon icon = new ImageIcon(Model.getFeetImages()[i]);
+      ImageIcon icon = new ImageIcon(ba.getModel().getFeetImages()[i]);
       buttons[i].setIcon(icon);
       buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
       buttons[i].setVerticalTextPosition(SwingConstants.BOTTOM);
-      buttons[i].setText(Model.getFoot()[i]);
+      buttons[i].setText(Model.FOOT_SHAPE[i]);
       buttons[i].setPreferredSize(new Dimension(210, 240));
       buttons[i].addActionListener(this);
       super.comboPanel.add(buttons[i]);

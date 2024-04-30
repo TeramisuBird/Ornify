@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 
 /**
- * Database Selections from user
+ * Database Selections from user.
  * <li> 0. Season
  * <li> 1. Size
  * <li> 2. Crown
@@ -34,28 +34,12 @@ import javax.swing.JLayeredPane;
  */
 public class Model
 {
-  private static Thread thread;
-  private static WebBrowser browser;
-  private static JLayeredPane overlay = null;
-  private static ArrayList<String> endResult = new ArrayList<String>();
-
-  // Images for seasons animation
-  private static final Image BUG_IMAGE = 
-      ImageReader.resizeImage(ImageReader.readBuffered("Bug.png"),
-      50, 50);
-  private static final Image LEAF_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Leaf.png"), 50, 50);
-  private static final Image RAIN_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("raindrop.png"), 50, 50);
-  private static final Image SNOW_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Snowflake.png"), 50, 50);
-
-  private static final ImageIcon TITLE_IMAGE = ImageReader.readImage("title_bird.png");
-
-  private static final String[] SIZE = {"Tiny", "Small", "Medium", "Large"};
-  private static final String[] FOOT_SHAPE = {"Clawed", "Climbing", "Perching", "Wading", "Webbed"};
-  private static final String[] BEAK_SHAPE = {"Cone", "Chisel", "Pointy", "Hooked", "Flat",
+  public static final String[] BEAK_LENGTH = {"Short", "Average", "Long"};
+  public static final String[] BEAK_SHAPE = {"Cone", "Chisel", "Pointy", "Hooked", "Flat",
       "Probing"};
+  public static final String[] FOOT_SHAPE = {"Clawed", "Climbing", "Perching", "Wading", "Webbed"};
+  public static final String[] SIZE = {"Tiny", "Small", "Medium", "Large"};
+  public static final String[] YEAR = {"Migration", "Breeding", "Non-breeding", "All-year"};
 
   private static final int BEAK_X = 210;
   private static final int BEAK_Y = 210;
@@ -63,7 +47,7 @@ public class Model
   private static final int FEET_Y = 210;
   private static final int SIZE_X = 310;
   private static final int SIZE_Y = 310;
-  
+
   private static final String DEFAULT = "default";
   private static final String BLACK = "black";
   private static final String BROWN = "brown";
@@ -77,50 +61,6 @@ public class Model
   private static final String YELLOW = "yellow";
   private static final String WHITE = "white";
 
-  // title_bird.png is from
-  // https://4vector.com/i/free-vector-cartoon-bird-03_098900_cartoon_bird_03.png
-
-  // Images for the feet type panel
-  private static final Image TINY_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Tiny.png"), SIZE_X, SIZE_Y);
-  private static final Image SMALL_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Small.png"), SIZE_X, SIZE_Y);
-  private static final Image MEDIUM_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Medium.png"), SIZE_X, SIZE_Y);
-  private static final Image LARGE_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Large.png"), SIZE_X, SIZE_Y);
-  private static final Image[] SIZE_IMAGES = {TINY_IMAGE, SMALL_IMAGE, MEDIUM_IMAGE, LARGE_IMAGE};
-
-  // Images for the feet type panel
-  private static final Image CLAWED_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Clawed.png"), FEET_X, FEET_Y);
-  private static final Image CLIMBING_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Climbing.png"), FEET_X, FEET_Y);
-  private static final Image PERCHING_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Perching.png"), FEET_X, FEET_Y);
-  private static final Image WADING_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Wading.png"), FEET_X, FEET_Y);
-  private static final Image WEBBED_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Webbed.png"), FEET_X, FEET_Y);
-  private static final Image[] FEET_IMAGES = {CLAWED_IMAGE, CLIMBING_IMAGE, PERCHING_IMAGE,
-      WADING_IMAGE, WEBBED_IMAGE};
-
-  // Images for the beak type panel
-  public static final Image CONE_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Cone.png"), BEAK_X, BEAK_Y);
-  public static final Image CHISEL_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Chisel.png"), BEAK_X, BEAK_Y);
-  public static final Image POINTY_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Pointy.png"), BEAK_X, BEAK_Y);
-  public static final Image HOOKED_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Hooked.png"), BEAK_X, BEAK_Y);
-  public static final Image FLAT_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Flat.png"), BEAK_X, BEAK_Y);
-  public static final Image PROBING_IMAGE = ImageReader
-      .resizeImage(ImageReader.readBuffered("Probing.png"), BEAK_X, BEAK_Y);
-  public static final Image[] BEAK_IMAGES = {CONE_IMAGE, CHISEL_IMAGE, POINTY_IMAGE, HOOKED_IMAGE,
-      FLAT_IMAGE, PROBING_IMAGE};
-  
   private static ArrayList<Pair<String, Color>> beakColor = new ArrayList<Pair<String, Color>>();
   private static ArrayList<Pair<String, Color>> crownColor = new ArrayList<Pair<String, Color>>();
   private static ArrayList<Pair<String, Color>> superColor = new ArrayList<Pair<String, Color>>();
@@ -134,19 +74,87 @@ public class Model
   private static ArrayList<Pair<String, Color>> footColor = new ArrayList<Pair<String, Color>>();
   
   private static boolean[] picked = new boolean[15];
-  
   private static HashMap<String, Integer> selectionIndicies = new HashMap<String, Integer>();
-  
   private static String[] selections = new String[15];
+  
+  private ArrayList<String> endResult = new ArrayList<String>();
+  private JLayeredPane overlay = null;
+  private Thread thread;
+  private WebBrowser browser;
+  
+  // Images for the feet type panel.
+  private Image[] sizeImages = new Image[4];
+
+  // Images for the feet type panel.
+  private Image[] feetImages = new Image[5];
+
+  // Images for the beak type panel.
+  private Image[] beakImages = new Image[6];
+
+  // Images for seasons animation.
+  private Image[] seasonImages = new Image[4];
+
+  // title_bird.png is from
+  // https://4vector.com/i/free-vector-cartoon-bird-03_098900_cartoon_bird_03.png
+  private ImageIcon titleImage;
+  private ImageReader reader;
 
   /**
-   * static constructor.
+   * Parameterized constructor of the model.
    * 
-   * fills color option ArrayLists & Selection/Index HashMap
+   * @param reader
+   *          - The image reader object.
    */
-  static
+  public Model(final ImageReader reader)
   {
-    // fill crown color options
+    this.reader = reader;
+    Image imageBug = reader.resizeImage(reader.readBuffered("Bug.png"), 50, 50);
+    Image imageLeaf = reader.resizeImage(reader.readBuffered("Leaf.png"), 50, 50);
+    Image imageRain = reader.resizeImage(reader.readBuffered("raindrop.png"), 50, 50);
+    Image imageSnow = reader.resizeImage(reader.readBuffered("Snowflake.png"), 50, 50);
+    seasonImages[0] = imageLeaf;
+    seasonImages[1] = imageSnow;
+    seasonImages[2] = imageRain;
+    seasonImages[3] = imageBug;
+    this.titleImage = reader.readImage("title_bird.png");
+
+    // Images for the feet type panel.
+    Image imageTiny = reader.resizeImage(reader.readBuffered("tiny.png"), SIZE_X, SIZE_Y);
+    Image imageSmall = reader.resizeImage(reader.readBuffered("small.png"), SIZE_X, SIZE_Y);
+    Image imageMedium = reader.resizeImage(reader.readBuffered("medium.png"), SIZE_X, SIZE_Y);
+    Image imageLarge = reader.resizeImage(reader.readBuffered("large.png"), SIZE_X, SIZE_Y);
+    sizeImages[0] = imageTiny;
+    sizeImages[1] = imageSmall;
+    sizeImages[2] = imageMedium;
+    sizeImages[3] = imageLarge;
+
+    // Images for the feet type panel.
+    Image imageClawed = reader.resizeImage(reader.readBuffered("Clawed.png"), FEET_X, FEET_Y);
+    Image imageClimbing = reader.resizeImage(reader.readBuffered("Climbing.png"), FEET_X, FEET_Y);
+    Image imagePerching = reader.resizeImage(reader.readBuffered("Perching.png"), FEET_X, FEET_Y);
+    Image imageWading = reader.resizeImage(reader.readBuffered("Wading.png"), FEET_X, FEET_Y);
+    Image imageWebbed = reader.resizeImage(reader.readBuffered("Webbed.png"), FEET_X, FEET_Y);
+    feetImages[0] = imageClawed;
+    feetImages[1] = imageClimbing;
+    feetImages[2] = imagePerching;
+    feetImages[3] = imageWading;
+    feetImages[4] = imageWebbed;
+
+    // Images for the beak type panel.
+    Image imageCone = reader.resizeImage(reader.readBuffered("Cone.png"), BEAK_X, BEAK_Y);
+    Image imageChisel = reader.resizeImage(reader.readBuffered("Chisel.png"), BEAK_X, BEAK_Y);
+    Image imagePointy = reader.resizeImage(reader.readBuffered("Pointy.png"), BEAK_X, BEAK_Y);
+    Image imageHooked = reader.resizeImage(reader.readBuffered("Hooked.png"), BEAK_X, BEAK_Y);
+    Image imageFlat = reader.resizeImage(reader.readBuffered("Flat.png"), BEAK_X, BEAK_Y);
+    Image imageProbing = reader.resizeImage(reader.readBuffered("Probing.png"), BEAK_X, BEAK_Y);
+    beakImages[0] = imageCone;
+    beakImages[1] = imageChisel;
+    beakImages[2] = imagePointy;
+    beakImages[3] = imageHooked;
+    beakImages[4] = imageFlat;
+    beakImages[5] = imageProbing;
+
+    // fill crown color options.
     crownColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     crownColor.add(new Pair<String, Color>(BLACK, new Color(0, 0, 0)));
     crownColor.add(new Pair<String, Color>(BROWN, new Color(88, 57, 39)));
@@ -155,7 +163,7 @@ public class Model
     crownColor.add(new Pair<String, Color>(RED, new Color(255, 0, 0)));
     crownColor.add(new Pair<String, Color>(MUTED_TAN, new Color(210, 187, 173)));
 
-    // fill supercilium color options
+    // fill supercilium color options.
     superColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     superColor.add(new Pair<String, Color>(LIGHT_GRAY, new Color(225, 225, 225)));
     superColor.add(new Pair<String, Color>(YELLOW, new Color(255, 255, 0)));
@@ -169,7 +177,7 @@ public class Model
     superColor.add(new Pair<String, Color>(WHITE_TAN, new Color(240, 222, 210)));
     superColor.add(new Pair<String, Color>(RED, new Color(255, 0, 0)));
 
-    // fill eyestripe color coptions
+    // fill eyestripe color coptions.
     eyestripeColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     eyestripeColor.add(new Pair<String, Color>(BLACK, new Color(0, 0, 0)));
     eyestripeColor.add(new Pair<String, Color>(WHITE, new Color(255, 255, 255)));
@@ -179,7 +187,7 @@ public class Model
     eyestripeColor.add(new Pair<String, Color>(GRAY, new Color(183, 183, 183)));
     eyestripeColor.add(new Pair<String, Color>(RED, new Color(255, 0, 0)));
 
-    // fill auricular color options
+    // fill auricular color options.
     auricColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     auricColor.add(new Pair<String, Color>(GRAY, new Color(183, 183, 183)));
     auricColor.add(new Pair<String, Color>(WHITE, new Color(255, 255, 255)));
@@ -192,7 +200,7 @@ public class Model
     auricColor.add(new Pair<String, Color>(WHITE_TAN, new Color(240, 222, 210)));
     auricColor.add(new Pair<String, Color>(RED, new Color(255, 0, 0)));
 
-    // fill beak color options
+    // fill beak color options.
     beakColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     beakColor.add(new Pair<String, Color>(GRAY, new Color(183, 183, 183)));
     beakColor.add(new Pair<String, Color>(BLACK, new Color(0, 0, 0)));
@@ -200,7 +208,7 @@ public class Model
     beakColor.add(new Pair<String, Color>(ORANGE, new Color(255, 153, 0)));
     beakColor.add(new Pair<String, Color>(WHITE_TAN, new Color(210, 180, 140)));
 
-    // fill throat color options
+    // fill throat color options.
     throatColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     throatColor.add(new Pair<String, Color>(WHITE, new Color(255, 255, 255)));
     throatColor.add(new Pair<String, Color>(TAN, new Color(210, 180, 140)));
@@ -210,7 +218,7 @@ public class Model
     throatColor.add(new Pair<String, Color>(RED, new Color(255, 0, 0)));
     throatColor.add(new Pair<String, Color>(BLACK, new Color(0, 0, 0)));
 
-    // fill breast color options
+    // fill breast color options.
     breastColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     breastColor.add(new Pair<String, Color>(LIGHT_GRAY, new Color(225, 225, 225)));
     breastColor.add(new Pair<String, Color>(GRAY, new Color(183, 183, 183)));
@@ -222,7 +230,7 @@ public class Model
     breastColor.add(new Pair<String, Color>(RED, new Color(255, 0, 0)));
     breastColor.add(new Pair<String, Color>(TAN, new Color(210, 180, 140)));
 
-    // fill covert color options
+    // fill covert color options.
     covertColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     covertColor.add(new Pair<String, Color>(BROWN, new Color(88, 57, 39)));
     covertColor.add(new Pair<String, Color>(GRAY, new Color(183, 183, 183)));
@@ -234,7 +242,7 @@ public class Model
     covertColor.add(new Pair<String, Color>(MUTED_TAN, new Color(210, 187, 173)));
     covertColor.add(new Pair<String, Color>(RED, new Color(255, 0, 0)));
 
-    // fill wing color options
+    // fill wing color options.
     wingColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     wingColor.add(new Pair<String, Color>(BROWN, new Color(88, 57, 39)));
     wingColor.add(new Pair<String, Color>(BLACK, new Color(0, 0, 0)));
@@ -244,7 +252,7 @@ public class Model
     wingColor.add(new Pair<String, Color>(WHITE, new Color(255, 255, 255)));
     wingColor.add(new Pair<String, Color>(RED, new Color(255, 0, 0)));
 
-    // fill foot color options
+    // fill foot color options.
     footColor.add(new Pair<String, Color>(DEFAULT, new Color(172, 91, 91)));
     footColor.add(new Pair<String, Color>(BROWN, new Color(88, 57, 39)));
     footColor.add(new Pair<String, Color>(YELLOW, new Color(255, 255, 0)));
@@ -268,7 +276,7 @@ public class Model
     selectionIndicies.put("foot_shape", 13);
     selectionIndicies.put("foot_color", 14);
   }
-  
+
   /**
    * get auricular colors.
    * 
@@ -278,7 +286,7 @@ public class Model
   {
     return Model.auricColor;
   }
-  
+
   /**
    * get beak colors.
    * 
@@ -288,7 +296,7 @@ public class Model
   {
     return Model.beakColor;
   }
-  
+
   /**
    * get breast colors.
    * 
@@ -298,7 +306,7 @@ public class Model
   {
     return Model.breastColor;
   }
-  
+
   /**
    * get covert colors.
    * 
@@ -308,7 +316,7 @@ public class Model
   {
     return Model.covertColor;
   }
-  
+
   /**
    * get crown colors.
    * 
@@ -318,7 +326,7 @@ public class Model
   {
     return Model.crownColor;
   }
-  
+
   /**
    * get eyestripe colors.
    * 
@@ -328,7 +336,7 @@ public class Model
   {
     return Model.eyestripeColor;
   }
-  
+
   /**
    * get foot colors.
    * 
@@ -348,7 +356,7 @@ public class Model
   {
     return Model.selectionIndicies;
   }
-  
+
   /**
    * get boolean array for option selected.
    * 
@@ -358,7 +366,7 @@ public class Model
   {
     return Model.picked;
   }
-  
+
   /**
    * get string array of user selections.
    * 
@@ -368,7 +376,7 @@ public class Model
   {
     return Model.selections;
   }
-  
+
   /**
    * get supercilium colors.
    * 
@@ -378,7 +386,7 @@ public class Model
   {
     return Model.superColor;
   }
-  
+
   /**
    * get throat colors.
    * 
@@ -388,7 +396,7 @@ public class Model
   {
     return Model.throatColor;
   }
-  
+
   /**
    * get wing colors.
    * 
@@ -398,159 +406,135 @@ public class Model
   {
     return Model.footColor;
   }
-  
+
   /**
-   * Method to get the thread.
-   * @return thread
+   * get the feet images.
+   * 
+   * @return the feetImages
    */
-  public static Thread getThread()
+  public final Image[] getFeetImages()
   {
-    return thread;
+    return feetImages;
+  }
+
+  /**
+   * get the beak images.
+   * 
+   * @return the beakImages
+   */
+  public final Image[] getBeakImages()
+  {
+    return beakImages;
   }
   
   /**
-   * Method to get the browser.
-   * @return web browser
+   * get the season images.
+   * 
+   * @return the seasonImages
    */
-  public static WebBrowser getWeb()
+  public final Image[] getSeasonImages()
   {
-    return browser;
+    return seasonImages;
   }
   
   /**
-   * Method to get the overlay.
-   * @return overlay
+   * get the size images.
+   * 
+   * @return the sizeImages
    */
-  public static JLayeredPane getOverlay()
+  public final Image[] getSizeImages()
   {
-    return overlay;
+    return sizeImages;
   }
   
   /**
-   * Method to get the results.
-   * @return results
+   * fetches a list of results from the final stage of the program.
+   * @return a list of results to retrieve.
    */
-  public static ArrayList<String> getEnd()
+  public ArrayList<String> getEndResult()
   {
     return endResult;
   }
   
   /**
-   * Method to set the browser.
-   * @param brow
+   * sets a list of results from the final stage of the program.
+   * @param endResult the list of results to save.
    */
-  public static void setWeb(final WebBrowser brow)
+  public void setEndResult(final ArrayList<String> endResult)
   {
-    browser = brow;
+    this.endResult = endResult;
+  }
+
+  /**
+   * fetches this program's original saved pane overlay.
+   * @return the overlay for this program to retrieve.
+   */
+  public JLayeredPane getOverlay()
+  {
+    return overlay;
   }
   
   /**
-   * Method to set the overlay.
-   * @param brow
+   * saves this program's pane overlay for the browser.
+   * @param overlay the overlay for this program to save.
    */
-  public static void setOverlay(final JLayeredPane brow)
+  public void setOverlay(final JLayeredPane overlay)
   {
-    overlay = brow;
+    this.overlay = overlay;
+  }
+
+  /**
+   * fetches the thread of this program's web browser.
+   * @return the Thread object that this program runs on.
+   */
+  public Thread getThread()
+  {
+    return thread;
   }
   
   /**
-   * Method to set the overlay.
-   * @param brow
+   * saves the thread this program's web browser runs on.
+   * @param thread a Thread object to save.
    */
-  public static void setEnd(final ArrayList<String> brow)
+  public void setThread(final Thread thread)
   {
-    endResult = brow;
+    this.thread = thread;
   }
   
   /**
-   * Method to set the overlay.
-   * @param brow
+   * gets this program's web browser.
+   * @return a WebBrowser panel of this program.
    */
-  public static void setThread(final Thread brow)
+  public WebBrowser getBrowser()
   {
-    thread = brow;
+    return browser;
   }
   
   /**
-   * Method that returns the image type.
-   * @param name
-   * @return the image
+   * sets this program's browser.
+   * @param browser the Browser of this program.
    */
-  public static Image getSeason(final String name)
+  public void setBrowser(final WebBrowser browser)
   {
-    Image im = null;
-    switch (name)
-    {
-      case "Autumn":
-        im = LEAF_IMAGE;
-        break;
-      case "Winter":
-        im = SNOW_IMAGE;
-        break;
-      case "Spring":
-        im = RAIN_IMAGE;
-        break;
-      case "Summer":
-        im = BUG_IMAGE;
-        break;
-      default:
-        return null;
-    }
-    
-    return im;
+    this.browser = browser;
   }
   
   /**
-   * Method that returns the array of beaks.
-   * @return the array
+   * gets the Title Image.
+   * @return a TitleImage of this program
    */
-  public static String[] getBeak()
+  public ImageIcon getTitleImage()
   {
-    return BEAK_SHAPE;
+    return titleImage;
   }
   
   /**
-   * Method that returns the array of feet.
-   * @return the array
+   * gets the ImageReader.
+   * @return an ImageReader object
    */
-  public static String[] getFoot()
+  public ImageReader getReader()
   {
-    return FOOT_SHAPE;
+    return reader;
   }
-  
-  /**
-   * Method that returns the array of sizes.
-   * @return the array
-   */
-  public static String[] getSize()
-  {
-    return SIZE;
-  }
-  
-  /**
-   * Method that returns the array of beaks.
-   * @return the array
-   */
-  public static ImageIcon getTitleImage()
-  {
-    return TITLE_IMAGE;
-  }
-  
-  /**
-   * Method that returns the array of beaks.
-   * @return the array
-   */
-  public static Image[] getSizeImages()
-  {
-    return SIZE_IMAGES;
-  }
-  
-  /**
-   * Method that returns the array of beaks.
-   * @return the array
-   */
-  public static Image[] getFeetImages()
-  {
-    return FEET_IMAGES;
-  }
+
 }

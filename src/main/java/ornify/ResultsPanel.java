@@ -14,24 +14,24 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
-/** 
+/**
  * Class that creates a results panel.
  */
 public class ResultsPanel extends CustomPanel implements ActionListener
 {
   public static final boolean IS_ONLINE = true;
-  
+
   protected String verdana = "Verdana";
   protected String no = "No";
   protected String yes = "Yes";
   protected String another = "Try another?";
-  
+
   protected JButton restartButton = new JButton(yes);
   protected JButton tryAnotherButton = new JButton(another);
   protected QueryBuilder qb = new QueryBuilder();
   protected String matchesText;
   protected JTextPane textPane = new JTextPane();
-  
+
   private SQLDatabase db;
   private JPanel yesNoPanel = new JPanel();
   private JPanel comboGridPanel = new JPanel();
@@ -43,14 +43,15 @@ public class ResultsPanel extends CustomPanel implements ActionListener
   private int columnCount = 3;
 
   /**
-   * Constructor.
-   * @param question
-   * @param ba
+   * A parameterized constructor.
+   * 
+   * @param question The question to display to the screen.
+   * @param ba The base application.
    */
   public ResultsPanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
-
+    this.ba = ba;
     this.tryAnotherButton.addActionListener(this);
     this.returnButton.addActionListener(this);
     this.nextButton.addActionListener(this);
@@ -59,9 +60,8 @@ public class ResultsPanel extends CustomPanel implements ActionListener
     configureResults();
 
     this.db = new SQLDatabase(IS_ONLINE);
-    this.ba = ba;
   }
-  
+
   /**
    * Method that configures the results.
    */
@@ -91,7 +91,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
       columnCount = meta.getColumnCount();
       for (int i = 1; i <= columnCount; i++)
       {
-        Model.getEnd().add(set.getString(i));
+        ba.getModel().getEndResult().add(set.getString(i));
         System.out.println(set.getString(i));
       }
 
@@ -105,12 +105,15 @@ public class ResultsPanel extends CustomPanel implements ActionListener
 
   /**
    * Method that checks for action performed.
-   * @param e the action
+   * 
+   * @param e
+   *          the action
    */
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
     String action = e.getActionCommand();
-    
+
     if (action.equals("Return"))
     {
       this.baseApp.handleReturn();
@@ -144,7 +147,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
       super.controlPanel.remove(tryAnotherButton);
       super.text.setFont(new Font(verdana, Font.BOLD, 30));
       super.text.setText("Is this your bird?");
-      
+
       restart();
     }
     else if (action.equals("Start over?"))
@@ -152,7 +155,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
       restart();
     }
   }
-  
+
   /**
    * Method that restarts the application.
    */
@@ -181,8 +184,8 @@ public class ResultsPanel extends CustomPanel implements ActionListener
         super.text.setFont(new Font(verdana, Font.BOLD, 20));
         super.text.setText("Oops! That bird doesn't seem to exist.");
         this.textPane.setText("Doesn't exist");
-        super.image.setIcon(ImageReader.downloadImage("https://i.redd.it/thlztdwby2ub1.jpg"));
-
+        super.image.setIcon(
+            ba.getModel().getReader().downloadImage("https://i.redd.it/thlztdwby2ub1.jpg"));
         super.controlPanel.remove(restartButton);
         super.controlPanel.remove(super.nextButton);
         super.controlPanel.remove(super.returnButton);
@@ -200,6 +203,7 @@ public class ResultsPanel extends CustomPanel implements ActionListener
 
   /**
    * Method that gets the panel.
+   * 
    * @return the panel
    */
   public JPanel getPanel()
@@ -219,14 +223,14 @@ public class ResultsPanel extends CustomPanel implements ActionListener
         if (set.next())
         {
           this.textPane.setText(set.getString(1));
-          super.image.setIcon(ImageReader.downloadImage(set.getString(2)));
+          super.image.setIcon(ba.getModel().getReader().downloadImage(set.getString(2)));
         }
         else
         {
           if (set.first())
           {
             this.textPane.setText(set.getString(1));
-            super.image.setIcon(ImageReader.downloadImage(set.getString(2)));
+            super.image.setIcon(ba.getModel().getReader().downloadImage(set.getString(2)));
           }
         }
       }
