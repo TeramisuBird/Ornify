@@ -38,7 +38,7 @@ public class BeakPanel extends CustomPanel
     for (int i = 0; i < buttons.length; i++)
     {
       buttons[i] = new JButton();
-      ImageIcon icon = new ImageIcon(ba.model.BEAK_IMAGES[i]);
+      ImageIcon icon = new ImageIcon(ba.getModel().getBeakImages()[i]);
       buttons[i].setIcon(icon);
       buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
       buttons[i].setVerticalTextPosition(SwingConstants.BOTTOM);

@@ -30,34 +30,38 @@ import javax.swing.JPanel;
  */
 public class WebBrowser extends JPanel
 {
-  public static String infoURL;
-  public static String soundURL;
-  public static int web_WIDTH;
-  public static int web_HEIGHT;
-  public static boolean isFirstPage = true;
+  public static final String INFO_MESSAGE = "Get more info";
+  private static final String WEBSITE_DOMAIN = "https://www.allaboutbirds.org/guide/";
+  private static final String WEBSITE_PAGE = "/overview";
+  private static int web_WIDTH;
+  private static int web_HEIGHT;
   private static final long serialVersionUID = 5223405231958560665L;
-  public static JButton linkButton = new JButton("Get more info");
+  private JButton linkButton = new JButton(INFO_MESSAGE);
   private JFXPanel jfxPanel;
   private JPanel controlPanel;
   private Stage stage;
   private WebView browser;
   private WebEngine engine;
   private BaseApplication ba;
+  private boolean isFirstPage = true;
+  private String infoURL;
+  private String soundURL = "http://www.google.com";
+  
 
   /**
-   * The constructor of this web browser.
+   * The default constructor of this web browser.
+   * 
+   * @param ba
+   *          The BaseApplication object that this program runs on.
    */
-  public WebBrowser(BaseApplication ba)
-  {
-    this("http://www.google.com", ba);
-  }
-
-  public WebBrowser(String url, BaseApplication ba)
+  public WebBrowser(final BaseApplication ba)
   {
     this.ba = ba;
+    handleInit();
     jfxPanel = new JFXPanel();
     Platform.setImplicitExit(false);
-    ba.model.thread = new Thread(() -> Platform.runLater(() -> {
+    ba.getModel().setThread(new Thread(() -> Platform.runLater(() -> 
+    {
       stage = new Stage();
       stage.setResizable(true);
       Group root = new Group();
@@ -65,18 +69,67 @@ public class WebBrowser extends JPanel
       stage.setScene(scene);
       browser = new WebView();
       engine = browser.getEngine();
-      engine.load(url);
+      engine.load(soundURL);
       ObservableList<Node> children = root.getChildren();
       children.add(browser);
       jfxPanel.setScene(scene);
-    }));
-    ba.model.thread.start();
+    })));
+    ba.getModel().getThread().start();
     this.setLayout(new BorderLayout());
     this.add(jfxPanel, BorderLayout.CENTER);
     controlPanel = new JPanel();
     controlPanel.setLayout(new FlowLayout());
     controlPanel = initButtons(controlPanel);
     this.add(controlPanel, BorderLayout.SOUTH);
+  }
+  
+  /**
+   * Initializes this browser.
+   */
+  private void handleInit()
+  {
+    Model model = ba.getModel();
+    String info = WEBSITE_DOMAIN + model.getEndResult().get(0) + WEBSITE_PAGE;
+    String sound = getiframe(model.getEndResult().get(2));
+    this.infoURL = info;
+    this.soundURL = sound;
+  }
+  
+  /**
+   * Handles this browser's reload.
+   */
+  public void handleBrowserReload() 
+  {
+    Model model = ba.getModel();
+    String info = WEBSITE_DOMAIN + model.getEndResult().get(0) + WEBSITE_PAGE;
+    String sound = getiframe(model.getEndResult().get(2));
+    linkButton.setText(INFO_MESSAGE);
+    isFirstPage = true;
+    this.infoURL = info;
+    this.soundURL = sound;
+    browse(soundURL);
+  }
+
+  /**
+   * Sets the URL of the info page to browse.
+   * 
+   * @param infoURL
+   *          the infoURL to set
+   */
+  public final void setInfoURL(final String infoURL)
+  {
+    this.infoURL = infoURL;
+  }
+
+  /**
+   * Sets the URL of the sound file page to play.
+   * 
+   * @param soundURL
+   *          the soundURL to set
+   */
+  public final void setSoundURL(final String soundURL)
+  {
+    this.soundURL = soundURL;
   }
 
   /**
@@ -85,9 +138,10 @@ public class WebBrowser extends JPanel
    * @param url
    *          The url to go to.
    */
-  public void browse(String url)
+  public void browse(final String url)
   {
-    Platform.runLater(() -> {
+    Platform.runLater(() -> 
+    {
       engine.load(url);
     });
   }
@@ -97,8 +151,9 @@ public class WebBrowser extends JPanel
    * 
    * @param iframeURL
    *          The full html iframe element.
+   * @return The string of the found url.
    */
-  public static String getiframe(String iframeURL)
+  public static String getiframe(final String iframeURL)
   {
     StringTokenizer tokens = new StringTokenizer(iframeURL, "\"");
     tokens.nextToken();
@@ -115,26 +170,30 @@ public class WebBrowser extends JPanel
   /**
    * Initializes buttons to test with. Must have FlowLayout.
    * 
-   * @param panel
+   * @param given
    *          The JPanel to populate with buttons.
    * @return A JPanel fully outfitted with buttons.
    */
-  private JPanel initButtons(JPanel panel)
+  private JPanel initButtons(final JPanel given)
   {
+    JPanel panel = given;
     // Refresh button
     JButton refreshButton = new JButton("Reload");
-    refreshButton.addActionListener((ActionEvent e) -> {
+    refreshButton.addActionListener((ActionEvent e) -> 
+    {
       Platform.runLater(() -> engine.reload());
     });
     panel.add(refreshButton);
 
     // Link button
-    linkButton.addActionListener((ActionEvent e) -> {
-      Platform.runLater(() -> {
+    linkButton.addActionListener((ActionEvent e) -> 
+    {
+      Platform.runLater(() -> 
+      {
         if (isFirstPage)
         {
           this.setPreferredSize(new Dimension(web_WIDTH, web_HEIGHT));
-          linkButton.setText("Get more info");
+          linkButton.setText(INFO_MESSAGE);
           browse(soundURL);
           isFirstPage = false;
         }
@@ -151,8 +210,9 @@ public class WebBrowser extends JPanel
 
     // Start over button
     JButton restartButton = new JButton("Start over?");
-    restartButton.addActionListener((ActionEvent e) -> {
-      ba.setLayeredPane(ba.model.overlay);
+    restartButton.addActionListener((ActionEvent e) -> 
+    {
+      ba.setLayeredPane(ba.getModel().getOverlay());
       ba.handleRestart();
     });
     panel.add(restartButton);

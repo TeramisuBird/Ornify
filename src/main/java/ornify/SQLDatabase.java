@@ -19,7 +19,8 @@ import java.util.ArrayList;
  */
 public class SQLDatabase
 {
-  private final String SECRET_FILEPATH = "sql_secret.txt";
+  public static final String SECRET_FILEPATH = "sql_secret.txt";
+  public static final String ERROR_MESSAGE = "SQL Error: ";
   private Connection connection;
 
   /**
@@ -40,7 +41,8 @@ public class SQLDatabase
    * <li>local database username
    * <li>local database password
    * 
-   * @param isOnline for determining to use local/online db
+   * @param isOnline
+   *          for determining to use local/online db
    */
   public SQLDatabase(final boolean isOnline)
   {
@@ -48,7 +50,7 @@ public class SQLDatabase
     String databaseName = "birds";
     String databaseURL = "jdbc:mysql://";
     String username = "root";
-    String password = "root";
+    String password = "password";
     BufferedReader reader;
     try
     {
@@ -87,10 +89,6 @@ public class SQLDatabase
     {
       System.out.println("** SQL Error" + "\nThis database does not exist.");
     }
-    catch (Exception e)
-    {
-      e.printStackTrace();
-    }
   }
 
   /**
@@ -109,10 +107,6 @@ public class SQLDatabase
     catch (SQLException e)
     {
       System.out.println("SQL Error");
-    }
-    catch (Exception e)
-    {
-      e.printStackTrace();
     }
   }
 
@@ -138,7 +132,7 @@ public class SQLDatabase
     }
     catch (SQLException e)
     {
-      System.out.println("SQL Error: " + e.getErrorCode());
+      System.out.println(ERROR_MESSAGE + e.getErrorCode());
       e.printStackTrace();
     }
     return list;
@@ -165,7 +159,7 @@ public class SQLDatabase
     }
     catch (SQLException e)
     {
-      System.out.println("SQL Error: " + e.getErrorCode());
+      System.out.println(ERROR_MESSAGE + e.getErrorCode());
       e.printStackTrace();
     }
   }
@@ -193,7 +187,7 @@ public class SQLDatabase
     }
     catch (SQLException e)
     {
-      System.out.println("SQL Error: " + e.getErrorCode());
+      System.out.println(ERROR_MESSAGE + e.getErrorCode());
       e.printStackTrace();
     }
   }
@@ -217,7 +211,7 @@ public class SQLDatabase
     }
     catch (SQLException e)
     {
-      System.out.println("SQL Error: " + e.getErrorCode());
+      System.out.println(ERROR_MESSAGE + e.getErrorCode());
       return null;
     }
   }

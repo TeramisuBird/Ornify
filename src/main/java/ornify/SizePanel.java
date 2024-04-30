@@ -31,7 +31,7 @@ public class SizePanel extends CustomPanel
   public SizePanel(final String question, final BaseApplication ba)
   {
     super(question, ba);
-    //super.questionPanel.remove(super.image);
+    // super.questionPanel.remove(super.image);
     currentOption = null;
 
     this.buttons = new JButton[Model.SIZE.length];
@@ -40,8 +40,9 @@ public class SizePanel extends CustomPanel
     for (int i = 0; i < buttons.length; i++)
     {
       buttons[i] = new JButton();
-      if (ba.model.SIZE_IMAGES[i]!=null) {
-        ImageIcon icon = new ImageIcon(ba.model.SIZE_IMAGES[i]);
+      if (ba.getModel().getSizeImages()[i] != null)
+      {
+        ImageIcon icon = new ImageIcon(ba.getModel().getSizeImages()[i]);
         buttons[i].setIcon(icon);
       }
       buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
@@ -65,9 +66,12 @@ public class SizePanel extends CustomPanel
 
   /**
    * Method that checks for action performed.
-   * @param e the action
+   * 
+   * @param e
+   *          the action
    */
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
     switch (e.getActionCommand())
     {

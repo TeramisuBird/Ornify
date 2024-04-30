@@ -25,13 +25,21 @@ import resources.Marker;
  */
 public class ImageReader
 {
+  public static final String ERROR_MESSAGE = "Cannot find image: ";
   /**
    * Must be instantiated at local resources folder.
    */
   private ResourceFinder finder;
-  
-  public ImageReader(ResourceFinder finder) {
-    this.finder = (finder==null)? finder : ResourceFinder.createInstance(new Marker());
+
+  /**
+   * A parameterized constructor which makes an ImageReader object.
+   * 
+   * @param finder
+   *          the given ResourceFinder object created at Marker's location.
+   */
+  public ImageReader(final ResourceFinder finder)
+  {
+    this.finder = (finder == null) ? finder : ResourceFinder.createInstance(new Marker());
   }
 
   /**
@@ -47,7 +55,8 @@ public class ImageReader
    */
   private ImageIcon getResizedIcon(final BufferedImage img, final int x, final int y)
   {
-    if (img == null) {
+    if (img == null)
+    {
       return null;
     }
     ImageIcon icon = null;
@@ -87,8 +96,9 @@ public class ImageReader
   {
     ImageIcon icon = null;
     InputStream stream = finder.findInputStream(path);
-    if (stream == null) {
-      System.out.println("Cannot find image " + path);
+    if (stream == null)
+    {
+      System.out.println(ERROR_MESSAGE + path);
       return null;
     }
     try
@@ -116,8 +126,9 @@ public class ImageReader
     stream = finder.findInputStream(path);
     try
     {
-      if (stream==null) {
-        System.out.println("Cannot find image " + path);
+      if (stream == null)
+      {
+        System.out.println(ERROR_MESSAGE + path);
         return null;
       }
       image = ImageIO.read(stream);
@@ -143,7 +154,8 @@ public class ImageReader
    */
   public Image resizeImage(final Image image, final int x, final int y)
   {
-    if (image == null) {
+    if (image == null)
+    {
       return null;
     }
     Image tmp = image.getScaledInstance(x, y, Image.SCALE_SMOOTH);
@@ -186,12 +198,13 @@ public class ImageReader
     {
       URL path = new URL(url);
       BufferedImage stream = ImageIO.read(path);
-      if (stream==null) {
+      if (stream == null)
+      {
         System.out.println("Cannot download image " + url);
         return null;
       }
       icon = getResizedIcon(stream, x, y);
-      
+
     }
     catch (MalformedURLException e)
     {

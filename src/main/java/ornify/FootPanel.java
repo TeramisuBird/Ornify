@@ -38,7 +38,7 @@ public class FootPanel extends CustomPanel
     for (int i = 0; i < buttons.length; i++)
     {
       buttons[i] = new JButton();
-      ImageIcon icon = new ImageIcon(ba.model.FEET_IMAGES[i]);
+      ImageIcon icon = new ImageIcon(ba.getModel().getFeetImages()[i]);
       buttons[i].setIcon(icon);
       buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
       buttons[i].setVerticalTextPosition(SwingConstants.BOTTOM);
