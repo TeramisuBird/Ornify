@@ -22,7 +22,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
 {
   private static final String FOOT = "foot";
   private static final String BEAK = "beak";
-  
+
   private PolygonReader reader;
   private ResourceFinder jarFinder;
   private HashMap<Polygon, String> shapes;
@@ -224,7 +224,7 @@ public class ShapeTestPanel extends Visualization implements MouseListener
           Model.getPicked()[Model.getIndicies().get(region + add)] = true;
 
           String text = region + "='" + colorName + "'";
-          Model.getSelections()[Model.getIndicies().get(region)] = text;
+          Model.getSelections()[Model.getIndicies().get(region + add)] = text;
         }
 
         if (newPaint == null)
@@ -239,9 +239,12 @@ public class ShapeTestPanel extends Visualization implements MouseListener
 
   /**
    * Method that checks for when mouse is clicked.
-   * @param e the click
+   * 
+   * @param e
+   *          the click
    */
-  @Override public void mouseClicked(final MouseEvent e)
+  @Override
+  public void mouseClicked(final MouseEvent e)
   {
     int xPos = e.getX();
     int yPos = e.getY();
@@ -265,36 +268,48 @@ public class ShapeTestPanel extends Visualization implements MouseListener
 
   /**
    * Method that checks for when mouse is clicked down.
-   * @param e the event
+   * 
+   * @param e
+   *          the event
    */
-  @Override public void mousePressed(final MouseEvent e)
+  @Override
+  public void mousePressed(final MouseEvent e)
   {
 
   }
 
   /**
    * Method that checks when the mouse button is released.
-   * @param e the event
+   * 
+   * @param e
+   *          the event
    */
-  @Override public void mouseReleased(final MouseEvent e)
+  @Override
+  public void mouseReleased(final MouseEvent e)
   {
 
   }
 
   /**
    * Method that checks when the mouse enters an object.
-   * @param e the event
+   * 
+   * @param e
+   *          the event
    */
-  @Override public void mouseEntered(final MouseEvent e)
+  @Override
+  public void mouseEntered(final MouseEvent e)
   {
 
   }
 
   /**
    * Method that checks when the mouse exits an object.
-   * @param e the event
+   * 
+   * @param e
+   *          the event
    */
-  @Override public void mouseExited(final MouseEvent e)
+  @Override
+  public void mouseExited(final MouseEvent e)
   {
 
   }
