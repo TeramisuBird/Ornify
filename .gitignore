@@ -35,3 +35,4 @@ replay_pid*
 /bin/
 *.class
 sql_secret.txt
+.checkstyle
